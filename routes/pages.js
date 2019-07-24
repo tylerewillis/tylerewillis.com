@@ -6,9 +6,6 @@ const router = express.Router()
 const nodemailer = require("nodemailer")
 const fs = require('fs')
 
-// Include config variables
-const config = require('../config/config.js')
-
 // Express Slow Down
 const slowDown = require("express-slow-down")
 const defaultLimiter = slowDown({
@@ -20,28 +17,6 @@ const defaultLimiter = slowDown({
 // Compression
 var compression = require('compression')
 app.use(compression())
-
-// Email credentials
-let transporter = nodemailer.createTransport({
-  host: global.gConfig.emailHost,
-  port: 465,
-  secure: true, // true for 465, false for other ports
-  auth: {
-    user: global.gConfig.emailHostUser,
-    pass: global.gConfig.emailHostPassword
-  }
-});
-
-// MySQL
-const mysql = require('mysql');
-const pool  = mysql.createPool({
-  connectionLimit : 10,
-  host            : 'localhost',//domain name
-  user            : global.gConfig.dbUser,
-  password        : global.gConfig.dbUserPassword,
-  database        : global.gConfig.database,
-  multipleStatements: true
-});
 
 //================================================
 // Flashcards

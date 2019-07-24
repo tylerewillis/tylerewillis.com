@@ -1,0 +1,21 @@
+extends ../layout.pug
+
+block head
+
+block content
+	.page
+		.page-example
+			block example-content
+
+			//- Footer for example pages
+			.example-footer
+				hr
+				p Know a better way? Please let me hear about it on Twitter (
+					a(href='#' target='_blank') @tylerewillis
+					| ) or email (
+					script.
+						var address = "tyler"
+						var domain = "tylerewillis.com"
+						var email = address + '@' + domain
+						document.write('<a href="mailto:' + email + '">' + email + '</a>')
+					| ). It would really go a long way toward helping me accomplish my dream of going from self-taught coder to programmer/computer scientist!

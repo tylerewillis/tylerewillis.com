@@ -1,0 +1,16 @@
+extends layout.pug
+
+block head
+	include front/head.pug
+	title= meta.title
+	meta(name='description', content=`${meta.description}`)
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content=`${meta.title}`)
+	meta(property='og:description', content=`${meta.description}`)
+	meta(property='og:image', content=`/static/media/${meta.image}`)
+
+block content
+	.page.page-about
+		h1 About
+		div!= content

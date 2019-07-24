@@ -1,0 +1,154 @@
+extends layout.pug
+
+block head
+	include front/head.pug
+	title Tyler Willis | Programmer, Computer Scientist
+	meta(name='description', content="Hi, I'm Tyler, a programmer and computer scientist currently located outside of Washington, D.C.")
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content="Tyler Willis | Programmer, Computer Scientist")
+	meta(property='og:description', content="Hi, I'm Tyler, a programmer and computer scientist currently located outside of Washington, D.C.")
+	meta(property='og:image', content="/static/media")
+
+	style.
+		header {display: none;}
+
+block content
+	.page.page-home
+		.home-header
+			a.header-logo(href='/')
+				img(src='/static/media/logo.png')
+				p Tyler Willis
+			.desktop-nav
+				a(href='#about') About
+				a(href='#skills') Skills
+				a(href='#pages') Pages
+				a(href='#projects') Projects
+				a(href='#contact') Contact
+
+
+		//-----------------------------------------------------
+		//- Headline
+		//-----------------------------------------------------
+
+		.home-top
+			h1 Make a great product by focusing on
+				span helping
+				| as many
+				span people
+				| as possible.
+
+
+		//-----------------------------------------------------
+		//- About
+		//-----------------------------------------------------
+
+		.about#about
+			p
+				| Hi, I'm Tyler. When I'm not biking
+				span 🚴‍,
+				| playing the guitar
+				span 🎸,
+				| or building legos with my kids
+				span 👦👧👦👶,
+				| I'm usually typing up lines of code on my MacBook
+				span 💻
+				| . Even though I received my Bachelor's Degree in Marketing, I started out my career in operations and spent 6 years in operations management for Pepsi and Peapod. Not inspired, I shifted focus to web development, learned to code and have spent the past 4 years as the lead website developer for a local marketing agency.
+			p
+				| On the side, I've been honing my development skills with projects and product ideas. I've launched 9 products to-date on
+				a(href='https://www.producthunt.com/@tylerewillis', target='_blank') Product Hunt
+					i.fab.fa-product-hunt
+				| and have experimented with hundreds of smaller projects both on my site and the sites of clients that I've had the privilege to create and support. The topics of focus have included SEO, sports, font icons, and business consulting.
+			p
+				| Right now, I'm dedicating all possible time to transforming myself from a self-taught coder into a senior level programmer and computer scientist.
+				span 💯
+		
+
+		//-----------------------------------------------------
+		//- Skills
+		//-----------------------------------------------------
+
+		.skills.section#skills
+			h2 Skills
+			p.sub-header Skills based on experience level and time accrued via client work and personal projects
+			.skills-container
+				.sc-inner
+					.sc-back
+						.scb-vertical
+							line
+							line
+							line
+						.scb-horizontal
+							line
+							line
+					.sc-front
+						.sc-bars
+							span.s-bar(style='height: 95%')
+							span.s-bar(style='height: 85%')
+							span.s-bar(style='height: 75%')
+							span.s-bar(style='height: 75%')
+							span.s-bar(style='height: 70%')
+							span.s-bar(style='height: 65%')
+							span.s-bar(style='height: 40%')
+							span.s-bar(style='height: 30%')
+
+				//-
+				.sc-bottom
+					.skill
+						span.s-label JavaScript
+						span.s-time 4.5 yrs
+					.skill
+						span.s-label PHP
+						span.s-time 4 yrs
+					.skill
+						span.s-label MySQL
+						span.s-time 4 yrs
+					.skill
+						span.s-label Node.JS
+						span.s-time 3.6 yrs
+					.skill
+						span.s-label Git
+						span.s-time 3.3 yrs
+					.skill
+						span.s-label SCSS
+						span.s-time 2.5 yrs
+					.skill
+						span.s-label React.JS
+						span.s-time 1.5 yrs
+					.skill
+						span.s-label Swift
+						span.s-time 1.2 yrs
+
+
+		//-----------------------------------------------------
+		//- Pages
+		//-----------------------------------------------------
+
+		.pages.section#pages
+			h2 Pages
+			p.sub-header Computer science, programming examples, musings and other tidbits
+			each page in pages
+				.post
+					h3 #{page.header}
+					p #{page.description}
+					a(href=`${page.url}`) View
+						i.fas.fa-chevron-right
+			a(href='/pages' class='post-all')
+				span See All
+		
+
+		//-----------------------------------------------------
+		//- Projects
+		//-----------------------------------------------------
+
+		.pages.section#projects
+			h2 Projects
+			p.sub-header Fun projects, experimentations and other MVPs
+			each project in projects
+				.post
+					h3 #{project.header}
+					p #{project.description}
+					a(href=`${project.url}`) View
+						i.fas.fa-chevron-right
+			a(href='/projects' class='post-all')
+				span See All

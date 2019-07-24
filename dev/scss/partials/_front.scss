@@ -1,0 +1,283 @@
+// =========================================/
+// Home
+// =========================================/
+
+.page-home {
+	@include global-width(0px auto, 700px);
+	.section {
+		padding: 75px 0px 30px;
+	}
+	h1 {
+		font-size: 60px;
+	  font-weight: 300;
+	  line-height: 70px;
+	  text-align: center;
+	  margin: 50px 0px 0px;
+	  @include mq(l) {
+	  	font-size: 40px;
+	  	line-height: 48px;
+	  }
+	  span {
+	  	font-weight: 700;
+			color: $color-primary-dark;
+			margin: 0px 12px;
+	  }
+	  span ~ span {
+	  	color: $color-primary;
+	  }
+	}
+	h2 {
+		width: 100%;
+		font-size: 26px;
+		margin-bottom: 15px;
+	}
+	.sub-header {
+		margin-bottom: 30px;
+		font-style: italic;
+		font-weight: 900;
+		font-size: 1.1em;
+	}
+}
+
+// About
+
+.about {
+	padding-top: 70px;
+	p {
+		span {
+			font-size: 20px;
+			margin: 0px 5px;
+		}
+	}
+	a,i {
+		margin: 0px 5px;
+	}
+	a i {
+		margin: 0px 0px 0px 5px;
+	}
+}
+
+// Skills
+
+.skills {
+	.sub-header {
+		margin-bottom: 30px;
+	}
+}
+.skill-node .dot {
+	margin-left: 50%;
+}
+.skill-javascript .dot {
+	margin-left: 80%;
+}
+.skill-php .dot {
+	margin-left: 90%;
+}
+.skill-css .dot {
+	margin-left: 90%;
+}
+.skill-mysql .dot {
+	margin-left: 75%;
+}
+.skill-reset .dot {
+	margin-left: 0% !important;
+	background-color: #d3d3d3;
+}
+
+// Blog
+
+.page-home {
+	.pages {
+		.post {
+			margin: 40px 0px;
+			border-left: 4px solid $color-primary-light;
+			padding-left: 15px;
+			h3 {
+				font-size: 20px;
+				margin-bottom: 10px;
+			}
+			p {
+				margin-bottom: 1em;
+			}
+			a {
+				color: $color-primary-light;
+				i {
+					@include transition(.1s);
+				}
+				&:hover {
+					color: $color-primary;
+					i {
+						padding-left: 8px;
+					}
+				}
+			}
+		}
+		a {
+			font-size: 14px;
+			i {
+				padding-left: 5px;
+				@include transition(.1s);
+			}
+			&:hover {
+				i {
+					padding-left: 8px;
+				}
+			}
+		}
+	}
+}
+.post-all {
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: $color-primary-light;
+	border-bottom: 3px solid #d3d3d3;
+	@include global-width(0px auto, 50px);
+	@include transition(.1s);
+	&:hover {
+		color: $color-primary;
+		border-bottom: 3px solid $color-primary-dark;
+	}
+}
+
+// Header
+
+.home-header {
+	display: flex;
+	flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+  .header-logo {
+  	text-align: center;
+  	img {
+  		width: 75px;
+			@include transition(.3s);
+  	}
+  	&:hover {
+  		img {
+  			-webkit-transform: rotate(-25deg);
+				-moz-transform: rotate(-25deg);
+				-ms-transform: rotate(-25deg);
+				-o-transform: rotate(-25deg);
+				transform: rotate(-25deg);
+  		}
+  	}
+  	p {
+  		font-family: $font-stack-header;
+			color: $color-primary !important;
+			font-size: 18px;
+			margin-top: 5px;
+  	}
+  }
+  .desktop-nav {
+  	width: 100%;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		a {
+			padding: 5px 25px;
+			font-size: 15px;
+		}
+  }
+}
+
+// Skills
+.skills-container {
+	.sc-inner {
+		position: relative;
+		height: 300px;
+		.sc-back {
+			@include overlay;
+			.scb-vertical {
+				@include overlay;
+				@include flex-container(space-around, flex-start);
+				line {
+					width: 2px;
+					background-color: #f2f2f2;
+					height: 100%;
+				}
+			}
+			.scb-horizontal {
+				@include overlay;
+				@include flex-container(flex-start, space-around);
+				line {
+					width: 100%;
+					height: 2px;
+					background-color: #f2f2f2;
+				}
+			}
+		}
+		.sc-front {
+			@include flex-container(space-around, flex-end);
+			height: 100%;
+			position: relative;
+			.sc-bars {
+				@include flex-container(space-around, flex-end);
+				width: 100%;
+				align-items: baseline;
+				height: 100%;
+				.s-bar {
+					background-color: $color-primary;
+					width: 40px;
+					box-shadow: 3px 0px 0px $color-primary-light;
+				}
+			}
+		}
+	}
+	.sc-bottom {
+		@include flex-container(space-around);
+		border-top: 3px solid $color-primary-dark;
+		.skill {
+			width: 70px;
+			text-align: center;
+			span {
+				display: block;
+			}
+			.s-label {
+				font-weight: 900;
+				font-size: .95em;
+				margin: .5em 0 .3em;
+			}
+			.s-time {
+				font-style: italic;
+				font-size: .85em;
+			}
+		}
+	}
+}
+
+// =========================================/
+// Contact & Footer
+// =========================================/
+
+.contact {
+	text-align: center;
+	margin: 100px 0px 60px;
+	p {
+		font-size: 1.4em;
+		a {
+			font-weight: 900;
+		}
+	}
+}
+footer {
+	margin: 30px 0px;
+	text-align: center;
+}
+
+// =========================================/
+// Legal
+// =========================================/
+
+.legal-container {
+	margin: 40px auto;
+}
+.legal-container h1 {
+	font-size: 22px;
+  margin: 30px 0px;
+}
+.legal-container ul {
+	list-style: disc;
+	margin:0px 0px 20px 30px;
+}

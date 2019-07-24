@@ -1,0 +1,1327 @@
+[
+	{
+		"id": 0,
+		"question": "In C, do you need to declare both values when declaring and initializing a new 2-dimensional array?",
+		"answer": "No. The first value [x] can be assumed by the compiler based on the initialized rows but the second value [y] MUST be declared."
+	},
+	{
+		"id": 1,
+		"question": "In C, can Arrays be more than one type of variable?",
+		"answer": "No, because Arrays are implemented as a sequence of values in the computer's memory."
+	},
+	{
+		"id": 2,
+		"question": "In C, how do you declare a string using pointer notation?",
+		"answer": "char * name = \"your name\""
+	},
+	{
+		"id": 3,
+		"question": "In C, how do you declare a string that can be manipulated?",
+		"answer": "You declare it by calling char name[] = 'your name';. (declaring it as char * name = 'your name'; makes it read-only.)"
+	},
+	{
+		"id": 4,
+		"question": "Why are strings saved in memory as the length of the text plus 1?",
+		"answer": "Since the program doesn't know the length of the string (only the compiler), a special character /0 (null terminator) is added to the end to terminate the string."
+	},
+	{
+		"id": 5,
+		"question": "In C, how can you insert a string placeholder using the printf function?",
+		"answer": "By using %s - for example printf(\"My name is %s\", name)"
+	},
+	{
+		"id": 6,
+		"question": "In C, how can you insert an integer placeholder using the printf function?",
+		"answer": "By using %d - for example printf(\"He is %d years old\", age)"
+	},
+	{
+		"id": 7,
+		"question": "In C, how do you compare 2 strings?",
+		"answer": "Using strncmp - for example if (strncmp(\"string\", \"string\", 6) == 0)."
+	},
+	{
+		"id": 8,
+		"question": "In C, how do you concatenate 2 strings?",
+		"answer": "Using strncat - for example strncat(\"string 1\", \"string 2\", n);"
+	},
+	{
+		"id": 9,
+		"question": "In C, what library do you need to include in order to have access to the strncmp and strncat functions?",
+		"answer": "#include <string.h>"
+	},
+	{
+		"id": 10,
+		"question": "In C, how many values can functions return?",
+		"answer": "One value or no values"
+	},
+	{
+		"id": 11,
+		"question": "In C, how do you declare a function that does not return a function?",
+		"answer": "Declare it with the keyword 'void'"
+	},
+	{
+		"id": 12,
+		"question": "In C, which keyword is used to set the scope of a variable and function to the file level?",
+		"answer": "Static. By default, variables are local only to the scope in which they are defined, and functions are global."
+	},
+	{
+		"id": 13,
+		"question": "In C, what is a pointer?",
+		"answer": "A pointer is essentially a simple integer variable which holds a memory address that points to a value, instead of holding the actual value itself. (char * name = 'your name';)"
+	},
+	{
+		"id": 14,
+		"question": "In C, what 3 things does this line accomplish: 'char * name = 'John';'",
+		"answer": "Allocates a local (stack) variable named name (which is a pointer to a single character), causes the string 'John' to appear somewhere in the program memory (after compilation), and initializes the name argument to point to where the J character resides at (which is followed by the rest of the string in the memory)."
+	},
+	{
+		"id": 15,
+		"question": "In C, what is the act of referring to where the pointer points?",
+		"answer": "Dereferencing. Example: int * pointer_to_a = &a; (use as *pointer_to_a)"
+	},
+	{
+		"id": 16,
+		"question": "In C, what is a linked list?",
+		"answer": "A linked list is a set of dynamically allocated nodes, arranged in such a way that each node contains one value and one pointer. The pointer always points to the next member of the list. If the pointer is NULL, then it is the last node in the list."
+	},
+	{
+		"id": 17,
+		"question": "In C, what are the advantages of a linked list?",
+		"answer": "Items can be added or removed from the middle of the list and there is no need to define an initial size"
+	},
+	{
+		"id": 18,
+		"question": "In C, what are the disadvantages of a linked list?",
+		"answer": "There is no 'random' access - it is impossible to reach the nth item in the array without first iterating over all items up until that item. This means we have to start from the beginning of the list and count how many times we advance in the list until we get to the desired item. Dynamic memory allocation and pointers are required, which complicates the code and increases the risk of memory leaks and segment faults. Linked lists have a much larger overhead over arrays, since linked list items are dynamically allocated (which is less efficient in memory usage) and each item in the list also must store an additional pointer."
+	},
+	{
+		"id": 19,
+		"question": "What is a binary tree?",
+		"answer": "A type of data structure in which each node has at most two children (left child and right child). Binary trees are used to implement binary search trees and binary heaps, and are used for efficient searching and sorting."
+	},
+	{
+		"id": 20,
+		"question": "In binary trees, what is depth-first search (DFS)?",
+		"answer": "An algorithm for traversing or searching tree or graph data structures. One starts at the root and explores as far as possible along each branch before backtracking. There are three types of depth first search traversal: pre-order visit, left, right, in-order left, visit, right, post-order left, right, visit."
+	},
+	{
+		"id": 21,
+		"question": "In binary trees, what is breadth-first search (BFS)?",
+		"answer": "An algorithm for traversing or searching tree or graph structures. In level-order, where we visit every node on a level before going to a lower level."
+	},
+	{
+		"id": 22,
+		"question": "In C, what are the advantages of dynamic allocation?",
+		"answer": "It helps us to dynamically store data without initially knowing the size of the data in the time we wrote the program."
+	},
+	{
+		"id": 23,
+		"question": "In C, how do we dynamically allocate memory and then release that memory?",
+		"answer": "'person * myperson = malloc(sizeof(person));' and then 'free(myperson);' when finished."
+	},
+	{
+		"id": 24,
+		"question": "What is the mathematical brain of a computer?",
+		"answer": "Arithmetic and Logic Unit (ALU)"
+	},
+	{
+		"id": 25,
+		"question": "What are the 3 fundamental operations in boolean algebra?",
+		"answer": "'Not', 'and' and 'or'"
+	},
+	{
+		"id": 26,
+		"question": "In boolean algebra, what flips a true value to false and a false value to true?",
+		"answer": "A 'not' operation"
+	},
+	{
+		"id": 27,
+		"question": "What is a transistor?",
+		"answer": "A semiconductor device used to amplify or switch electrical signals made up of a source, a sink and a gate."
+	},
+	{
+		"id": 28,
+		"question": "What is the standard way in which humans represent numbers?",
+		"answer": "Base-10 or decimal notation"
+	},
+	{
+		"id": 29,
+		"question": "What is the standard way in which computers recognize numbers?",
+		"answer": "Base-2 or binary notation"
+	},
+	{
+		"id": 30,
+		"question": "What is the highest number that can be represented in 8 bits (1 byte)?",
+		"answer": "255 (11111111)"
+	},
+	{
+		"id": 31,
+		"question": "How do you represent negative numbers in binary?",
+		"answer": "By putting a '1' as the first bit."
+	},
+	{
+		"id": 32,
+		"question": "What standard was created to represent letters and characters with binary code?",
+		"answer": "ASCII (American Standard Code for Information Interchange)"
+	},
+	{
+		"id": 33,
+		"question": "What was the first universal encoding scheme?",
+		"answer": "Unicode"
+	},
+	{
+		"id": 34,
+		"question": "Explain the 2 parts of an ALU",
+		"answer": "The arithmetic unit performs all numerical operations and the logic unit performs logical operations like AND, OR, NOT, XOR and many others."
+	},
+	{
+		"id": 35,
+		"question": "In memory, what is a latch?",
+		"answer": "When a circuit latches onto a particular, 1-bit output value and stays that way. (Part of SRAM - Static Random Access Memory.)"
+	},
+	{
+		"id": 36,
+		"question": "In memory, what's a 'register'?",
+		"answer": "A group of latches which hold a single number (the number of bits includes is its 'width')."
+	},
+	{
+		"id": 37,
+		"question": "In memory, what is a larger register referred to as?",
+		"answer": "A matrix - a grid of latches that require fewer data wires, write-enabled wires and read-enabled wires."
+	},
+	{
+		"id": 38,
+		"question": "Explain RAM",
+		"answer": "Random access memory - the process of storing information in memory that can be retrieved directly at any point in time."
+	},
+	{
+		"id": 39,
+		"question": "What is the heart of a computer?",
+		"answer": "The CPU (Central Processing Unit). It is used to execute programs."
+	},
+	{
+		"id": 40,
+		"question": "What are the components of a CPU?",
+		"answer": "RAM, memory registers for temporary storage and manipulation, the control unit encompassing an instruction address register to keep track of where we are in a program (stores memory address of current insturction) and an instruction register to store the current instruction, the ALU, and the clock to advance the program."
+	},
+	{
+		"id": 41,
+		"question": "What are the phases of a CPU's operation?",
+		"answer": "Fetch (to receive our first instruction), Decode (instructions are decoded and interpreted by a control unit made of logic gates), Execute (read enables the value in memory, sends it to register A and increments the instruction address register by 1)."
+	},
+	{
+		"id": 42,
+		"question": "What is the clock speed?",
+		"answer": "In the CPU, the clock speed measures how fast the CPU can carry out each fetch-decode-execute cycle measures in Hertz (1 hertz = 1 cycle per second)"
+	},
+	{
+		"id": 43,
+		"question": "What is the term for speeding up or slowing down a CPU's clock speed?",
+		"answer": "Dynamic frequency scaling. Speeding up can help with running a large program more smoothly and slowing down can save battery power."
+	},
+	{
+		"id": 44,
+		"question": "In RAM, for each byte of data, what do the first 4 and then last 4 digits specify?",
+		"answer": "The first 4 digits specify the operation code (opcode) and the last 4 digits specify an address or registers."
+	},
+	{
+		"id": 45,
+		"question": "What's it called to have bigger CPU instructions with more bits?",
+		"answer": "Instruction Length (32-64 bits)"
+	},
+	{
+		"id": 46,
+		"question": "What is instruction set architecture (ISA)?",
+		"answer": "The interface between the computer's software and hardware. Its implementations can vary in performance, physical size, and monetary cost."
+	},
+	{
+		"id": 47,
+		"question": "What is the list of operations that a CPU follows?",
+		"answer": "The instruction set. (The Intel 4004 had 36 instructions which were enough to run a computer.)"
+	},
+	{
+		"id": 48,
+		"question": "What are the data wires connecting the CPU to the RAM?",
+		"answer": "a bus"
+	},
+	{
+		"id": 49,
+		"question": "What is a little piece of ram located on the CPU?",
+		"answer": "A cache. Caches allow for the speeding up of a program by allowing the RAM to transfer entire blocks of data directly to the CPU."
+	},
+	{
+		"id": 50,
+		"question": "What is it called with the CPU draws from data already stored in its cache?",
+		"answer": "A cache hit. (A cache miss is when the CPU has to go back to the RAM for data.)"
+	},
+	{
+		"id": 51,
+		"question": "What's it called when the data stored in memory is different from the data stored in the CPU's cache?",
+		"answer": "A dirty bit."
+	},
+	{
+		"id": 52,
+		"question": "What is instruction pipelining?",
+		"answer": "When the CPU parallelizes the fetch-decode-execute operations (overlapping the operations when freed)."
+	},
+	{
+		"id": 53,
+		"question": "What is speculative execution?",
+		"answer": "When a CPU guesses which branch to add its instructions to the CPU's pipeline."
+	},
+	{
+		"id": 54,
+		"question": "If a CPU performs an incorrect speculative execution, what is the process for correction?",
+		"answer": "A pipeline flush. When a CPU has to dump all of its instructions and start over."
+	},
+	{
+		"id": 55,
+		"question": "What benefit do multi-core processors provide?",
+		"answer": "Allows the CPU to run several streams of instructions at once."
+	},
+	{
+		"id": 56,
+		"question": "What was one of the most famous examples of early programming?",
+		"answer": "Joseph Marie Jacquard developing a programmable textile loom (punch cards)."
+	},
+	{
+		"id": 57,
+		"question": "What is the language that computers speak?",
+		"answer": "Machine language (or machine code)."
+	},
+	{
+		"id": 58,
+		"question": "What is the writing of computer code in everyday language?",
+		"answer": "Pseudo-code"
+	},
+	{
+		"id": 59,
+		"question": "What is the job of an assembler?",
+		"answer": "To read a program written in Assembly language to native machine code. (very low-level - assembly languages have a 1-to-1 mapping to machine instructions)"
+	},
+	{
+		"id": 60,
+		"question": "Who built the first compiler?",
+		"answer": "Dr. Grace Hopper (Called A-0 in 1952)"
+	},
+	{
+		"id": 61,
+		"question": "What is the job of a compiler?",
+		"answer": "To transform programming source code into a low-level language like binary or machine code."
+	},
+	{
+		"id": 62,
+		"question": "What compiler was built shortly after A-0 by IBM?",
+		"answer": "FORTRAN (Formula Translation) by John Backus in 1957."
+	},
+	{
+		"id": 63,
+		"question": "What was the first common programming language that could be used by multiple different machines?",
+		"answer": "Common Business-Oriented Language (COBOL) led by Dr. Grace Hopper in 1959. Allowed programmers to \"write once, enable anywhere\" and opened the subject of programming to more than just computer experts."
+	},
+	{
+		"id": 64,
+		"question": "What is the set of rules that govern the structure and composition of statements in a language?",
+		"answer": "Syntax"
+	},
+	{
+		"id": 65,
+		"question": "What is the statement that assigns a value to a variable?",
+		"answer": "Assignment statement (a = 5)"
+	},
+	{
+		"id": 66,
+		"question": "What does it mean to set initial values for variables upon declaration?",
+		"answer": "Initialization"
+	},
+	{
+		"id": 67,
+		"question": "What are examples of Control Flow Statements?",
+		"answer": "If statements, if-else statements"
+	},
+	{
+		"id": 68,
+		"question": "What type of statements are if-expression-then-endif statements?",
+		"answer": "Conditional statements"
+	},
+	{
+		"id": 69,
+		"question": "What are packages of code called?",
+		"answer": "Functions (or Methods or Subroutines)"
+	},
+	{
+		"id": 70,
+		"question": "What is it called to send a value back to the program from a function?",
+		"answer": "A return statement"
+	},
+	{
+		"id": 71,
+		"question": "What is the benefit of breaking code into many functions?",
+		"answer": "Called modularization, functions allow programmers to write entire apps and allow teams to work efficiently on bigger projects."
+	},
+	{
+		"id": 72,
+		"question": "What are bundles of pre-written functions available in most programming languages?",
+		"answer": "Libraries"
+	},
+	{
+		"id": 73,
+		"question": "What is an algorithm?",
+		"answer": "A list of specific steps used to complete a computation. (performance vs memory/storage determines success)"
+	},
+	{
+		"id": 74,
+		"question": "What is Big-O Notation?",
+		"answer": "How well an algorithm scales in reference to the size of its data. The O-notation formulas measure worst-case time."
+	},
+	{
+		"id": 75,
+		"question": "What is a brute-force approach?",
+		"answer": "Trying every available path/algorithm to see which is fastest. Equal to O(n!) meaning n * n-1 * n-2 etc."
+	},
+	{
+		"id": 76,
+		"question": "What is Dijkstra's Algorithm?",
+		"answer": "In graph search, it loops though each available node from the original starting point and retains the lowest value (or shortest route). Equal to O(n-squared)"
+	},
+	{
+		"id": 77,
+		"question": "What is a series of values stored in memory?",
+		"answer": "An Array"
+	},
+	{
+		"id": 78,
+		"question": "What is another term for an array or arrays?",
+		"answer": "A matrix"
+	},
+	{
+		"id": 79,
+		"question": "What is a linked-list?",
+		"answer": "A flexible data structure that can store many nodes of data."
+	},
+	{
+		"id": 80,
+		"question": "What are examples of linked-lists?",
+		"answer": "Ques (first-in, first-out), stacks (last-in, first-out)"
+	},
+	{
+		"id": 81,
+		"question": "What are nodes?",
+		"answer": "In linked-lists, nodes are structs containing both values and pointers."
+	},
+	{
+		"id": 82,
+		"question": "What are trees?",
+		"answer": "structs containing values and 2 pointers (parent nodes have children and leaf nodes have no children)"
+	},
+	{
+		"id": 83,
+		"question": "Who is known as 'The Father of Computer Science'?",
+		"answer": "Alan Turing"
+	},
+	{
+		"id": 84,
+		"question": "What is the Church-Turing Thesis?",
+		"answer": "The combined efforts that proved the limits of computation and formulize computability. (example, determining if a program or algorithm would loop forever)"
+	},
+	{
+		"id": 85,
+		"question": "What is the Turing Test?",
+		"answer": "Determining whether or not a computer could deceive a human into believing that it was human. (modern-day CAPTCHA)"
+	},
+	{
+		"id": 86,
+		"question": "Who coined the term 'software engineering'?",
+		"answer": "Margaret Hamilton"
+	},
+	{
+		"id": 87,
+		"question": "What is object oriented programming?",
+		"answer": "Refers to a type of programming in which programmers define not only the data type of a data structure, but also the types of functions that can be applied to the data structure."
+	},
+	{
+		"id": 88,
+		"question": "What is an API?",
+		"answer": "Application Programming Interface - A set of functions and procedures allowing the creation of applications that access the features or data of an operating system or application."
+	},
+	{
+		"id": 89,
+		"question": "What are IDEs?",
+		"answer": "Integrated Development Environment - A software application that provides comprehensive facilities to programmers for software development. An IDE normally consists of at least a source code editor, build automation tools, and a debugger."
+	},
+	{
+		"id": 90,
+		"question": "What were the individual parts (vacuum tubes, resistors, capacitors, diodes) of electronic computing referred to as?",
+		"answer": "Discrete components"
+	},
+	{
+		"id": 91,
+		"question": "What are integrated circuits?",
+		"answer": "ICs, putting many computer components inside of new, single components"
+	},
+	{
+		"id": 92,
+		"question": "Who is the father of modern ICs (integrated circuits)?",
+		"answer": "Robert Noyce, and he started making them with silicon."
+	},
+	{
+		"id": 93,
+		"question": "What were the benefits of printed circuit boards (PCBs) upon invention?",
+		"answer": "Didn't require soldering and bundling of billions of wires and could be mass produced. Using PCBs with ICs were smaller, cheaper and more reliable."
+	},
+	{
+		"id": 94,
+		"question": "What is the fabrication process of an integrated circuit?",
+		"answer": "Semiconductor lithography (photolithography)"
+	},
+	{
+		"id": 95,
+		"question": "Who determined that approximately every 2 years, thanks to advances in materials and manufacturing, you could fit twice the number of transistors into the same amount of space?",
+		"answer": "Gordon Moore (Moore's Law)"
+	},
+	{
+		"id": 96,
+		"question": "What are external devices connected to a computer called?",
+		"answer": "Peripherals"
+	},
+	{
+		"id": 97,
+		"question": "What do operating systems provide as intermediary APIs between software programs and hardware peripherals?",
+		"answer": "Device drivers"
+	},
+	{
+		"id": 98,
+		"question": "What is the benefit of virtual memory?",
+		"answer": "As the operating system stores memory for each program, it assumes that the program's block of memory starts at position 0 instead of dedicating it's own entire physical block of memory taking up sometimes unnecessary space."
+	},
+	{
+		"id": 99,
+		"question": "What is dynamic memory allocation?",
+		"answer": "As a result of virtual memory, it allows programs to have flexible memory sizes that appear to be single continuous blocks even when they're not. Simplifies the process for OSs trying to run multiple programs simultaneously."
+	},
+	{
+		"id": 100,
+		"question": "What is the benefit of each program having their own block of allocated memory?",
+		"answer": "Memory Protection - if one program is buggy it won't affect the memory belonging to other programs."
+	},
+	{
+		"id": 101,
+		"question": "What is a terminal?",
+		"answer": "A keyboard and screen that connects to a big computer but doesn't contain any processing power itself."
+	},
+	{
+		"id": 102,
+		"question": "What is time-sharing?",
+		"answer": "Each individual user of a computer was allowed to use only a small fraction of a computer's memory and other resources."
+	},
+	{
+		"id": 103,
+		"question": "What is a kernel?",
+		"answer": "The operating systems core functionality (e.g. memory management, multitasking, dealing with I/O)."
+	},
+	{
+		"id": 104,
+		"question": "What is non-permanent memory also called?",
+		"answer": "Volatile memory"
+	},
+	{
+		"id": 105,
+		"question": "What is the time that it takes for a computer to access any block of data?",
+		"answer": "Seek time"
+	},
+	{
+		"id": 106,
+		"question": "What are solid state technologies?",
+		"answer": "Technology with no moving parts (e.g. SSD - solid state drives, opposed to CDs). "
+	},
+	{
+		"id": 107,
+		"question": "What determines how the data inside a file is organized?",
+		"answer": "File format"
+	},
+	{
+		"id": 108,
+		"question": "What character encoding standard do TXT files use?",
+		"answer": "ASCII"
+	},
+	{
+		"id": 109,
+		"question": "What is data about data called?",
+		"answer": "Metadata"
+	},
+	{
+		"id": 110,
+		"question": "In a picture, what does each individual pixel consist of?",
+		"answer": "Red, green and blue colors"
+	},
+	{
+		"id": 111,
+		"question": "What keeps tracks of file information inside of a computer (including when each file begins in storage and how long they are)?",
+		"answer": "Directory File"
+	},
+	{
+		"id": 112,
+		"question": "What is it called when files get broken up across storage?",
+		"answer": "Fragmentation (Defragmentation is reording the file's storage to be sequential)"
+	},
+	{
+		"id": 113,
+		"question": "What is 'run-length encoding'?",
+		"answer": "In an image file, it takes all sequential pixels of the same RGB value, adds a bit at the beginning specifying how long the run is and then removes all duplicate pixels."
+	},
+	{
+		"id": 114,
+		"question": "What is compression that doesn't cause any quality or information loss?",
+		"answer": "Lossless compression"
+	},
+	{
+		"id": 115,
+		"question": "What is a Huffman Tree?",
+		"answer": "A compression algorithm that groups code blocks by frequency. (A type of dictionary coder)"
+	},
+	{
+		"id": 116,
+		"question": "What is lossy compression?",
+		"answer": "Changing some of the file's data upon compression but only that which is nearly undetectable by humans. (Perceptual Coding)"
+	},
+	{
+		"id": 117,
+		"question": "In video files, what is it called when certain elements (like a background) remain largely the same frame-by-frame and therefore don't need to be retransmitted?",
+		"answer": "Temporal redundancy (Inter-frame Simularity)"
+	},
+	{
+		"id": 118,
+		"question": "What is a portion of the computer's memory reserved for the screen's character generator called?",
+		"answer": "Screen Buffer"
+	},
+	{
+		"id": 119,
+		"question": "What was the first commercially successful computer?",
+		"answer": "Univac 1 in the 1950s"
+	},
+	{
+		"id": 120,
+		"question": "What was one of the most influential factors bringing about personal computers?",
+		"answer": "Single-chip CPUs (powerful yet small and inexpensive)"
+	},
+	{
+		"id": 121,
+		"question": "What was the first commercially successful personal computer?",
+		"answer": "Altair 8800 released in 1975"
+	},
+	{
+		"id": 122,
+		"question": "What is an interpreter?",
+		"answer": "Similar to a compiler but runs as the program runs instead of beforehand"
+	},
+	{
+		"id": 123,
+		"question": "When did the first Apple computer launch?",
+		"answer": "1976 called the Apple 1 by Steve Wozniack and Steve Jobs (sold as a kit)"
+	},
+	{
+		"id": 124,
+		"question": "What personal computers were sold in 1977 that were offered as ready out-of-the-box?",
+		"answer": "Apple 2, TRS-80 Model 1 (Radio Shack), Commodore Pet 2001 (The 1977 Trinity)"
+	},
+	{
+		"id": 125,
+		"question": "When was Macintosh first released?",
+		"answer": "1984. It was the first computer with a GUI."
+	},
+	{
+		"id": 126,
+		"question": "What is a GUI?",
+		"answer": "A visual way of interacting with a computer using items such as windows, icons, and menus."
+	},
+	{
+		"id": 127,
+		"question": "What is a WIMP Interface?",
+		"answer": "A GUI with windows, icons, menus, and a pointer. (first introduced by the Xerox Alto)"
+	},
+	{
+		"id": 128,
+		"question": "What is event-driven programming?",
+		"answer": "Used by GUIs to fire code at any time in any order in response to events."
+	},
+	{
+		"id": 129,
+		"question": "What is the process of flattening 3D coordinates onto a 2D plane?",
+		"answer": "3D Projection"
+	},
+	{
+		"id": 130,
+		"question": "Triangles used in 3D objects are called what?",
+		"answer": "Polygons"
+	},
+	{
+		"id": 131,
+		"question": "What is Anti-Aliasing?",
+		"answer": "In computer graphics, when the polygon grazes a pixel, only the pixels fully contained inside the polygon are fully-filled while the grazed pixels are only partially filled."
+	},
+	{
+		"id": 132,
+		"question": "What is latency?",
+		"answer": "The time it takes for a message to transfer."
+	},
+	{
+		"id": 133,
+		"question": "What are relatively small networks of close-by computers called?",
+		"answer": "Local Area Networks (LANs)"
+	},
+	{
+		"id": 134,
+		"question": "What is a popular LAN connection using a connected cable?",
+		"answer": "Ethernet (each computer connected to a shared cable via a personal MAC address)"
+	},
+	{
+		"id": 135,
+		"question": "What is the rate at which a carrier can transmit data?",
+		"answer": "Bandwidth"
+	},
+	{
+		"id": 136,
+		"question": "What is 'Exponential Backoff'?",
+		"answer": "In networking, EB occurs when multiple computers try to transmit data at the same time. When a collision occurs, the computers wait exponentially more time before trying again."
+	},
+	{
+		"id": 137,
+		"question": "What is 'Circuit Switching'?",
+		"answer": "In networking, when whole circuits are switched to route traffic to the correct destination. (Because of the potential for having to wait for busy or in-use circuits, many large companies and governments have their own dedicated circuits.)"
+	},
+	{
+		"id": 138,
+		"question": "What is 'Message Switching'?",
+		"answer": "In networking, when computers are connected via multiple stops (like the postal service). This is fault-tolerant because if one stop is down the connection can be rerouted."
+	},
+	{
+		"id": 139,
+		"question": "What is the 'Hop Count'?",
+		"answer": "In networking, the number of hops a message takes along it's route."
+	},
+	{
+		"id": 140,
+		"question": "What is 'Packet Switching'?",
+		"answer": "In networking, when a message is broken apart into several packets of data with their own destination addresses. It's very efficient and fault-tolerant and how the internet works today."
+	},
+	{
+		"id": 141,
+		"question": "What is the process your computer follows to connected to the internet via network?",
+		"answer": "LAN -> Local WAN (Wide Area Network run by the Internet Service Provider [ISP]) -> Regional WAN -> Other possible WANs"
+	},
+	{
+		"id": 142,
+		"question": "What is 'Internet Protocol' (IP)?",
+		"answer": "A set of standards that must be followed to transmit messages online (includes the destination address)."
+	},
+	{
+		"id": 143,
+		"question": "What is 'User Datagram Protocol' (UDP)?",
+		"answer": "An internet protocol that sets on top of IP which includes a port number (to make sure the messages gets to the correct program) and checksum (for message validation). Can be faulty."
+	},
+	{
+		"id": 144,
+		"question": "What is 'Transmission Control Protocol' (TCP)?",
+		"answer": "An internet protocol on top of IP that ensures the data reaches its destination and in order. Also sends an acknowledgement back to the sender. If no acknowledgement is sent after a time the sender will automatically retransmit. Can lead to more network delays due to double the amount of messages being transmitted."
+	},
+	{
+		"id": 145,
+		"question": "What is 'Domain Name System' (DNS)?",
+		"answer": "The mapping of domain names to IP addresses. When a domain name is entered in a browser and sent, DNS looks for the proper IP address for which to send the request and then returns it to the browser."
+	},
+	{
+		"id": 146,
+		"question": "What are the 7 layers of the OSI (Open System Interconnection)?",
+		"answer": "Physical layer, data link layer, network layer, transport layer, session layer, presentation layer, application layer"
+	},
+	{
+		"id": 147,
+		"question": "What is URL short for?",
+		"answer": "Uniform Resource Locator"
+	},
+	{
+		"id": 148,
+		"question": "What is HTML short for?",
+		"answer": "Hypertext Markup Language"
+	},
+	{
+		"id": 149,
+		"question": "What would it mean for data to get 'throttled'?",
+		"answer": "Intentionally given less bandwidth and lower priority by ISPs (Net Neutrality)"
+	},
+	{
+		"id": 150,
+		"question": "In cybersecurity, what does 'integrity' mean?",
+		"answer": "Only authorized people should have the ability to use or modify systems and data."
+	},
+	{
+		"id": 151,
+		"question": "In cybersecurity, what does 'availability' mean?",
+		"answer": "Authorized people should always have access to their systems and data"
+	},
+	{
+		"id": 152,
+		"question": "In cybersecurity, what is a 'threat model'?",
+		"answer": "When security experts attempt to determine 'who' the enemy is. They let you prepare against specific threats."
+	},
+	{
+		"id": 153,
+		"question": "In cybersecurity, what is an 'attack vector'?",
+		"answer": "The attacker's capabilities, goals and means of attack."
+	},
+	{
+		"id": 154,
+		"question": "What 2 main questions does security boil down to?",
+		"answer": "Who are you and what should you have access to?"
+	},
+	{
+		"id": 155,
+		"question": "How does the computer differentiate between the right and wrong people?",
+		"answer": "Authentication. What you know (based on knowledge of a secret/password), what you have (physical key and lock) and who you are (biometric sensors)."
+	},
+	{
+		"id": 156,
+		"question": "What is a 'brute force attack'?",
+		"answer": "When there's nothing clever to the attack than just trying every possible combination of numbers or letters."
+	},
+	{
+		"id": 157,
+		"question": "What is 'multi-factor authentication'?",
+		"answer": "When the computer requires more than one type of authentication."
+	},
+	{
+		"id": 158,
+		"question": "What is 'Access Control'?",
+		"answer": "After authentication, access control determines what you have access to (Permissions or Access Control Lists - ACL)."
+	},
+	{
+		"id": 159,
+		"question": "What are the 3 types of permissions?",
+		"answer": "Read, write and execute"
+	},
+	{
+		"id": 160,
+		"question": "What is the 'no read up, no write down' approach in cybersecurity?",
+		"answer": "Bell-LaPadula Model"
+	},
+	{
+		"id": 161,
+		"question": "Where do most security errors come from?",
+		"answer": "Implementation error"
+	},
+	{
+		"id": 162,
+		"question": "What is the process of having code audited by a crowd of security experts?",
+		"answer": "Independent Verification and Validation"
+	},
+	{
+		"id": 163,
+		"question": "In cybersecurity, what is 'isolation'?",
+		"answer": "For example, when computers store program's memory in their own blocks."
+	},
+	{
+		"id": 164,
+		"question": "What are 'good' hackers called?",
+		"answer": "White Hats (as opposed to Black Hats)"
+	},
+	{
+		"id": 165,
+		"question": "What is it called when hackers trick users into letting them in?",
+		"answer": "Social engineering"
+	},
+	{
+		"id": 166,
+		"question": "What is 'phishing'?",
+		"answer": "When hackers include a link in an email that sends users to a mirror website where personal credentials are entered."
+	},
+	{
+		"id": 167,
+		"question": "What is 'pretexting'?",
+		"answer": "When hackers pretend to be from a company's IT department."
+	},
+	{
+		"id": 168,
+		"question": "What is a 'Trojan Horse'?",
+		"answer": "When an email attachment appears harmless but actually contains malicious software (malware)."
+	},
+	{
+		"id": 169,
+		"question": "What is a 'buffer overflow'?",
+		"answer": "When a hacker overflows the allocated block in memory (i.e. putting excessive input inside of an input field)."
+	},
+	{
+		"id": 170,
+		"question": "How can 'buffer overflow' be prevented?",
+		"answer": "By 'bounds checking' or verifying the length of the input prior to saving it in memory."
+	},
+	{
+		"id": 171,
+		"question": "What is 'code injection'?",
+		"answer": "Used by hackers upon data input to alter database queries."
+	},
+	{
+		"id": 172,
+		"question": "What does it mean to 'sanitize' data?",
+		"answer": "Upon receiving new data, the server removes or modifies any special characters from the input."
+	},
+	{
+		"id": 173,
+		"question": "What is it called when a new exploitable bug is discovered that software creators weren't of?",
+		"answer": "Zero day vulnerability"
+	},
+	{
+		"id": 174,
+		"question": "What are 'worms'?",
+		"answer": "When hackers write programs that can jump from computer to computer automatically."
+	},
+	{
+		"id": 175,
+		"question": "What is a 'botnet'?",
+		"answer": "When a hacker takes over a large number of computers that can be used together (for sending DDoS attacks against servers, large amounts of spam, etc)."
+	},
+	{
+		"id": 176,
+		"question": "What is a 'DDoS Attack'?",
+		"answer": "When all computers in a botnet send a flood of dummy messages to knock servers offline or force owners to pay a ransom."
+	},
+	{
+		"id": 177,
+		"question": "What is 'Defense in Depth'?",
+		"answer": "When system architects deploy a defense strategy against hackers containing multiple layers."
+	},
+	{
+		"id": 178,
+		"question": "What is the process of making text a secret?",
+		"answer": "Encryption (as opposed to decryption)"
+	},
+	{
+		"id": 179,
+		"question": "What was one of the earliest software ciphers to become widespread?",
+		"answer": "Data Encryption Standard (1977)"
+	},
+	{
+		"id": 180,
+		"question": "How does the 'Advanced Encryption Standard' work?",
+		"answer": "It chops data into 16-byte blocks and then applies a series of substitutions and permutations based on key value, plus other operations to obscure the message. This process is repeated 10 or more times. (used today by phones and websites - https, a form of 'Public Key Cryptography')"
+	},
+	{
+		"id": 181,
+		"question": "What is a 'Key Exchange'?",
+		"answer": "An algorithm that lets 2 computers agree on a cipher key without ever sending it via one-way functions (i.e. Diffie-Hellman Key Exchange)"
+	},
+	{
+		"id": 182,
+		"question": "What is the 'Diffie-Hellman Key Exchange'?",
+		"answer": "A one-way function using modular exponentiation (B(x) mod M). The base (B) and modulas (M) are publicly known but the exponent (x) is a secret."
+	},
+	{
+		"id": 183,
+		"question": "What is 'machine learning'?",
+		"answer": "Algorithms that give computers the ability to learn from data and then make predictions and decisions (i.e. is this email spam?)."
+	},
+	{
+		"id": 184,
+		"question": "What is a 'classification'?",
+		"answer": "When we decide if a moth is a lunar moth or an emperor moth, for example (algorithms that do this are called classifiers - reducing the complexities of real-world objects into features like wingspan and mass)."
+	},
+	{
+		"id": 185,
+		"question": "How do machine-learning algorithms use 'features'?",
+		"answer": "By collecting data on real-world objects and determining decision boundaries based on maximizing correctness (incorrectness is called 'confusion matrix')."
+	},
+	{
+		"id": 186,
+		"question": "In machine-learning, what's it called when we divide up decisions into boxes?",
+		"answer": "A 'Decision Tree' (if wingspan > 10 and mass > 5)"
+	},
+	{
+		"id": 187,
+		"question": "What are 2 common machine-learning techniques?",
+		"answer": "'Decision Trees' and 'Support Vector Machines' (based in statistics)"
+	},
+	{
+		"id": 188,
+		"question": "What are 'Artificial Neural Networks'?",
+		"answer": "Machine-learning algorithms that use neural nets (using weighting, summing, biasing and applying an activation function to inputted integer values). Can be multiple layers referred to as 'deep learning'."
+	},
+	{
+		"id": 189,
+		"question": "What is artificial intelligence that is only good at specific tasks?",
+		"answer": "'Weak AI' or 'Narrow AI'"
+	},
+	{
+		"id": 190,
+		"question": "What would human-level artificial intelligence be referred to as?",
+		"answer": "'Strong AI'"
+	},
+	{
+		"id": 191,
+		"question": "What is 'Reinforcement Learning'?",
+		"answer": "Learning tasks through continuous repetition (like how humans learn)."
+	},
+	{
+		"id": 192,
+		"question": "What is 'Computer Vision'?",
+		"answer": "The goal of giving computers the ability to extract high-level understanding from digital images and videos."
+	},
+	{
+		"id": 193,
+		"question": "What is a 'kernel'?",
+		"answer": "A grid containing the values for a pixel-wise multiplication, the sum of which is saved into the center pixel (used in 'Computer Vision')."
+	},
+	{
+		"id": 194,
+		"question": "What are edge-enhancing kernels called?",
+		"answer": "'Prewitt Operators' (kernels that are able to perform image transformations). Can be used to determine a person's nose, eyes or other features where light and dark contrast in predictable patterns when multiple kernels are used together."
+	},
+	{
+		"id": 195,
+		"question": "What are 'Convulational Neural Networks'?",
+		"answer": "Using neural networks to run images through layers assigned to detect different things (e.g. edges, shapes, then mouths/eyebrows) and then combined."
+	},
+	{
+		"id": 196,
+		"question": "What is 'Natural Language Processing'?",
+		"answer": "An interdisciplinary field combining computer science and linguistics (NLP)."
+	},
+	{
+		"id": 197,
+		"question": "What rules were developed to encapsulate the grammar of a language for computers?",
+		"answer": "'Phrase Structure Rules' - declaring different types of word combinations as viable sentences (i.e. a noun phrase followed by a verb phrase)."
+	},
+	{
+		"id": 198,
+		"question": "What is a 'parse tree'?",
+		"answer": "Breaking down a sentence into smaller chunks of data (e.g. nouns, verbs)."
+	},
+	{
+		"id": 199,
+		"question": "What is a 'Negative Feedback Loop'?",
+		"answer": "Used in robotics to sense, control and perform actions in the real world."
+	},
+	{
+		"id": 200,
+		"question": "What is a 'Proportional-Integral-Derivative Controller'?",
+		"answer": "A widely used program that calculates the desired value (speed) to the actual value, the sum of error in the ratio, and potential future error."
+	},
+	{
+		"id": 201,
+		"question": "What are 'Androids'?",
+		"answer": "Robots that look and act like humans."
+	},
+	{
+		"id": 202,
+		"question": "What are robots with the intelligence and capability to take human lives?",
+		"answer": "'Lethal Autonomous Weapons'"
+	},
+	{
+		"id": 203,
+		"question": "What is 'usability'?",
+		"answer": "The degree to which a human-made artifact can be used to achieve an objective effectively and efficiently."
+	},
+	{
+		"id": 204,
+		"question": "What does it mean for data to be 'chunked'?",
+		"answer": "When it's put together in small, meaningful groups. Humans can read, remember and process information more effectively this way (i.e. telephone numbers)."
+	},
+	{
+		"id": 205,
+		"question": "What are 'affordances'?",
+		"answer": "Affordances provide strong clues to the operations of things (door plates are for pushing, knobs are for turning, slots are for inserting things into). No additional instructions needed. Broken affordances are when pulling on a door handle when it actually needs to be pushed."
+	},
+	{
+		"id": 206,
+		"question": "What is 'knurling'?",
+		"answer": "Texture added to objects to improve grip and show you where to best grab them (like a window's scroll bar)."
+	},
+	{
+		"id": 207,
+		"question": "Should interfaces offer multiple paths to accomplish goals?",
+		"answer": "Yes, to leverage expertise - when users gain experience with interfaces they get faster and build mental models of how to do things efficiently (i.e. copy & paste links cater to beginners and keyboard shortcuts cater to experts)."
+	},
+	{
+		"id": 208,
+		"question": "What is 'affect' in computer psychology?",
+		"answer": "When a computer adapts its behavior to respond appropriately to a user's emotional state."
+	},
+	{
+		"id": 209,
+		"question": "What is 'computer-mediated communication (CMC)'?",
+		"answer": "Includes synchronous communication like video calls and asynchronous communication like tweets, emails and texts and studies the use of things like emoticons and language used in different channels. One finding is that people are usually more willing to reveal personal information to a computer than when in a face-to-face interaction."
+	},
+	{
+		"id": 210,
+		"question": "What is 'augmented gaze'?",
+		"answer": "Computer vision and graphics software that can warp the head and eyes making it appear as though someone is looking into the camera rather than down at the screen (i.e. video conferencing and webcams)."
+	},
+	{
+		"id": 211,
+		"question": "In robotics, what is the dip in realism between almost-human and actually-human called?",
+		"answer": "The 'uncanny valley'"
+	},
+	{
+		"id": 212,
+		"question": "What is 'ubiquitous computing'?",
+		"answer": "Having computer involvement in every aspect of our lives."
+	},
+	{
+		"id": 213,
+		"question": "What is 'singularity'?",
+		"answer": "Rapid technological growth especially with respect to intelligence."
+	},
+	{
+		"id": 214,
+		"question": "What is a 'complexity brake'?",
+		"answer": "The levelling-off of progress in computer growth (particularly with respect to intelligence). As complexity increases, it becomes more difficult to make additional progress."
+	},
+	{
+		"id": 215,
+		"question": "What is it called when a job sector is rendered obsolete by computers (such as AI and robots)?",
+		"answer": "Technological Unemployment"
+	},
+	{
+		"id": 216,
+		"question": "What is the term for when humans and technology merge?",
+		"answer": "Cyborgs"
+	},
+	{
+		"id": 217,
+		"question": "What does it mean for an algorithm to run in 'linear time'?",
+		"answer": "That would be equal to O(n). The time required to run the algorithm would be directly proportional to the size of the data (as the data size doubles, so does the time required for the algorithm to run). An example of this would be searching for a value within an array by incrementing."
+	},
+	{
+		"id": 218,
+		"question": "What is 'asymptotic complexity' or when an algorithm runs in 'constant time'?",
+		"answer": "Equal to O(1). The time required to run an algorithm would not be altered by the size of the data (potential downfalls could be memory or storage loss)."
+	},
+	{
+		"id": 219,
+		"question": "What does it mean for an algorithm to run in 'logarithmic time'?",
+		"answer": "Equal to O(log n)Finding an element in an already-sorted list of elements (i.e. binary search - starting with the middle element then looking left or right and continuing)."
+	},
+	{
+		"id": 220,
+		"question": "What is 'order of growth'?",
+		"answer": "For algorithms, it refers to how the time for computation increases when the input size is increased (important with larger input sizes). With larger input sizes, it's important to focus on the dominating terms (i.e. 100n vs n-squared)."
+	},
+	{
+		"id": 221,
+		"question": "What is 'asymptotic behavior'?",
+		"answer": "Regarding algorithms, it's when we drop other minor factors and focus on the largest growing term when considering performance. In f(n) = n, we're interested in the limit of function f as n tends to infinity."
+	},
+	{
+		"id": 222,
+		"question": "What is 'recursion'?",
+		"answer": "The method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). A recursive function is a function that calls itself."
+	},
+	{
+		"id": 223,
+		"question": "What are 'profilers'?",
+		"answer": "Tools that measure the running time of programs and help to identify bottlenecks."
+	},
+	{
+		"id": 224,
+		"question": "What is 'worst-case analysis'?",
+		"answer": "When attempting to put a run-time value on an algorithm, we always assume the worst case scenario (the most instructions/actions needed)."
+	},
+	{
+		"id": 225,
+		"question": "What would our time-based formula be if our program had a constant number of instructions?",
+		"answer": "f(n) = 1"
+	},
+	{
+		"id": 226,
+		"question": "What would be a real-life program example of f(n) = n-exponential 2?",
+		"answer": "When a program has a loop within a loop. A loop within a loop within a loop would yield f(n) = n-exponential 3"
+	},
+	{
+		"id": 227,
+		"question": "What symbol do we use when we've determined the value of 'f' asymptotically?",
+		"answer": "Θ(n) or 'theta of n'. For example, this is a true mathematical statement: n6 + 3n ∈ Θ(n6) - is theta of n to the 6. This is also known as the 'complexity' or 'time complexity' of the algorithm."
+	},
+	{
+		"id": 228,
+		"question": "What are the 4 common algorithm 'time complexities' called?",
+		"answer": "Θ(1) is constant-time, Θ(n) is linear, Θ(n2) is quadratic and Θ(log(n)) is logarithmic."
+	},
+	{
+		"id": 229,
+		"question": "What is the difference between 'theta of n' and 'big O of n'?",
+		"answer": "Theta simplifies the instruction set focusing on the one, highest-variable element where 'Big O' focuses on the finding the worst case scenario. O-complexity gives the 'upper bound' while theta gives us the 'tight bound' (the actual complexity)."
+	},
+	{
+		"id": 230,
+		"question": "How can complexities between theta and Big-O be considered 'tight'?",
+		"answer": "When the 2 complexities register approximately the same. (theta of n and big-O of n or theta of n and big-O of 2n). Complexities that are not considered tight can be referred to as small-o - 'small-o of n'."
+	},
+	{
+		"id": 231,
+		"question": "What does 'big omega' tell us (i.e. 'big omega of n')?",
+		"answer": "It gives us the complexity that we know our program won't be better than (the best-case scenario - the 'lower bound'). This is good when trying to prove how poor an algorithm is. Symbol: Ω"
+	},
+	{
+		"id": 232,
+		"question": "When would we need to refer to 'small omega' (i.e. 'small omega of n')?",
+		"answer": "When the lower bound of 'big omega' can't be considered 'tight'. Symbol: ω"
+	},
+	{
+		"id": 233,
+		"question": "What are the comparable mathematical symbols for the common asymptotic comparisons?",
+		"answer": "small-o would be <, big-O would be <=, theta would be =, big-omega would be >=, small-omega would be > (as in, a number is < something or other comparisons)."
+	},
+	{
+		"id": 234,
+		"question": "What do 'logarithmic' operations do to a number?",
+		"answer": "They make the number much smaller than the original (the inverse operation of exponentiating something). In computer science, base-2 logarithms are the most common (having 2 values). Example: log(32) = 5."
+	},
+	{
+		"id": 235,
+		"question": "What is it called when an algorithm solves a problem in the best possible way?",
+		"answer": "An 'optimal algorithm'."
+	},
+	{
+		"id": 236,
+		"question": "In arrays, what is 'row major' ordering?",
+		"answer": "Ordering all of the array elements in a given row before continuing to the next row (e.g. 1,1 1,2 1,3 1,4 1,5 2,1 2,2 ...)."
+	},
+	{
+		"id": 237,
+		"question": "In arrays, what is 'column major' ordering?",
+		"answer": "Ordering all of the array elements in a given column before continuing to the next column (e.g. 1,1 2,1 3,1 1,2 2,2 3,2 1,3 ...)."
+	},
+	{
+		"id": 238,
+		"question": "In arrays, what is the time formula for adding and subtracting an element to the end of an array?",
+		"answer": "O(1) - order of 1 (constant time)."
+	},
+	{
+		"id": 239,
+		"question": "In arrays, what is the time formula for adding and subtracting an element to the beginning of an array?",
+		"answer": "O(n) - order of n (linear time). Each subsequent element in the array would need to be reordered. Expensive."
+	},
+	{
+		"id": 240,
+		"question": "In arrays, what is the time formula for adding and subtracting an element to the middle of an array?",
+		"answer": "O(n) - order of n (linear time). Each subsequent element in the array would need to be reordered. Expensive."
+	},
+	{
+		"id": 241,
+		"question": "What is the primary benefit of arrays?",
+		"answer": "Arrays provide constant-time access to its elements - reading or writing."
+	},
+	{
+		"id": 242,
+		"question": "What are arrays?",
+		"answer": "Arrays are a contiguous area of memory consisting of equal-size elements indexed by contiguous integers."
+	},
+	{
+		"id": 243,
+		"question": "In linked-lists, what is the time formula for PushFront() and PopFront()?",
+		"answer": "O(1) - order of 1 (constant time). A new node is created then pointed to the original first node and the head is updated to point to the new node."
+	},
+	{
+		"id": 244,
+		"question": "In linked-lists, what is the time formula for PushBack() and PopBack()?",
+		"answer": "O(n) - order of n (linear time). A new node is created then the linked-list is iterated over to find the final node which then creates a tail pointer and points to the new node (unless a tail element has already been created which would then allow for O(1) time)."
+	},
+	{
+		"id": 245,
+		"question": "What is a doubly-linked list?",
+		"answer": "A linked list that has 2 pointers, a head and a tail. Each node contains 3 pieces of data - the value, a pointer following the path of the head (next) and a pointer following the path of the tail (previous)."
+	},
+	{
+		"id": 246,
+		"question": "What are the benefits of linked lists?",
+		"answer": "It is O(1) to insert or remove from both the front and the back, list items don't need to be contiguous, and, with doubly-linked lists, O(1) to insert or remove between nodes."
+	},
+	{
+		"id": 247,
+		"question": "What is a stack data type?",
+		"answer": "An abstract data type with the following operations (Push, Pop, Top, Empty). They are like a stack of books - can't get to the bottom without removing all of the other books. LIFO."
+	},
+	{
+		"id": 246,
+		"question": "What are a couple of common use cases for the stack data type?",
+		"answer": "Checking whether or not a string is balanced (i.e. '()[]') and in compilers."
+	},
+	{
+		"id": 247,
+		"question": "How do you implement a stack data type?",
+		"answer": "By allocating an array with a maximum size and then pushing elements into the array (potential wasted space and max size) or by creating a linked list and then pushing elements into the list (no maximum size but increased overhead needing to store the pointer in addition to the value)."
+	},
+	{
+		"id": 248,
+		"question": "What is the primary benefit of the stack data type?",
+		"answer": "Each stack operation (Push, Pop, Top, Empty) is an O(1) - order of one or constant time - operation."
+	},
+	{
+		"id": 249,
+		"question": "What is a queue data type?",
+		"answer": "An abstract data type with the following operations (Enqueue - adds, Key Dequeue - removes and returns least recently-added - FIFO, Empty)."
+	},
+	{
+		"id": 250,
+		"question": "How do you implement a queue data type?",
+		"answer": "With a linked list - use enqueue to push new values to end of list, or with an array (enqueue and dequeue wrap around an array with a set maximum size)."
+	},
+	{
+		"id": 251,
+		"question": "What is a tree data structure?",
+		"answer": "A structure that is either empty or is a node with a key and a list of child nodes/trees. It starts with a root (top node), then children/parents, then ancestors/descendants/siblings."
+	},
+	{
+		"id": 252,
+		"question": "How do you determine the height of a tree data structure?",
+		"answer": "It is the maximum depth of a subtree node and the farthest leaf (the root's [or specific elements] farthest descendants)."
+	},
+	{
+		"id": 253,
+		"question": "How many children can a binary tree node contain?",
+		"answer": "2 - one to the left and one to the right."
+	},
+	{
+		"id": 254,
+		"question": "How do we walk a tree data structure?",
+		"answer": "Depth-first - completely traversing a sub-tree before exploring a sibling tree (pre-order, in-order, post-order), breadth-first - traversing all nodes at one level (siblings) before progressing to the next level (children)."
+	},
+	{
+		"id": 255,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 256,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 257,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 258,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 259,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 260,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 261,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 262,
+		"question": "",
+		"answer": ""
+	}
+]

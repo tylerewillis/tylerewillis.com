@@ -1,0 +1,168 @@
+* {
+	box-sizing: border-box;
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+	color: $color-black;
+}
+body,
+textarea,
+input {
+	font-family: $font-stack-body;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 900;
+	font-family: $font-stack-header;
+}
+.global-width {
+	width: 95%;
+	max-width: 1260px;
+	margin: auto;
+}
+.global-width-small {
+	width: 95%;
+	max-width: 900px;
+	margin: auto;
+}
+.page {
+	min-height: 100vh;
+}
+a {
+	color: $color-primary;
+	text-decoration: none;
+}
+a:hover {
+	color: $color-primary-light;
+	text-decoration: none;
+}
+.ql-size-huge {
+	font-size: 24px;
+	line-height: 32px;
+	font-weight: 500;
+	margin: 20px 0px 10px;
+	display: inline-block;
+}
+.ql-size-large {
+	font-size: 20px;
+	line-height: 28px;
+	font-weight: 500;
+	margin: 20px 0px 10px;
+	display: inline-block;
+}
+.breadcrumbs {
+	padding: 10px 0px;
+	font-size: 14px;
+}
+.breadcrumbs span {
+	margin: 0px 5px;
+}
+p {
+	font-size: .9em;
+	line-height: 1.5em;
+	margin-bottom: 1.25em;
+	font-weight: 300;
+}
+li {
+	font-size: .9em;
+	line-height: 1.5em;
+	margin-bottom: .5em;
+	font-weight: 300;
+}
+
+// =========================================/
+// Antispam
+// =========================================/
+
+.antispam {
+	display: none;
+}
+
+// =========================================/
+// Alerts
+// =========================================/
+
+.alert {
+	position: relative;
+}
+.alert-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 12px;
+	opacity: .5;
+	font-size: 22px;
+}
+.alert-close:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+.alert-center-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,.2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.alert-center {
+  border-radius: 5px;
+  padding: 40px;
+  box-shadow: 1px 1px 1px $color-shade-dark;
+  min-width: 400px;
+  min-height: 250px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+.alert-top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 30px;
+}
+.alert-bottom {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 30px;
+}
+
+// =========================================/
+// Privacy Statement
+// =========================================/
+
+.privacy-footer {
+	background-color: $color-black;
+	padding: 20px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	p {
+		color: $color-white;
+		margin: 0px;
+		text-align: center;
+		a {
+			color: $color-white;
+			font-weight: 900;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $color-white;
+    margin: 8px;
+    cursor: pointer;
+	}
+}
+

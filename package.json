@@ -1,0 +1,37 @@
+{
+  "name": "start",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "eslint": "./node_modules/.bin/eslint",
+    "watch-css": "./node_modules/.bin/node-sass -o public/css dev/scss --watch",
+    "dev": "nodemon & npm run watch-css",
+    "build": "./node_modules/.bin/node-sass -o public/css dev/scss --output-style compressed"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cluster": "^0.7.7",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "export-to-csv": "^0.2.1",
+    "express": "^4.17.1",
+    "express-slow-down": "^1.3.1",
+    "formidable": "^1.2.1",
+    "googleapis": "^40.0.0",
+    "helmet": "^3.18.0",
+    "mysql": "^2.17.1",
+    "nodemailer": "^6.2.1",
+    "nodemon": "^1.19.1",
+    "pug": "^2.0.4",
+    "sitemap": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "node-sass": "^4.12.0"
+  }
+}

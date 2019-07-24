@@ -1,0 +1,127 @@
+extends ../cs/example-layout.pug
+
+block head
+	include head.pug
+	title
+	meta(name='description', content='')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='')
+	meta(property='og:description', content='')
+	meta(property='og:image', content='')
+
+	//- Schema
+	script.
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Check balance of brackets in code",
+			"about": "Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Check balance of brackets in code
+		h2 Use Case:
+		p Let's say you're writing some code in a text editor and you'd like to create a way to verify you haven't forgotten to close any opening brackets in your code, or that you haven't unintentionally overlapped a new, different bracket set with a previous bracket set. A lot of text editors provide native (or plugin) options for assisting you with this today, but, for a test case, below are examples for building this functionality efficiently in both JavaScript and PHP.
+		p It would be simple to edit the below examples for other string pairs (single or multiple characters) for additional use cases.
+
+	.examples
+		//- JavaScript
+		p Here is the JavaScript solution:
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|	function isBalance(string) {
+					|
+					|		var openingBrackets = ["(","[","{"]
+					|		var closingBrackets = [")","]","}"]
+					|		var stack = []
+					|
+					|		// Traverse string
+					|		for (i = 0; i < string.length; i++) {
+					|			var char = string.charAt(i)
+					|
+					|			// If an opening bracket, add to stack
+					|			if (openingBrackets.includes(char)) {
+					|				stack.push(char)
+					|			}
+					|
+					|			// If a closing bracket, verify that top-most value in stack is the opening match
+					|			if (closingBrackets.includes(char)) {
+					|				var matchingOpeningBracket = openingBrackets[closingBrackets.indexOf(char)]
+					|				if (stack[stack.length -1] == matchingOpeningBracket) {
+					|
+					|					// If match, just remove the opening bracket from the stack
+					|					stack.pop()
+					|				} else {
+					|	
+					|					// If not a match, return an error message with details and break
+					|					console.log(`Error at character location ${i}. "${stack[stack.length - 1]}" not closed properly.`) // Stop program and return error location and opening bracket that wasn't closed properly
+					|					break
+					|				}
+					|			}
+					|
+					|			// If we made it to the end of the input string, log a success message
+					|			(string.length - 1 === i) ? console.log('Success') : ''
+					|		}
+					|	}
+					|	isBalance('{[]}()') // Logs 'Success'
+			p While traversing the inputted string, we're checking to see if the character is contained in our predetermined list of opening brackets. If so, we're pushing it onto our stack.
+			p Then we're checking to see if the character is contained in our predetermined list of closing brackets. If it is then, instead of pushing it onto our stack, we're returning the top-most value on our stack and checking to see if it is the correct opening bracket for our active character (which was determined to be a closing bracket).
+			p If they match, we remove the top-most value from the stack (since we've just now found its closing-bracket match) and continue traversing the string. If they don't match, then we've discovered an error and will stop the program immediately and return the error containing the location and top-most element in our stack that's missing it's needed closing bracket match.
+			p Finally, if no errors have been discovered, we'll simply log 'Success' to the console.
+		
+		//- PHP
+		p Here is the PHP solution:
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					| function isBalance($string) {
+					|
+					|		$openingBrackets = array("(", "[", "{");
+					|		$closingBrackets = array(")", "]", "}");
+					|		$stack = array();
+					|
+					|		// Traverse String
+					|		for ($i = 0; $i < strlen($string); $i++) {
+					|			$char = $string[$i];
+					|
+					|			// If an opening bracket, add to the stack
+					|			if (in_array($char, $openingBrackets)) {
+					|				array_push($stack, $char);
+					|			}
+					|
+					|			// If a closing bracket, verify that the top-most value in our stack is the opening bracket match
+					|			if (in_array($char, $closingBrackets)) {
+					|				$matchingOpeningBracket = $openingBrackets[array_search($char, $closingBrackets)];
+					|				
+					|				// Store value of top-most stack value
+					|				$topOfStack = array_values(array_slice($stack, -1))[0];
+					|				if ($topOfStack == $matchingOpeningBracket) {
+					|
+					|					// If match, just remove the opening bracket from the stack
+					|					array_pop($stack);
+					|				} else {
+					|
+					|					// If not a match, echo error message with details and break from loop
+					|					echo "Error at character location {$i}. {$topOfStack} not closed properly.\n";
+					|					break;
+					|				}
+					|			}
+					|
+					|			// If we made it to the end of the input string, echo a success message
+					|			if ((strlen($string) - 1) == $i) {
+					|				echo "Success\n";
+					|			}
+					|		}
+					|	}
+					|	isBalance("{}({[])"); // Echoes 'Error at character location 6. { not closed properly.'
+			p The PHP code for this function is very similar to the JavaScript code (save for the required semicolons and dollar signs for the variables). One main difference, however, is that we can't perform mathematical functions inside of an array value lookup by index (like we can in JavaScript). Doing this will return an "undefined offset" error. So we worked around this by simply slicing off the last value of the array and then returning the top-most value and assigning it to the variable 
+				strong $topOfStack
+				| .

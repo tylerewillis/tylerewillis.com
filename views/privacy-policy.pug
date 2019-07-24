@@ -1,0 +1,10 @@
+extends layout.pug
+
+block head
+	include front/head.pug
+
+block content
+	.page.page-legal
+		.legal-container.global-width-small
+			h1 Privacy Policy
+			div!= content[0].content

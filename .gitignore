@@ -1,0 +1,4 @@
+# Ignore uploads folder
+/public/media/
+/node_modules/
+.DS_Store

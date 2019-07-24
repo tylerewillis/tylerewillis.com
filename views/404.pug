@@ -1,0 +1,15 @@
+extends layout.pug
+
+block head
+	include front/head.pug
+	title= title
+	meta(name='description', content=`${description}`)
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content=`${title}`)
+	meta(property='og:description', content=`${description}`)
+	meta(property='og:image', content=`${image}`)
+
+block content
+	.page.page-home
+		h1 404 Error

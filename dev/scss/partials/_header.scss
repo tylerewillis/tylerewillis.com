@@ -1,0 +1,113 @@
+// =========================================/
+// Header
+// =========================================/
+
+.header-container {
+	@include global-width(0px auto, 700px);
+	@include flex-container(space-between, center);
+	padding: 15px 0px;
+	align-items: center;
+	.header-logo {
+		img {
+			width: 60px;
+			height: auto;
+		}
+	}
+	.desktop-nav {
+		a {
+			font-size: 1em;
+			margin-left: 15px;
+		}
+	}
+}
+
+// =========================================/
+// Header Mobile
+// =========================================/
+
+.mn-button {
+	cursor: pointer;
+	position: relative;
+	z-index: 1;
+	margin-top: 3px;
+	display: none;
+	@include mq(l) {
+		display: block;
+	}
+}
+.mn-button span {
+	background-color: $color-black;
+	height: 2px;
+	width: 30px;
+	display: block;
+	margin-bottom: 5px;
+	border-radius: 3px;
+	transition: width 0.5s cubic-bezier(0.77,0.2,0.05,1.0), transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.3s ease;
+}
+.mn-button-open span {
+	background-color: $color-white;
+}
+.mn-button span:nth-child(1) {
+	transform: rotate(0deg) translate(0px, 0px);
+  transform-origin: 0px 3px;
+}
+.mn-button-open span:nth-child(1) {
+	transform: rotate(45deg) translate(-3px, -1px);
+  width: 25px;
+}
+.mn-button-open span:nth-child(2) {
+	opacity: 0;
+}
+.mn-button span:nth-child(3) {
+	transform: rotate(0deg) translate(0px, 0px);
+	transform-origin: 0px -2px;
+}
+.mn-button-open span:nth-child(3) {
+	transform: rotate(-45deg) translate(-3px, 0px);
+	width: 25px;
+}
+.mobile-nav-container {
+	background-color: $color-black;
+	width: 350px;
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 105%;
+	box-shadow: 3px -5px 10px #000 inset;
+	margin-right: -350px;
+	-webkit-transition: margin-right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	-moz-transition: margin-right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	-ms-transition: margin-right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	-o-transition: margin-right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	transition: margin-right 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	padding: 100px 20px;
+}
+.mobile-nav-container-open {
+	margin-right: 0px;
+}
+.mnc-background {
+	background-image: url(/static/media/brilliant.png);
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.mobile-nav-container a {
+	display: block;
+	color: $color-white;
+	font-size: 20px;
+	margin-bottom: 30px;
+	position: relative;
+}
+.mobile-nav-container .mnc-light {
+	opacity: .5;
+}
+.mobile-nav-container hr {
+	border-top: 1px solid gray;
+}
+.body-shift {
+	margin-left: -350px;
+	margin-right: 350px;
+	overflow: hidden;
+}

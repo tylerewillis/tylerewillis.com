@@ -1,0 +1,17 @@
+[
+	{
+		"header": "Check balance of brackets in code",
+		"url": "/page/bracket-balance",
+		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets."
+	},
+	{
+		"header": "Sorting Algorithm Animations",
+		"url": "/page/sorting-algorithm-animations",
+		"description": "Animations and code examples for popular sorting algorithms."
+	},
+	{
+		"header": "Computer Science Flashcards",
+		"url": "/page/flashcards",
+		"description": "Hundreds of flashcards that I've put together to help with the transformation from self-taught coder to computer scientist."
+	}
+]

@@ -23,7 +23,7 @@ block content
 				a(href='#about') About
 				a(href='#skills') Skills
 				a(href='#pages') Pages
-				a(href='#projects') Projects
+				a(href='#products') Products
 				a(href='#contact') Contact
 
 
@@ -126,7 +126,7 @@ block content
 
 		.pages.section#pages
 			h2 Pages
-			p.sub-header Computer science, programming examples, musings and other tidbits
+			p.sub-header Computer science, programming and code examples, blog posts, and small projects.
 			each page in pages
 				.post
 					h3 #{page.header}
@@ -138,17 +138,17 @@ block content
 		
 
 		//-----------------------------------------------------
-		//- Projects
+		//- Products
 		//-----------------------------------------------------
 
-		.pages.section#projects
-			h2 Projects
-			p.sub-header Fun projects, experimentations and other MVPs
-			each project in projects
+		.pages.section#products
+			h2 Products
+			p.sub-header Fun products, experimentations and other MVPs
+			each product in products
 				.post
-					h3 #{project.header}
-					p #{project.description}
-					a(href=`${project.url}`) View
+					h3 #{product.header}
+					p #{product.description}
+					a(href=`${product.url}`) View
 						i.fas.fa-chevron-right
-			a(href='/projects' class='post-all')
+			a(href='/products' class='post-all')
 				span See All

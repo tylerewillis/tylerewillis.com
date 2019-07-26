@@ -1,0 +1,48 @@
+extends ../pages/pages/layout.pug
+
+block head
+	include head.pug
+	title Creating Tree Data Structures in JavaScript & PHP
+	meta(name='description', content='In this coding example, we create tree data structures in JavaScript and PHP. We also see how to add to existing trees, remove from them, traverse, and get their heights.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Creating Tree Data Structures in JavaScript & PHP')
+	meta(property='og:description', content='In this coding example, we create tree data structures in JavaScript and PHP. We also see how to add to existing trees, remove from them, traverse, and get their heights.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content='/page/tree-data-structures')
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Creating Tree Data Structures in JavaScript & PHP",
+			"about": "In this coding example, we create tree data structures in JavaScript and PHP. We also see how to add to existing trees, remove from them, traverse, and get their heights.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, tree data structure, recursion, tree traversal"
+		}
+
+block example-content
+	.write-up
+		h1 What is 
+			em this 
+			| in JavaScript?
+		h2 Why Do We Care?
+		p 
+			strong This 
+			| is a ...
+
+	.examples
+		//-
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function Node(data) {
+					|	this.data = data
+					|	this.parent = null
+					|	this.children = []
+					|}
+
+		

@@ -55,4 +55,15 @@ router.get('/tree-data-structures', (req, res) => {
   res.render('pages/tree-structures', args)
 })
 
+//================================================
+// Network packet processing simulation
+//================================================
+
+router.get('/network-packet-processing', (req, res) => {
+
+  // Render page
+  var args = { }
+  res.render('pages/network-packet-processing-simulation', args)
+})
+
 module.exports = router

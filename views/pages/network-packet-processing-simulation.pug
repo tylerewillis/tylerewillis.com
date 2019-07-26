@@ -1,0 +1,159 @@
+extends ../pages/pages/layout.pug
+
+block head
+	include head.pug
+	title Network Packet Processing Simulation in JavaScript
+	meta(name='description', content='This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Network Packet Processing Simulation in JavaScript')
+	meta(property='og:description', content='This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.')
+	meta(property='og:url' content='/page/network-packet-processing')
+	meta(property='og:image', content='/static/media/social-media.png')
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Check balance of brackets in code",
+			"about": "Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Network Packet Processing Simulation in JavaScript
+		h2 Use Case:
+		p As part of my efforts to transform myself from self-taught coder to computer scientist, I've been working through a series of computer science courses offered by the University of California, San Diego. One of them was to simulate a program that processing incoming network packets.
+		p In this simulation, we only have one processor and it processes packets in the order that they are received. Once the processing of a packet begins it will continue until complete. There is also a set memory limit (as in real life) or network buffer meaning that packets will be placed in a queue if the processor is busy or dropped if the queue is at maximum capacity.
+		p Below is my implementation in JavaScript (explanations to follow each code snippet).
+
+	.examples
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var queue = []
+					|var processing = 0
+					|var numberStrings = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+					|var packets = [5,3,8,1,2,9,0,4,7]
+
+		p Here we are creating a few variables:
+		ul
+			li A queue that will store the packets waiting to be processed
+			li A processing integer that will be switched to 1 when the processor is in use
+			li A numberStrings array that will simply be used to give our packets a string value for a name instead of just the single integer value
+			li A packets array that we'll use to generate new packets for our processor
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function sendPacket(size) {
+					|
+					|	// Get time of packet
+					|	var today = new Date();
+					|	var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+					|
+					|	// Create packet object and send
+					|	var packet = { name: numberStrings[size], size, time }
+					|	receivePacket(packet)
+					|}
+
+		p Our sendPacket function will be used when we simulate the sending of a packet to a network processor. Our packet will only consist of its size (an integer) at first, but then a name and timestamp will be added to it when sent.
+		p We'll then call our next function - receivePacket - using the compiled packet as an argument.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function receivePacket(packet) {
+					|
+					|	// Sum queue sizes
+					|	var queueSize = 0;
+					|	for (i = 0; i < queue.length; i++) {
+					|		queueSize += queue[i].size
+					|	}
+					|
+					|	// Check if room in queue
+					|	if ((packet.size + queueSize) <= 20) {
+					|		queue.push(packet)
+					|	} else {
+					|		console.log(`Packet ${packet.name} dropped.`)
+					|	}
+					|}
+
+		p When we receive the packet, we want to place it into our queue to be processed in order. However, we first need to check if there is size. To do that, we'll loop through our queue and sum up the sizes. Our theoretical queue has a memory size of "20", so if the size of our new packet and the existing queue is less than or equal to 20, we'll go ahead and push the packet to the end of queue. However, if it would cause the queue to experience a stack overflow then the packet is simply dropped (and we'll log that to the console).
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function processPackets(packet) {
+					|
+					|	// Log start of processing
+					|	console.log(`Packet ${packet.name} started processing.`)
+					|
+					|	// Set timeout loop to simulate processing
+					|	setTimeout(function() {
+					|		// Get time of packet
+					|		var today = new Date();
+					|		var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+					|		console.log(`Packet ${packet.name} received at ${packet.time} finished processing at ${time}.`)
+					|
+					|		// Remove from queue and processing
+					|		queue.shift()
+					|		processing = 0
+					|	}, packet.size * 1000)
+					|}
+
+		p We created a processPackets function to complete the actual "processing" of our packets. We log when the packet starts processing and then use a JavaScript setTimeout function to simulate the processing according to the size of the packet (we multiple the size by 1000) so that each packet will take n-seconds to complete.
+		p Once the processing is complete, we log the completion time, dequeue the item and set our processing variable back to '0' meaning that our processor is free for new tasks.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function checkQueue() {
+					|	setInterval(function() {
+					|		if(queue.length > 0 && processing == 0) {
+					|			processing = 1
+					|			processPackets(queue[0])
+					|		} else if (processing == 1) {
+					|			console.log('Processing packet ...')
+					|		} else {
+					|			console.log('Waiting for packets ...')
+					|		}
+					|	}, 1000)
+					|}
+
+		p Like a real network processor, we need to listen for incoming packets to our network. To do this, we created the checkQueue function to check the existence of packets in our queue. We use JavaScript's setInterval function this time to, once every second, check whether or not the queue contains at least 1 value. If it does (and the processor is currently free for a new packet), then we'll send a new packet to be processed. We'll also set the processing variable to 1 to signify that it's currently busy.
+		p If one of the previous 2 values (queue is not empty or processing is not free) proves false, then we'll check if the processor is currently busy. If so, we'll log once per second that the processor is actively processing a packet.
+		p If not, we'll know that the queue is actually empty and log, once per second, that the processor is currently waiting for new packets.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function generatePackets() {
+					|	var packetIndex = 0
+					|	setInterval(function() {
+					|		if (packetIndex == (packets.length - 1)) {
+					|			packetIndex = 0
+					|		} else {
+					|			packetIndex++
+					|		}
+					|		sendPacket(packets[packetIndex])
+					|	}, 1000)
+					|}
+					|
+					|generatePackets()
+					|checkQueue()
+
+		p Our final piece of code includes our generatePackets function that will actually create and send packets to our network processor based on the packets array that we called at the beginning. We'll use the packetIndex variable to iterate over the values in the array and the setInterval function again to send a new packet once per second (whether to be received or dropped).
+		p We'll then call the generatePackets function to start sending packets and the checkQueue function to start listening.
+		p Here's a visual of the results in the terminal:
+		img(src='/static/media/packet-processing-simulation.gif')

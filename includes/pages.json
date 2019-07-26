@@ -5,6 +5,11 @@
 		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets."
 	},
 	{
+		"header": "Tree Data Structures in JavaScript & PHP",
+		"url": "/page/tree-data-structures",
+		"description": "See how to create, add to trees, remove from trees, traverse trees and more in these JavaScript and PHP coding examples."
+	},
+	{
 		"header": "Sorting Algorithm Animations",
 		"url": "/page/sorting-algorithm-animations",
 		"description": "Animations and code examples for popular sorting algorithms."

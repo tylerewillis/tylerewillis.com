@@ -1,0 +1,46 @@
+extends ../cs/example-layout.pug
+
+block head
+	include head.pug
+	title
+	meta(name='description', content='')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='')
+	meta(property='og:description', content='')
+	meta(property='og:image', content='')
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Check balance of brackets in code",
+			"about": "Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Check balance of brackets in code
+		h2 Use Case:
+		p 
+
+	.examples
+		//- JavaScript
+		p Here is the JavaScript solution:
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					
+		
+		//- PHP
+		p Here is the PHP solution:
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					

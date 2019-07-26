@@ -44,4 +44,15 @@ router.get('/bracket-balance', (req, res) => {
   res.render('pages/bracket-balance', args)
 })
 
+//================================================
+// Tree Data Structures
+//================================================
+
+router.get('/tree-data-structures', (req, res) => {
+
+  // Render page
+  var args = { }
+  res.render('pages/tree-structures', args)
+})
+
 module.exports = router

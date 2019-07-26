@@ -1,0 +1,459 @@
+extends ../pages/example-layout.pug
+
+block head
+	include head.pug
+	title
+	meta(name='description', content='')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='')
+	meta(property='og:description', content='')
+	meta(property='og:image', content='')
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Check balance of brackets in code",
+			"about": "Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Tree Data Structures in JavaScript & PHP
+		h2 Use Case:
+		p Tree data structures are a hierarchical data structure that help users to organize and find data in a moderately efficient amount of time.
+		p Trees are a very common structure in our day-to-day lives including computer file systems, the HTML document-object-model (DOM) on any given web page, and the likely management/employee structure at your place of employment. A file system would be a great use for tree data structures in an application.
+		p Below are my implementations of trees in both JavaScript and PHP, including:
+		ul
+			li Creating trees
+			li Adding to trees
+			li Removing from trees
+			li Traversing a tree by way of depth-first traversal
+			li Traversing a tree by way of breadth-first traversal
+			li Seeing if a tree contains a specific value
+		p Please review the code samples below and then reach out to me if you know of a better or more efficient way to implement!
+
+	.examples
+		//- JavaScript
+		h3 JavaScript Tree Data Structure Implementation
+		p Each value in a tree is called a 
+			strong node 
+			| which contains the value and references to both its parent and its children. So let's create that first (we'll default to the parent value being null unless we let it know otherwise).
+
+		//-
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function Node(data) {
+					|	this.data = data
+					|	this.parent = null
+					|	this.children = []
+					|}
+
+		p Now that we've outlined the operations for a node, we need to outline the 
+			strong tree
+			| itself.
+		p The tree constructor creates a new instance of a node and then assigns that node as the tree's root. When it comes time for us to create the tree later, we'll do so directly with the tree constructor (and indirectly with the node function).
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function Tree(data) {
+					|	var node = new Node(data)
+					|	this._root = node
+					|	this._levels = 0
+					|}
+					|
+					|var tree = new Tree('one')
+
+		p We now have the basic building blocks for creating a tree (and we even created one!), but we haven't made it very easy on ourselves (or our coworkers). Let's create a way for simple addition to the tree.
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|Tree.prototype.add = function(data, toParent, traversalType) {
+					|	var child = new Node(data),
+					|	parent = null,
+					|	callback = function(node) {
+					|		if (node.data === toParent) {
+					|			parent = node
+					|		}
+					|	}
+					|
+					|	this.contains(callback, traversalType)
+					|
+					|	if (parent) {
+					|		parent.children.push(child)
+					|		child.parent = parent
+					|	} else {
+					|		throw new Error('Cannot add node to a non-existent parent.')
+					|	}
+					|}
+
+		p Let's explain this. We've defined 3 parameters:
+		ul
+			li data: will contain the value of the new node that we're creating
+			li toParent: will contain the value of the parent node that we're assigning it to as a child
+			li traversalType: will be the type of traversal (depth-first or breadth-first - explained in a bit) that we've decided to use
+		p We'll use these new values to create a new node, establish the parent (if found, else null), traverse to the location of the parent, and then push the newly added child node to the parent.
+		p Finally, if we've entered an invalid parent value then we'll see an error message. Note that, although it'd be nice, we can't use this method for adding the first, root value to our tree since we need to declare a 
+			strong toParent 
+			| value and not doing so would return an error. Since we'd need to initialize our tree by calling it anyway, we might as well pass an initial root value at that time.
+		p We could then add a new node like so:
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|tree.add('two', 'one', tree.traverseBreadthFirst)
+
+		p Since we know how to add, how could we then remove that same value? It gets a little more complicated, but let me show you how and then we'll walk through it.
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function findIndex(arr, data) {
+					|	var index;
+					|
+					|	for (var i = 0; i < arr.length; i++) {
+					|		if (arr[i].data === data) {
+					|			index = i
+					|		}
+					|	}
+					|	return index
+					|}
+					|
+					|Tree.prototype.remove = function(data, fromParent, traversalType) {
+					|	var tree = this,
+					|	parent = null,
+					|	childToRemove = null,
+					|	index
+					|
+					|	var callback = function(node) {
+					|		if (node.data === fromParent) {
+					|			parent = node
+					|		}
+					|	}
+					|
+					|	this.contains(callback, traversalType)
+					|
+					|	if (parent) {
+					|		index = findIndex(parent.children, data)
+					|
+					|		if (index === undefined) {
+					|			throw new Error('Node to remove does not exist.')
+					|		} else {
+					|			childToRemove = parent.children.splice(index, 1)
+					|		}
+					|	} else {
+					|		throw new Error('Parent does not exist.')
+					|	}
+					|}
+
+		p Right off the bat we've created a simple 
+			strong findIndex 
+			| function to help us out. Then, as you'll see with the 
+			strong remote 
+			| function, it looks similar to the 
+			strong add 
+			| function in that we're defining 3 parameters (the only difference is that we're defining a 
+			strong fromParent 
+			| rather than a 
+			strong toParent
+			| ).
+		p Inside the function we're setting the variables similar to before, locating the parent node and traversing the tree to find the location of the parent. Then, if the parent is located, we're using our helper function to locate the child node to be removed and then splicing it from the data structure via its index.
+		p Very similar to our 
+			strong add 
+			| function except that we're needing to identify the child's index here.
+		p Okay, time for a short and sweet function: 
+			strong contains 
+			| :
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|Tree.prototype.contains = function(callback, traversalType) {
+					|	traversalType.call(this, callback);
+					|}
+					|
+					|tree.contains(function(node){
+					|	if (node.data === 'four') {
+					|		console.log(node)
+					|	}
+					|}, tree.traverseBreadthFirst)
+
+		p First, we set up a short and sweet method that accepts 2 parameters - a 
+			strong callback 
+			| and a 
+			strong traversalType
+			|.
+		p When we call the 
+			strong contains 
+			| function we can dive into the callback function a bit more. Here we'll invoke the traversal function on every node in our tree until we locate the node we're looking for. Once we find it, we'll just log the node to our console.
+		p By now we've created a tree (and a node), added to it, removed from it and searched it for a specific node. All that is left to do at this point is to traverse it.
+		p Here's the first way - 
+			strong depth-first traversal
+			| :
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|Tree.prototype.traverseDepthFirst = function(callback) {
+					|	(function recurse(currentNode) {
+					|		for (var i = 0, length = currentNode.children.length; i < length; i++) {
+					|			recurse(currentNode.children[i])
+					|		}
+					|		callback(currentNode)
+					|	})(this._root)
+					|}
+					|
+					|tree.traverseBreadthFirst(function(node) {
+					|	console.log(node.data)
+					|})
+
+		p With depth-first traversal in tree data structures, we search the tree by starting with the first child, its first child and its first child (and so on) until there are no additional levels. Then, we search all children of the lowest level before moving to the parent and traverse it and its siblings. Then we'll move to their parent and etcetera.
+		p We only have one parameter here and it's the callback function that we'll call when we actually call this traversal function.
+		p Inside, we will:
+		ul
+			li Invoke our recursive function which will continue to call itself until the entire tree is traversed
+			li Call the recursive function on all of the children of all of the parent nodes discovered in the tree
+		p You wouldn't necessary use this function by itself, but rather in the previous examples (e.g. add, remove, contains) as a traversal option, but since we used it in each of those examples we needed to know what it did!
+		p The other option would be 
+			strong breadth-first traversal
+			| :
+		
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|Tree.prototype.traverseBreadthFirst = function(callback) {
+					|	var queue = []
+					|	queue.push(this._root);
+					|	currentTree = queue.shift();
+					|	while(currentTree){
+					|		for (var i = 0, length = currentTree.children.length; i < length; i++) {
+					|			queue.push(currentTree.children[i]);
+					|		}
+					|		callback(currentTree);
+					|		currentTree = queue.shift();
+					|	}
+					|}
+					|
+					|tree.traverseBreadthFirst(function(node) {
+					|	console.log(node.data)
+					|})
+
+		p Where as depth-first traversal starts by locating the children of each parent, breadth-first traversal searches a tree data structure one level at a time. Each node is visited in a level before advancing to the next, deeper level (if one exists).
+		p The difference in the function is that we're keeping track of each parent node in a 
+			strong queue 
+			| data structure that we'll push to (enqueue) and shift from (dequeue) as we knock each parent's children off of our list post traversal.
+		p
+			strong BONUS
+			| : get the 
+			strong height 
+			| of your tree data structure.
+		p You may be asked to find the height of a tree data structure - the number of edges on the longest path between a node and a descendant leaf (
+			a(href='https://en.wikipedia.org/wiki/Tree_(data_structure)') Wikipedia
+			| ). Here's how you can do it:
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|Tree.prototype.height = function() {
+					|	var levels = 0;
+					|	var parents = [];
+					|
+					|	(function recurse(currentNode) {
+					|		for (var i = 0, length = currentNode.children.length; i < length; i++) {
+					|			if (currentNode.children) {
+					|				if(!parents.includes(currentNode)) {
+					|					levels++
+					|					parents.push(currentNode)
+					|				}
+					|				recurse(currentNode.children[i])
+					|			}
+					|		}
+					|	})(this._root)
+					|	return levels
+					|}
+					|
+					|console.log(tree.height())
+
+		p We're using a function similar to depth-first traversal with our new 
+			strong height 
+			| function, but instead of logging anything we're just incrementing our 
+			strong levels 
+			| variable originally declared in Tree constructor toward the beginning of this exercise.
+		p We've also declared a parents array that we'll push to and compare against so as not to increment levels with each child, only when we're on a new parent's child.
+		p Finally, we're returning the height value.
+
+		//- PHP
+		h3 PHP Tree Data Structure Implementation
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					|class Node {
+					|	function __construct ($data) {
+					|		$this->data = $data;
+					|		$this->parent = null;
+					|		$this->children = array();
+					|	}
+					|}
+					|
+					|class Tree {
+					|
+					|	// Create tree
+					|	function __construct ($data) {
+					|		$node = new Node($data);
+					|		$this->root = $node;
+					|		$this->levels = 0;
+					|	}
+
+		p Fairly the same here so far except that we're creating both Node and Tree as PHP classes and then setting their respective values using the
+			strong __construct
+			| function and passing the data via parameter.
+		p Note that the remainder of this code will be inside of the Tree class.
+
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					|// Add
+					|function add($data, $toParent) {
+					|	$child = new Node($data);
+					|	$parent = false;
+					|	$results = $this->traverseBreadthFirst();
+					|
+					|	foreach($results as $result) {
+					|		if($result->data == $toParent) {
+					|
+					|			// Add as child to node
+					|			$result->children[] = $child;
+					|
+					|			// Add node as child's parent
+					|			$child->parent = $result->data;
+					|
+					|			// Parent located so true
+					|			$parent = true;
+					|		}
+					|	}
+					|
+					|	if($parent == false) {
+					|		echo "Error: Cannot add node to non-existent parent.";
+					|	}
+					|}
+
+		p When adding to a PHP tree, we're first capturing the results of the breadth-first traversal (see below) then iterating through those results to find the parent node with which we can add the child to. Then we're designating the parent in the child node and setting parent to true so as not to return the error message.
+
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					|// Remove
+					|function remove($data, $fromParent) {
+					|	$results = $this->traverseBreadthFirst();
+					|	foreach($results as $result) {
+					|		if($result->data == $fromParent) {
+					|			$i = 0;
+					|			foreach($result->children as $child) {
+					|				if($child->data == $data) {
+					|					unset($result->children[$i]);
+					|					break;
+					|				}
+					|				$i++;
+					|			}
+					|		}
+					|	}
+					|}
+
+		p I don't love this implementation (with all of the looping). There's gotta be a more efficient way (let me know if there is!), but to remove a node we're gathering the results of our traversal, iterating through them to find the parent, then iterating through the parent's children to find the child that we're then removing from the parent.
+		p We're iterating the value of i so that, when removing the child, we can do so via the index value of the child in the parent's array.
+
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					|// Contains
+					|function contains($data) {
+					|	$results = $this->traverseBreadthFirst();
+					|	foreach($results as $result) {
+					|		if($result->data == $data) {
+					|			return $result;
+					|		}
+					|	}
+					|}
+
+		p When searching for a value in the tree, we're first, like previous implementations, gathering the results of the traversal then looping through each result until we can confirm that we've found the one we're looking for.
+
+		.example.php-example
+			p.label PHP
+			pre
+				code.language-php
+					|// Depth-first traversal
+					|function traverseDepthFirst() {
+					|	function recurse($currentNode, &$results = array()) {
+					|		$length = count($currentNode->children);
+					|		for ($i = 0; $i < $length; $i++) {
+					|			$results[] = $currentNode->children[$i];
+					|			recurse($currentNode->children[$i], $results);
+					|		}
+					|	}
+					|	recurse($this->root, $results);
+					|	return $results;
+					|}
+					|
+					|// Breadth-first traversal
+					|function traverseBreadthFirst() {
+					|	$queue = array();
+					|	$queueIndex = 1;
+					|	$results = array();
+					|
+					|	array_push($queue, $this->root);
+					|	array_push($results, $this->root);
+					|
+					|	$currentTree = $queue[0];
+					|	unset($queue[0]);
+					|
+					|	while($currentTree) {
+					|		$length = count($currentTree->children);
+					|		for ($i = 0; $i < $length; $i++) {
+					|			array_push($queue, $currentTree->children[$i]);
+					|			array_push($results, $currentTree->children[$i]);
+					|		}
+					|		if(count($queue) > 0) {
+					|			$currentTree = $queue[$queueIndex];
+					|			unset($queue[$queueIndex]);
+					|		} else {
+					|			$currentTree = false;
+					|		}
+					|		$queueIndex++;
+					|	}
+					|	return $results;
+					|}
+
+		p Here are our 2 traversals - depth-first and breadth-first. The trickiest part here is to pass the 
+			strong $results 
+			| array variable via recursion so that we could add to it and then return it to save our results.
+		p In the breadth-first traversal method we don't quite have that same problem as we're not implementing recursion.
+		p As far as the height is concerned, my method is currently buggy so I'm not going to post that and cause others to stumble. Hopefully I'll be replacing this sentence with that implementation shortly!

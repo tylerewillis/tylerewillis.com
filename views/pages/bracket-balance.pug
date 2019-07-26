@@ -1,4 +1,4 @@
-extends ../cs/example-layout.pug
+extends ../pages/example-layout.pug
 
 block head
 	include head.pug
@@ -11,7 +11,7 @@ block head
 	meta(property='og:image', content='')
 
 	//- Schema
-	script.
+	script(type='application/ld+json').
 		{
 			"@context": "http://schema.org",
 			"@type": "BlogPosting",
@@ -24,14 +24,14 @@ block head
 
 block example-content
 	.write-up
-		h1 Check balance of brackets in code
+		h1 Check Balance of Brackets in Code
 		h2 Use Case:
 		p Let's say you're writing some code in a text editor and you'd like to create a way to verify you haven't forgotten to close any opening brackets in your code, or that you haven't unintentionally overlapped a new, different bracket set with a previous bracket set. A lot of text editors provide native (or plugin) options for assisting you with this today, but, for a test case, below are examples for building this functionality efficiently in both JavaScript and PHP.
 		p It would be simple to edit the below examples for other string pairs (single or multiple characters) for additional use cases.
 
 	.examples
 		//- JavaScript
-		p Here is the JavaScript solution:
+		h3 JavaScript Bracket Balance Implementation
 		.example.javascript-example
 			p.label JavaScript
 			pre
@@ -77,7 +77,7 @@ block example-content
 			p Finally, if no errors have been discovered, we'll simply log 'Success' to the console.
 		
 		//- PHP
-		p Here is the PHP solution:
+		h3 PHP Bracket Balance Implementation
 		.example.php-example
 			p.label PHP
 			pre

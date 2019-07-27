@@ -66,4 +66,15 @@ router.get('/network-packet-processing', (req, res) => {
   res.render('pages/network-packet-processing-simulation', args)
 })
 
+//================================================
+// JavaScript Stack
+//================================================
+
+router.get('/javascript-stack', (req, res) => {
+
+  // Render page
+  var args = { }
+  res.render('pages/constant-time-javascript-stack', args)
+})
+
 module.exports = router

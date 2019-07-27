@@ -1,0 +1,165 @@
+extends ../pages/pages/layout.pug
+
+block head
+	include head.pug
+	title Creating a Constant-Time JavaScript Stack
+	meta(name='description', content='You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Createing a Constant-Time JavaScript Stack')
+	meta(property='og:description', content='You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.')
+	meta(property='og:url', content='/page/javascript-stack')
+	meta(property='og:image', content='/static/media/social-media.png')
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Creating a Constant-Time JavaScript Stack",
+			"about": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, stack, constant time"
+		}
+
+block example-content
+	.write-up
+		h1 Creating a Constant-Time JavaScript Stack
+		h2 Use Case:
+		p JavaScript isn't known for being the most efficient programming language, but there's a way that we can create a stack in JavaScript without using an array that will allow us to perform multiple stack data structure functions in constant time - O(1) - including pushing, popping, swapping, and getting the maximum value.
+		p Review the code snippets below (and the explanations to follow).
+
+	.examples
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Creates a stack
+					|var Stack = function() {
+					|	this.count = 0
+					|	this.storage = {}
+					|	this.auxiliary = {}
+					|}
+					
+		p So we start off by declaring a new Stack class in JavaScript that keeps the properties of count which is an integer, and storage and auxiliary which are objects.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Adds a value onto the end of the stack
+					|Stack.prototype.push = function(value) {
+					|	this.storage[this.count] = value
+					|
+					|	// Push to and update auxiliary stack
+					|	if (this.auxiliary[this.count - 1] > value) {
+					|		for (i = this.count - 1; i >= 0; i--) {
+					|			if (value > this.auxiliary[i]) {
+					|				this.auxiliary[i + 1] = value
+					|			} else {
+					|				temp = this.auxiliary[i]
+					|				this.auxiliary[i + 1] = temp
+					|				this.auxiliary[i] = value
+					|			}
+					|		}
+					|	} else {
+					|		this.auxiliary[this.count] = value
+					|	}
+					|
+					|	this.count++
+					|}
+
+		p We'll then extend this class by adding to it a prototype function of push which we'll use to push new values onto the top of our stack. We use the 'count' value as the index of our new value in the 'storage' object.
+		p For our 'auxiliary' object (which we're maintaining in order to be able to calculate 'max' in constant time), we need to check if the incoming value is smaller than the existing top value of the auxiliary stack. If so, then we'll need to add it to the auxiliary stack in order of value, looping backwards until we find the proper location. If the value is larger than the top of the stack, then we'll just add it to the top of the stack like we did with our 'storage' object.
+		p Finally, we'll update the variable keeping track of our count (the current size of our stack).
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Removes and returns the value at the end of the stack
+					|Stack.prototype.pop = function() {
+					|	// Check to see if the stack is empty
+					|	if (this.count === 0) {
+					|		return undefined
+					|	}
+					|
+					|	this.count--
+					|	var result = this.storage[this.count]
+					|	delete this.storage[this.count]
+					|
+					|	// Delete from auxiliary stack
+					|	for (i = 0; i < this.count; i++) {
+					|		if (this.auxiliary[i] == result) {
+					|			delete this.auxiliary[i]
+					|		}
+					|	}
+					|	return result
+					|}
+
+		p Adding a 'pop' function will allow us to remove items from the top of stack. We can do this in constant time by reducing our stack count by one and then removing the value located at that index of the stack.
+		p We also need to remove the value from our auxiliary stack. Since the auxiliary stack is ordered based on value and not like a traditional stack, we need to loop through the stack until we find the index of the popped value from the 'storage' object and then remove it from the 'auxiliary' object.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Returns the length of the stack
+					|Stack.prototype.size = function() {
+					|	return this.count
+					|}
+					|
+					|// Returns the value on top of the stack without removing it
+					|Stack.prototype.peek = function() {
+					|	return this.storage[this.count - 1]
+					|}
+					|
+					|// Check if stack is empty
+					|Stack.prototype.empty = function() {
+					|	return this.count == 0
+					|}
+
+		p Size, peek and empty are pretty straightforward. We can return the current 'size' of the stack in constant time by just returning our stored count variable. We can return the top value of the stack via the 'peek' function in constant time by using the current count minus 1 to get the index of our top-most value and return it. We can also check whether or not the stack is 'empty' by just returning the current count equal to 0 (which will return false if the stack is not empty).
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Swap the top 2 elements of the stack
+					|Stack.prototype.swap = function() {
+					|	var temp = this.storage[this.count - 1]
+					|	this.storage[this.count - 1] = this.storage[this.count - 2]
+					|	this.storage[this.count - 2] = temp
+					|}
+
+		p We can also 'swap' the top 2 values of our stack in constant time. Since we don't need to worry about our auxiliary object in this situation, we can just store the current value of the top-most value in a temporary variable, set the value at the top-most index equal to the value located at the 2nd highest index, and then set the value at the 2nd highest index to our temporarily-stored value.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Get maximum value of stack
+					|Stack.prototype.max = function() {
+					|	return this.auxiliary[this.count - 1]
+					|}
+
+		p Here's why we've been storing the extra auxiliary stack - so that we can now obtain the maximum value in our stack in constant time.
+		p There might be instances where this wouldn't be feasible to you, like if you had limited storage space or the efficiency of constant time to get the maximum value isn't worth the cost of additional storage. Weighing efficiency against storage/cost is definitely something you'll need to keep in mind when it comes to implementation.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var stack = new Stack()
+					|
+					|stack.push(4)
+					|stack.push(1)
+					|stack.push(2)
+					|console.log(stack.max()) // 4
+					|console.log(stack.pop()) // 2
+					|console.log(stack.peek()) // 1
+					|console.log(stack.empty()) // false
+
+		p Now we can start using our stack object by creating a new stack, pushing to it and trying out our other functions (results of functions commented).
+		p You could implement this stack in your projects to create a most efficient, constant time - O(1) - method of maintaining your data. If storage space or memory is a concern, then just remove the 'max' prototype function and storage of the 'auxiliary' object.

@@ -1,10 +1,17 @@
 [
 	{
+		"header": "Creating a Constant-Time JavaScript Stack",
+		"url": "/page/javascript-stack",
+		"description": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Network Packet Processing Simulation in JavaScript",
 		"url": "/page/network-packet-processing",
 		"description": "This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.",
 		"category": "Projects"
-	},{
+	},
+	{
 		"header": "Check balance of brackets in code",
 		"url": "/page/bracket-balance",
 		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets.",

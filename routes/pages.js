@@ -77,4 +77,15 @@ router.get('/javascript-stack', (req, res) => {
   res.render('pages/constant-time-javascript-stack', args)
 })
 
+//================================================
+// Sliding window
+//================================================
+
+router.get('/javascript-sliding-window', (req, res) => {
+
+  // Render page
+  var args = { }
+  res.render('pages/sliding-window', args)
+})
+
 module.exports = router

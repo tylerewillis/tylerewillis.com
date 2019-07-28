@@ -12,6 +12,12 @@
 		"category": "Projects"
 	},
 	{
+		"header": "Maximum Value in JavaScript Sliding Window Queue",
+		"url": "/page/javascript-sliding-window",
+		"description": "We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Check balance of brackets in code",
 		"url": "/page/bracket-balance",
 		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets.",

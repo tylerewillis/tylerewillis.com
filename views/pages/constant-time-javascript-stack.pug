@@ -1,7 +1,6 @@
 extends ../pages/pages/layout.pug
 
-block head
-	include head.pug
+block pages-head
 	title Creating a Constant-Time JavaScript Stack
 	meta(name='description', content='You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.')
 	meta(property='og:locale', content='en_US')
@@ -55,15 +54,24 @@ block example-content
 					|	// Push to and update auxiliary stack
 					|	if (this.auxiliary[this.count - 1] > value) {
 					|		for (i = this.count - 1; i >= 0; i--) {
+					|			// If bigger than current value
 					|			if (value > this.auxiliary[i]) {
 					|				this.auxiliary[i + 1] = value
-					|			} else {
+					|				break
+					|			} else if (i == 0) {
+					|				// If 0 or at first value in stack
 					|				temp = this.auxiliary[i]
 					|				this.auxiliary[i + 1] = temp
 					|				this.auxiliary[i] = value
+					|				break
+					|			// If not bigger or at first value, move iterated value up in stack
+					|			} else {
+					|				temp = this.auxiliary[i]
+					|				this.auxiliary[i + 1] = temp
 					|			}
 					|		}
 					|	} else {
+					|		// If bigger than top-most value of stack, place on top of stack
 					|		this.auxiliary[this.count] = value
 					|	}
 					|

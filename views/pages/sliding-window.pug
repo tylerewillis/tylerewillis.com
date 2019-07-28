@@ -1,0 +1,161 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Maximum Value in JavaScript Sliding Window Queue
+	meta(name='description', content='We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Maximum Value in JavaScript Sliding Window Queue')
+	meta(property='og:description', content='We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.')
+	meta(property='og:image', content='/static/media/social-media.png')
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Maximum Value in JavaScript Sliding Window Queue",
+			"about": "We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, sliding window, constant time, stack, queue, object"
+		}
+
+block example-content
+	.write-up
+		h1 Maximum Value in JavaScript Sliding Window Queue
+		h2 Use Case:
+		p In this sliding window scenario, we are given an array of numbers and a window size. The window size determines how many numbers we're looking at at one time. When the window slides forward by 1, we're now looking at another set of numbers (the first number is being removed and a new number is being added to the end based on the values in our array).
+		p Here's an illustration:
+
+		//- Sliding window example
+		.sliding-window-example
+			.swe-numbers
+				p 2
+				p 7
+				p 3
+				p 1
+				p 5
+				p 2
+				p 6
+				p 2
+			.swe-window-left
+			.swe-window-right
+
+		p We have been tasked with returning the maximum value found in the window at each slide of the pane in O(n) - or linear time. To do so, we're going to start with the
+			a(href='/page/javascript-stack' title='Constant-time JavaScript stack') constant-time JavaScript stack 
+			| that we previously created.
+		p But we need to make a few updates. We need to give our stack the functionality of a queue so that we can dequeue values from the front of the stack when the window pane slides forward. We don't want to lose the constant-time efficiency of the stack however, so we'll need to add a 'start' variable to keep track of the index of our stack's starting variable. This will also alter the index that we use for pushing new values onto our stack so we'll need to change that as well.
+		p Here are the updated declarations and push functions.
+
+	.examples
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var Stack = function() {
+					|	this.count = 0
+					|	this.start = 0
+					|	this.storage = {}
+					|	this.auxiliary = {}
+					|}
+					|
+					|// Adds a value onto the end of the stack
+					|Stack.prototype.push = function(value) {
+					|	this.storage[this.start + this.count] = value
+					|
+					|	// Push to and update auxiliary stack
+					|	if (this.auxiliary[this.count - 1] >= value) {
+					|		for (i = this.count - 1; i >= 0; i--) {
+					|			// If bigger than current value
+					|			if (value > this.auxiliary[i]) {
+					|				this.auxiliary[i + 1] = value
+					|				break
+					|			} else if (i == 0) {
+					|				// If 0 or at first value in stack
+					|				temp = this.auxiliary[i]
+					|				this.auxiliary[i + 1] = temp
+					|				this.auxiliary[i] = value
+					|				break
+					|			} else {
+					|				// If not bigger or at first value, move iterated value up in stack
+					|				temp = this.auxiliary[i]
+					|				this.auxiliary[i + 1] = temp
+					|			}
+					|		}
+					|	} else {
+					|		// If bigger than top-most value of stack, place on top of stack
+					|		this.auxiliary[this.count] = value
+					|	}
+					|	this.count++
+					|}
+
+		p Now we can add our new dequeue function that will allow us to remove the bottom value in our stack.
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Removes value from front of stack (queue dequeue)
+					|Stack.prototype.dequeue = function() {
+					|	var dequeueValue = this.storage[this.start]
+					|	delete this.storage[this.start]
+					|
+					|	// Delete from auxiliary stack
+					|	var located = false
+					|	for (i = 0; i < this.count; i++) {
+					|		// If we've already found the matching value, we'll just reduce the indexes of the remaining values
+					|		if (located == true) {
+					|			// Delete the last value after copying
+					|			if (i == this.count - 1) {
+					|				this.auxiliary[i - 1] = this.auxiliary[i]
+					|				delete this.auxiliary[i]
+					|			} else {
+					|				this.auxiliary[i - 1] = this.auxiliary[i]
+					|			}
+					|		} else {
+					|			// If the value matches, delete it
+					|			if(this.auxiliary[i] == dequeueValue) {
+					|				delete this.auxiliary[i]
+					|				located = true
+					|			}
+					|		}
+					|	}
+					|	// Increment starting point index
+					|	this.start++
+					|	// Lower count of stack
+					|	this.count--
+					|}
+
+		p If we just had one stack for our main storage, this would be a piece of cake as we'd just need to delete the value found at the start index of our storage object. However, we also have to iterate over our 'auxiliary' stack (used for keeping track of the maximum value) to remove the matching value.
+
+		//-			
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var values = [2,7,3,1,5,2,6,2]
+					|
+					|function slideWindow(values, size) {
+					|	// Create our new stack
+					|	var window = new Stack()
+					|
+					|	// Iterate over values
+					|	for (j = 0; j <= values.length; j++) {
+					|		if (window.size() < size) {
+					|			// At beginning, populate window to size
+					|			window.push(values[j])
+					|		} else {
+					|			// Log maximum value
+					|			console.log(window.max())
+					|			// Slide window
+					|				// Dequeue first value
+					|				window.dequeue()
+					|				// Push new value
+					|				window.push(values[j])
+					|		}
+					|	}
+					|}
+					|
+					|slideWindow(values, 4) // Logs 7 7 5 6 6

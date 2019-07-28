@@ -1,6 +1,10 @@
 extends ../../layout.pug
 
 block head
+	link(rel='stylesheet', href='/static/css/prism.css')
+	script(src='/static/js/prism.js')
+	script(src='/static/js/pages.js')
+	block pages-head
 
 block content
 	.page

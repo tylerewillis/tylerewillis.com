@@ -30,6 +30,12 @@
 		"category": "Code Examples"
 	},
 	{
+		"header": "Using Priority Queues to Simulate Parallel Processing",
+		"url": "/page/priority-queue-processing-simulation",
+		"description": "We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Check balance of brackets in code",
 		"url": "/page/bracket-balance",
 		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets.",

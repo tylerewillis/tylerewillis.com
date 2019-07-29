@@ -1321,6 +1321,46 @@
 	},
 	{
 		"id": 262,
+		"question": "What is tree data structure union by rank heuristic?",
+		"answer": "When combining 2 disjoint sets, it refers to hanging the shorter of the trees under the taller one."
+	},
+	{
+		"id": 263,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 264,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 265,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 266,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 267,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 268,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 269,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 270,
 		"question": "",
 		"answer": ""
 	}

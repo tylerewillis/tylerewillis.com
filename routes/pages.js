@@ -121,4 +121,15 @@ router.get('/heap-sort-algorithm', (req, res) => {
   res.render('pages/heap-sort-algorithm', args)
 })
 
+//================================================
+// Priority Queue Processing Simulation
+//================================================
+
+router.get('/priority-queue-processing-simulation', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/priority-queue-processing-simulation' }
+  res.render('pages/parallel-processing-simulation', args)
+})
+
 module.exports = router

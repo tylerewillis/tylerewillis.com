@@ -1,0 +1,129 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Using Priority Queues to Simulate Parallel Processing
+	meta(name='description', content='We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Using Priority Queues to Simulate Parallel Processing')
+	meta(property='og:description', content='We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Using Priority Queues to Simulate Parallel Processing",
+			"about": "We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, binary heaps, heap sort"
+		}
+
+block example-content
+	.write-up
+		h1 Using Priority Queues to Simulate Parallel Processing
+		h2 Use Case:
+		p To test the 
+			a(href='/page/binary-heap-implementation') binary heaps 
+			| that we implemented in a previous post, I wanted to simulate a scheduler program that sends jobs to the CPU to be processed. To make the simulation a bit more complex, we'll assume that we have 3 processors that can work together in harmony and each take jobs based on their priority in the job queue.
+		p Our processors will all work at the same speed and will complete a job in full before being able to take another job from the scheduler.
+		p Here's the implementation:
+
+	.examples
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var processor1Busy = false
+					|var processor2Busy = false
+					|var processor3Busy = false
+					|
+					|// Processors
+					|function processor1(job) {
+					|	processor1Busy = true
+					|	setTimeout(function() {
+					|		processor1Busy = false
+					|		console.log(`Processor 1 finished processing job #${job}`)
+					|	}, job * 1000)
+					|}
+					|function processor2(job) {
+					|	processor2Busy = true
+					|	setTimeout(function() {
+					|		processor2Busy = false
+					|		console.log(`Processor 2 finished processing job #${job}`)
+					|	}, job * 1000)
+					|}
+					|function processor3(job) {
+					|	processor3Busy = true
+					|	setTimeout(function() {
+					|		processor3Busy = false
+					|		console.log(`Processor 3 finished processing job #${job}`)
+					|	}, job * 1000)
+					|}
+
+		p We start by declaring that all of our processors are currently not busy (as is true at the beginning of the program). Then we'll create functions (all the same) that will simulate the processing of a job. We'll use JavaScript's native 'setTimeout' function to run for a set amount of seconds (equal to the size of the job multiplied by 1 second).
+		p At the beginning of the job, the processor will declare that it is now busy. Once the 'setTimeout' has finished, the processor will declare that it is no longer busy and will log a completion message to the console.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Schedule jobs
+					|var job
+					|function schedule(heap) {
+					|	var schedule = setInterval(function() {
+					|		if (heap.array().length > 0) {
+					|			if (!processor1Busy) {
+					|				job = heap.extractMax()
+					|				processor1(job)
+					|				console.log(`Processor 1 Starting Task #${job}`)
+					|			} else if (!processor2Busy) {
+					|				job = heap.extractMax()
+					|				processor2(job)
+					|				console.log(`Processor 2 Starting Task #${job}`)
+					|			} else if (!processor3Busy) {
+					|				job = heap.extractMax()
+					|				processor3(job)
+					|				console.log(`Processor 3 Starting Task #${job}`)
+					|			} else {
+					|				console.log('Processing ...')
+					|			}
+					|		} else {
+					|			console.log('Jobs complete')
+					|			clearInterval(schedule)
+					|		}
+					|	}, 1000)
+					|}
+
+		p Our scheduler will receive our 'heap' object as a parameter (learn more about 
+			a(href='/page/binary-heap-implementation') how we implemented binary heaps 
+			| in a previous post). Then, it will leverage JavaScript's native 'setInterval' function to send a new job to the processors once per second.
+		p The scheduler will check each processor in order to see if its busy. If not, it will put a new job off of the priority queue, send it to the processor, and log to the console that the job has started.
+		p If there are no jobs remaining, it will log to the console 'Jobs complete' and end the interval loop.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Array to Heap, then call Heap Sort
+					|var array = [5,2,3,8,1,6,7,3,4,9]
+					|function arrayToHeap(array) {
+					|
+					|	// Create a new heap and insert each value from array
+					|	var heap = new Heap(10)
+					|	for (i = 0; i < array.length; i++) {
+					|		heap.insert(array[i])
+					|	}
+					|
+					|	// Call scheduler
+					|	schedule(heap)
+					|}
+					|arrayToHeap(array)
+
+		p To initiate our scheduler, we'll first take an array of integers and transform them into a heap using our 'arrayToHeap' function. We'll loop through each value in the array and insert them into our newly-created heap. Once we've iterated through all possible values, we'll call our scheduler.
+		p And, of course, we'll call our 'arrayToHeap' function to start it all off.
+		p Here are how the results look in the terminal:
+		img(src='/static/media/parallel-processing-terminal-results.jpg')

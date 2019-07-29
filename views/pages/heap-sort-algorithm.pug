@@ -1,0 +1,66 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Binary Heap Sort Algorithm in JavaScript
+	meta(name='description', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
+	meta(property='og:description', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Binary Heap Sort Algorithm in JavaScript",
+			"about": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, heap sort, sorting, algorithm, O(n log n)"
+		}
+
+block example-content
+	.write-up
+		h1 Binary Heap Sort Algorithm in JavaScript
+		h2 Use Case:
+		p This post is a follow up of my previous post on 
+			a(href='/page/binary-heap-implementation') building a binary heap in JavaScript
+			|. Heap sort is an efficient sorting algorithm - O(n log n) - (both for timing and storage) that compares values against each other. Below is my concise implementation of this algorithm.
+
+	.examples
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function heapSort(heap) {
+					|	for (i = heap.array().length - 1; i >= 0; i--) {
+					|		console.log(heap.extractMax())
+					|	}
+					|}
+
+		p Once we constructed our binary heap (as outlined in the previous post), we simply need to create a loop that will run for the size of the heap and return our maximum values.
+		p In this example, we're just logging them to the console but you could add them to a new data type starting at the end and working your way forward (or reverse - depending on ascending or descending order).
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Array to Heap, then call Heap Sort
+					|var array = [5,2,3,8,1,6,7,3,4,9]
+					|function arrayToHeap(array) {
+					|
+					|	// Create a new heap and insert each value from array
+					|	var heap = new Heap(10)
+					|	for (i = 0; i < array.length; i++) {
+					|		heap.insert(array[i])
+					|	}
+					|
+					|	// After building heap, call heapSort algorithm
+					|	heapSort(heap)
+					|}
+					|arrayToHeap(array)
+					
+		p To call our 'heapSort' function, we'll first iterate through the array variable to pull in our values, add them to our heap using our 'heap.insert' function, and then call our 'heapSort' function to log the values in descending order to the console.

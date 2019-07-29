@@ -1,5 +1,17 @@
 [
 	{
+		"header": "Building a Binary Heap in JavaScript",
+		"url": "/page/binary-heap-implementation",
+		"description": "Binary heaps allow for combined data insertion and max value extraction more efficiently than many other data structures and are used for the efficient heap sort algorithm.",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Binary Heap Sort Algorithm in JavaScript",
+		"url": "/page/heap-sort-algorithm",
+		"description": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Creating a Constant-Time JavaScript Stack",
 		"url": "/page/javascript-stack",
 		"description": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",

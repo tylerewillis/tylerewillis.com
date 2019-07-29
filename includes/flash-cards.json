@@ -1291,33 +1291,33 @@
 	},
 	{
 		"id": 256,
-		"question": "",
-		"answer": ""
+		"question": "What is amortized cost?",
+		"answer": "Cost(n operations) / n or the average cost of the operation rather than the worst-case cost."
 	},
 	{
 		"id": 257,
-		"question": "",
-		"answer": ""
+		"question": "What is the aggregate method of amortized analysis?",
+		"answer": "When we look at the efficiency of a program through the lense of amortized cost and getting the brute-force sum."
 	},
 	{
 		"id": 258,
-		"question": "",
-		"answer": ""
+		"question": "What is the Banker's Method of amortized analysis?",
+		"answer": "When we charge extra for each cheap operation and then save the extra charges as tokens in our data structure to use to pay for the expensive operations (i.e. saving $100 month to buy a car). Tokens used only for mental calculation."
 	},
 	{
 		"id": 259,
-		"question": "",
-		"answer": ""
+		"question": "What is the Physicist's Method of amortized analysis?",
+		"answer": "When we define a potential function which maps states of the data structure to integers. "
 	},
 	{
 		"id": 260,
-		"question": "",
-		"answer": ""
+		"question": "What is a Priority Queue data structure?",
+		"answer": "A queue without a beginning or an end but with each element having been assigned a priority at which elements are returned. Use case: scheduling jobs. Supports insert and extractMax."
 	},
 	{
 		"id": 261,
-		"question": "",
-		"answer": ""
+		"question": "What is a binary max-heap?",
+		"answer": "A binary tree where each parent >= value of the child. You add new nodes by attaching them to a leaf by sifting up (swapping elements) until all parents are greater than their children. You extract the max (root) by swapping its value with any leaf and then sifting down (swapping) until the tree is no longer in violation. Running time O(tree height)."
 	},
 	{
 		"id": 262,

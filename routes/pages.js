@@ -99,4 +99,26 @@ router.get('/dynamic-array-replication', (req, res) => {
   res.render('pages/dynamic-array-replication', args)
 })
 
+//================================================
+// Binary Heap
+//================================================
+
+router.get('/binary-heap-implementation', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/binary-heap-implementation' }
+  res.render('pages/binary-heaps', args)
+})
+
+//================================================
+// Binary Heap Algorithm
+//================================================
+
+router.get('/heap-sort-algorithm', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/heap-sort-algorithm' }
+  res.render('pages/heap-sort-algorithm', args)
+})
+
 module.exports = router

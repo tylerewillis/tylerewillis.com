@@ -2150,6 +2150,40 @@ footer {
         .page-pages .page-single .page-details a i {
           padding-left: 5px; }
 
+.social-share-container {
+  width: 95%;
+  max-width: 300px;
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 200px; }
+  .social-share-container p {
+    margin-right: 10px;
+    font-weight: 900; }
+  .social-share-container a {
+    height: 40px;
+    width: 40px;
+    border-radius: 3px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center; }
+    .social-share-container a:hover {
+      box-shadow: 2px 2px 0px #036399;
+      color: #036399;
+      background-color: #d3d3d3; }
+    .social-share-container a i {
+      font-size: 1.5em; }
+  .social-share-container .facebook {
+    background-color: #4266B2; }
+  .social-share-container .twitter {
+    background-color: #1FA1F2; }
+  .social-share-container .linkedin {
+    background-color: #0571AE; }
+
 .page .cards {
   height: 90vh;
   width: 100vw;

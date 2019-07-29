@@ -62,6 +62,44 @@
 }
 
 // =========================================/
+// Social share container
+// =========================================/
+
+.social-share-container {
+	@include global-width(0px, 300px);
+	@include flex-container(space-between, center);
+	width: 200px;
+	p {
+		margin-right: 10px;
+		font-weight: 900;
+	}
+	a {
+		height: 40px;
+		width: 40px;
+		border-radius: 3px;
+		color: $color-white;
+		@include flex-container(center, center);
+		&:hover {
+			box-shadow: 2px 2px 0px $color-primary;
+			color: $color-primary;
+			background-color: #d3d3d3;
+		}
+		i {
+			font-size: 1.5em;
+		}
+	}
+	.facebook {
+		background-color: #4266B2;
+	}
+	.twitter {
+		background-color: #1FA1F2;
+	}
+	.linkedin {
+		background-color: #0571AE;
+	}
+}
+
+// =========================================/
 // Flashcards
 // =========================================/
 

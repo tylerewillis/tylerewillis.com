@@ -29,7 +29,7 @@ router.get('/flashcards', (req, res) => {
   let cards = JSON.parse(json)
 
   // Render page
-  var args = { cards }
+  var args = { cards, url: '/page/flashcards' }
   res.render('pages/flashcards', args)
 })
 
@@ -40,7 +40,7 @@ router.get('/flashcards', (req, res) => {
 router.get('/bracket-balance', (req, res) => {
 
   // Render page
-  var args = { }
+  var args = { url: '/page/bracket-balance' }
   res.render('pages/bracket-balance', args)
 })
 
@@ -51,7 +51,7 @@ router.get('/bracket-balance', (req, res) => {
 router.get('/tree-data-structures', (req, res) => {
 
   // Render page
-  var args = { }
+  var args = { url: '/page/tree-data-structures' }
   res.render('pages/tree-structures', args)
 })
 
@@ -62,7 +62,7 @@ router.get('/tree-data-structures', (req, res) => {
 router.get('/network-packet-processing', (req, res) => {
 
   // Render page
-  var args = { }
+  var args = { url: '/page/network-packet-processing' }
   res.render('pages/network-packet-processing-simulation', args)
 })
 
@@ -73,7 +73,7 @@ router.get('/network-packet-processing', (req, res) => {
 router.get('/javascript-stack', (req, res) => {
 
   // Render page
-  var args = { }
+  var args = { url: '/page/javascript-stack' }
   res.render('pages/constant-time-javascript-stack', args)
 })
 
@@ -84,7 +84,7 @@ router.get('/javascript-stack', (req, res) => {
 router.get('/javascript-sliding-window', (req, res) => {
 
   // Render page
-  var args = { }
+  var args = { url: '/page/javascript-sliding-window' }
   res.render('pages/sliding-window', args)
 })
 

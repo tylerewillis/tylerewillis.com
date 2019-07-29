@@ -13,3 +13,11 @@
 		$('.email').text(emailAddress)
 footer
 	p &copy;#{new Date().getFullYear()} Tyler Willis
+
+	//- Googla Analytics
+	script(async, src="https://www.googletagmanager.com/gtag/js?id=UA-74122239-1")
+	script.
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-74122239-1');

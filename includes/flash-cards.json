@@ -1286,8 +1286,8 @@
 	},
 	{
 		"id": 255,
-		"question": "",
-		"answer": ""
+		"question": "What are dynamic arrays?",
+		"answer": "Arrays that can change size by storing a pointer to an array and then creating a new array (and updating the pointer) when the array size increases. Also called resizable arrays. Implemented by storing the array, the capacity of the array, and the size of the array."
 	},
 	{
 		"id": 256,

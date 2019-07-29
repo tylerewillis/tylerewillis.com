@@ -88,4 +88,15 @@ router.get('/javascript-sliding-window', (req, res) => {
   res.render('pages/sliding-window', args)
 })
 
+//================================================
+// Dynamic Arrays Replication
+//================================================
+
+router.get('/dynamic-array-replication', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/dynamic-array-replication' }
+  res.render('pages/dynamic-array-replication', args)
+})
+
 module.exports = router

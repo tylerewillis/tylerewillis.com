@@ -30,6 +30,12 @@
 		"category": "Code Examples"
 	},
 	{
+		"header": "Replicating a Dynamic Array in JavaScript",
+		"url": "/page/dynamic-array-replication",
+		"description": "Although arrays in JavaScript size-up automatically, we can create a stack object to replicate the process of creating a dynamically allocated array.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Sorting Algorithm Animations",
 		"url": "/page/sorting-algorithm-animations",
 		"description": "Animations and code examples for popular sorting algorithms.",

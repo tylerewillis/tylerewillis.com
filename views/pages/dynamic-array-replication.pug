@@ -1,0 +1,74 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Replicating a Dynamic Array in JavaScript
+	meta(name='description', content='Although arrays in JavaScript size-up automatically, we can create a stack object to replicate the process of creating a dynamically allocated array.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Replicating a Dynamic Array in JavaScript')
+	meta(property='og:description', content='Although arrays in JavaScript size-up automatically, we can create a stack object to replicate the process of creating a dynamically allocated array.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:image', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Replicating a Dynamic Array in JavaScript",
+			"about": "Although arrays in JavaScript size-up automatically, we can create a stack object to replicate the process of creating a dynamically allocated array.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, dynamic arrays, array capacity, stacks"
+		}
+
+block example-content
+	.write-up
+		h1 Replicating a Dynamic Array in JavaScript and PHP
+		h2 Use Case:
+		p Arrays are an extremely common data structure in computers and programming. If you've been programming for more than a week, you've used arrays to store lists or series of values regardless of type.
+		p A drawback to arrays, however, are that they are of fixed size meaning that when they're called their capacity is established. Fortunately, we have data structures called dynamic arrays that allow us to automatically resize (or replace) the array with a new one when the capacity is about to be breached. Even more fortunately for us as programmers is that pretty much all programming languages we use today will take care of this for us behind the seens, meaning that we don't need to go through the process of creating a new array, updating the pointer (and capacity) and deleting the old array each time our array size is extended beyond its initial size.
+		p But, for learning purposes, below are examples of what this might look like if we needed to do so in both JavaScript - just to have a better understanding and appreciation of what is happening behind the scenes.
+
+	.examples
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|// Creates a stack
+					|var Stack = function(capacity) {
+					|	this.capacity = capacity
+					|	this.size = 0
+					|	this.storage = {}
+					|}
+					|
+					|// Adds a value onto the end of the stack
+					|Stack.prototype.push = function(value) {
+					|
+					|	// If capacity reached
+					|	if (this.size == this.capacity) {
+					|		this.capacity = this.capacity * 2
+					|
+					|		// Simulating replacing old array with new array
+					|		temp = this.storage
+					|		delete this.storage
+					|		this.storage = temp
+					|		this.storage[this.size] = value
+					|	} else {
+					|		this.storage[this.size] = value
+					|	}
+					|	this.size++
+					|}
+					|
+					|var stack = new Stack(3)
+					|stack.push(4)
+					|stack.push(1)
+					|stack.push(2)
+					|console.log(stack.capacity) // 3
+					|stack.push(5)
+					|console.log(stack.capacity) // 6
+
+		p We're starting with the 
+			a(href='/page/javascript-stack' title='Constant-time JavaScript stack') constant-time JavaScript stack 
+			| that we created previously, but updating the Stack for 'capacity' and 'size'. Then, upon pushing to the stack we're checking if the current size matches the capacity. If it does, then our stack is full and we need to create a new array (not done here but simulated) with a new capacity before adding the new value to it.
+		p After calling the stack, we can log out the capacity values before breaching the capacity size and then after.

@@ -32,7 +32,7 @@ block content
 		//-----------------------------------------------------
 
 		.home-top
-			h1 Make a great product by focusing on
+			h1 Make a great product by 
 				span helping
 				| as many
 				span people
@@ -131,7 +131,17 @@ block content
 			p.sub-header Computer science, programming and code examples, blog posts, and small projects.
 			each page in pages
 				.post
-					h3 #{page.header}
+					h3
+						if page.category == 'Code Examples'
+							.page-icon.page-icon-code
+								i.fas.fa-laptop-code
+						else if page.category == 'Projects'
+							.page-icon.page-icon-projects
+								i.fas.fa-rocket
+						else if page.category == 'Personal'
+							.page-icon.page-icon-personal
+								i.fas.fa-hiking
+						| #{page.header}
 					p #{page.description}
 					a(href=`${page.url}`) View
 						i.fas.fa-chevron-right

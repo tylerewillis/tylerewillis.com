@@ -1,0 +1,119 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Storing Phone Numbers with Direct Address Hashing
+	meta(name='description', content='Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here\'s a JavaScript implementation.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Storing Phone Numbers with Direct Address Hashing')
+	meta(property='og:description', content='Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here\'s a JavaScript implementation.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Storing Phone Numbers with Direct Address Hashing",
+			"about": "Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here's a JavaScript implementation.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, direct addressing, array, hashing"
+		}
+
+block example-content
+	.write-up
+		h1 Storing Phone Numbers with Direct Address Hashing
+		h2 Use Case:
+		p Direct Addressing is a simple storage scheme where you store values in an array with a specific index value. You'll start by creating an array based on the length of your data, then you'll be able to add, delete and find values based on array index. Setting our phone book up this way will allow for all of the following:
+		ul
+			li Adding new contacts in constant time - O(1)
+			li Delete contacts in constant time
+			li Finding contacts in constant time
+		p However, there is a tradeoff to this efficiency that will be clear in our first code snippet.
+		p We're going to illustrate direct addressing by creating a simple phone book to hold our contacts.
+		p We first need to set up our phone book to hold our contacts:
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function phoneBook(size) {
+					|	this.count = 0
+					|	this.array = new Array(size)
+					|}
+					|
+					|var phoneBook = new phoneBook(10000000) // 10 million
+
+		p We'll create a new JavaScript class called 'phoneBook' that will receive a size, hold a count (so that we can return the actual number of contacts in our phone book in constant time), and hold our array of contacts.
+		p Then we'll set the variable 'phoneBook' equal to our new class with a size of 10 million. The reason why we need to do 10 million is because we need to account for all possible combinations of phone numbers in 123-456-7890 format.
+		p Yes, this is a very large data set (and doesn't even account for many internationally-formatted phone numbers). Our memory consumption being taken up here can be measured as O(|U|) where |U| is the length of the set of all possible phone numbers. This is the tradeoff to the constant time efficiency being achieved when adding, deleting and finding contacts.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|phoneBook.prototype.add = function(number, label) { // Constant Time
+					|	var number = number.replace(/-| /g, '')
+					|	var label = label.split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')
+					|	this.array[number] = label
+					|
+					|	this.count++
+					|}
+
+		p We'll then create an 'add' function to our 'phoneBook' class that will receive a phone number and label (or the name of the contact). We'll clean the entered number by removing any hyphens and spaces and also capitalize the names submitted in the label - in case they weren't capitalized on submission (just to keep things looking nice).
+		p Then we'll use our number as the array index and set that index value equal to the label.
+		p Lastly, we'll add one to the current count of our phone book contacts.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|phoneBook.prototype.del = function(number) { // Constant Time
+					|	var number = number.replace(/-| /g, '')
+					|	this.array[number] = ''
+					|
+					|	this.count--
+					|}
+
+		p We'll then create a 'del' function to our class that will allow us to "remove" a contact based on phone number from our phone book. In actuality, we won't really delete this value from our array (since our array holds all possible phone numbers) but we'll make the value/label equal to an empty string.
+		p Then we'll reduce our contacts count by 1.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|phoneBook.prototype.find = function(number) { // Constant Time
+					|	var number = number.replace(/-| /g, '')
+					|
+					|	if(this.array[number].length > 0) {
+					|		console.log(this.array[number])
+					|	} else {
+					|		console.log('Number Not Found')
+					|	}
+					|}
+
+		p If we want to look up one of our contacts, or we want our phone to display the name of a contact when they are calling us, we'll need to create a 'find' function. This function will check the string length of the value at the number index in our array. If it's greater than 0, it will return the name. If it's not greater than 0, then it will return 'Number Not Found'.
+		p Now let's test it out:
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|phoneBook.add('91 1', 'police')
+					|phoneBook.add('012-345-6789', 'mom')
+					|phoneBook.add('987-654-3210', 'dad')
+					|phoneBook.add('555-555-5555', 'sam')
+					|
+					|console.log(phoneBook.array[911]) // Police
+					|
+					|phoneBook.find('012-345-6789') // Mom
+					|
+					|console.log(phoneBook.count) // 4
+					|
+					|phoneBook.del('555-555-5555')
+					|
+					|console.log(phoneBook.count) // 3
+					|
+					|phoneBook.find('555-555-5555') // Number Not Found

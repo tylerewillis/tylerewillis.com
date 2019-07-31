@@ -1,5 +1,11 @@
 [
 	{
+		"header": "My Founder's Journey",
+		"url": "/page/founders-journey",
+		"description": "9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.",
+		"category": "Personal"
+	},
+	{
 		"header": "Building a Binary Heap in JavaScript",
 		"url": "/page/binary-heap-implementation",
 		"description": "Binary heaps allow for combined data insertion and max value extraction more efficiently than many other data structures and are used for the efficient heap sort algorithm.",
@@ -64,5 +70,17 @@
 		"url": "/page/flashcards",
 		"description": "Hundreds of flashcards that I've put together to help with the transformation from self-taught coder to computer scientist.",
 		"category": "Projects"
+	},
+	{
+		"header": "Using Rabin-Karp's Algorithm to Find All Occurrences of Substring",
+		"url": "/page/rabin-karp-javascript",
+		"description": "Rabin-Karp's Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Storing Phone Numbers with Direct Address Hashing",
+		"url": "/page/direct-addressing",
+		"description": "Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here's a JavaScript implementation.",
+		"category": "Code Examples"
 	}
 ]

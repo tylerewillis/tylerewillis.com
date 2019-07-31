@@ -132,4 +132,26 @@ router.get('/priority-queue-processing-simulation', (req, res) => {
   res.render('pages/parallel-processing-simulation', args)
 })
 
+//================================================
+// Direct Addressing
+//================================================
+
+router.get('/direct-addressing', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/direct-addressing' }
+  res.render('pages/direct-addressing', args)
+})
+
+//================================================
+// Rabin-Karp Substring in String
+//================================================
+
+router.get('/rabin-karp-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/rabin-karp-javascript' }
+  res.render('pages/rabin-karp', args)
+})
+
 module.exports = router

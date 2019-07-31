@@ -1326,42 +1326,47 @@
 	},
 	{
 		"id": 263,
-		"question": "",
-		"answer": ""
+		"question": "What is 'direct addressing' in hashing?",
+		"answer": "The simplest form of hashing - storing all possible values in an array (i.e. phone numbers in a phone book). Not realistic - requires way too much memory."
 	},
 	{
 		"id": 264,
-		"question": "",
-		"answer": ""
+		"question": "What is a 'hash function'?",
+		"answer": "A function that maps a set of objects from 0 to a given value. Should be fast to compute, small probability of collision, allow for direct addressing with O(m)."
 	},
 	{
 		"id": 265,
-		"question": "",
-		"answer": ""
+		"question": "In hashing, what is a collision?",
+		"answer": "When 2 items have the same value as the hash function."
 	},
 	{
 		"id": 266,
-		"question": "",
-		"answer": ""
+		"question": "What is 'chaining' in 'hashing'?",
+		"answer": "When you leverage mapping in hashing values."
 	},
 	{
 		"id": 267,
-		"question": "",
-		"answer": ""
+		"question": "In hashing, what is a 'map'?",
+		"answer": "A mapping from a set of objects to a set of values. Has values 'hasKey', 'get', 'set'. The objects are usually referred to as keys and values are values."
 	},
 	{
 		"id": 268,
-		"question": "",
-		"answer": ""
+		"question": "What is 'cardinality' in hashing?",
+		"answer": "The size of the hash set."
 	},
 	{
 		"id": 269,
-		"question": "",
-		"answer": ""
+		"question": "What is a 'hash table'?",
+		"answer": "An implementation of a Set or a Map using hashing."
 	},
 	{
 		"id": 270,
-		"question": "",
+		"question": "What is a 'blockchain'?",
+		"answer": "A distributed diary that is difficult to forge by leveraging hashing. It also uses binary trees to improve efficiency of operations."
+	},
+	{
+		"id": 270,
+		"question": "What is a 'Merkle Tree'?",
 		"answer": ""
 	}
 ]

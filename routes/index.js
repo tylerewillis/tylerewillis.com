@@ -25,13 +25,14 @@ router.get('/', (req, res) => {
   // Get pages from file
   var json = fs.readFileSync('./includes/pages.json')
   let pages = JSON.parse(json)
+  let featuredPages = pages.slice(0,5)
 
   // Get projects from file
   json = fs.readFileSync('./includes/products.json')
   let products = JSON.parse(json)
 
   // Render page
-  var args = { pages, products }
+  var args = { pages: featuredPages, products }
   res.render('index', args)
 })
 

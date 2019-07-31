@@ -1,0 +1,45 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title My Founder's Journey | Tyler Willis
+	meta(name='description', content='9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='My Founder\'s Journey | Tyler Willis')
+	meta(property='og:description', content='9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "My Founder's Journey | Tyler Willis",
+			"about": "9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.",
+			"inLanguage": "en-US",
+			"keywords": "startups, entrepreneur, solo-preneur, programmer, Product Hunt"
+		}
+
+block example-content
+	.write-up
+		h1 My Founder's Journey
+		h2 Highs and lows of learning to code and launching new products.
+		p The month of September 2015 was one of the scariest and most thrilling months of my life. A few of the highlights:
+		ul
+			li I turned 28
+			li My daughter turned 7 months old
+			li I quit my job in operations
+			li I committed fully to a career that I was excited about
+		p I spent the previous 5 years in operations and management for 2 large companies. They were jobs. They paid the bills. There were good days and bad. I never looked forward to going to work.
+		p So I took a chance and bet on myself. I quit my job to pursue a career in the field that I received my Bachelor's Degree in 5 years earlier - digital marketing. It seemed full of opportunity for someone who enjoyed being creative. The more I learned the more hooked I became.
+		p Then, I found website development. I learned HTML, CSS, some JavaScript, and how to build websites in WordPress. As I learned more about digital marketing, I became aware of awesome tools such as Crazy Egg and Moz. They were great, but I didn't really have a good reason to sign up for and pay subscriptions for services like that. But they didn't seem impossible to build (at least portions of), so I decided to go that route.
+		p One problem, I didn't know a lick of server-side code other than what I was exposed to in basic WordPress (being built in PHP). So my first startup company was built while I taught myself PHP.
+		h3 PerfectPage.io
+			span - On-page SEO analysis
+		p Enter PerfectPage.io. PerfectPage was a SAAS product where users could submit their websites to get on-page search engine optimization analysis for over 100 different page elements. Those included standard SEO elements like the web page title and meta description as well as content analysis including tone analyzation provided by the IBM Watson API. It was to be the most in-depth SEO analysis tool on the market.
+		p I spent about 18 months developing the product on my own (I redid the front-end design about 3 times) then I brought on a friend to handle the content marketing strategy to help us build awareness for the product organically.
+		p We submitted PerfectPage to Product Hunt, Betalist and other popular product submission sites. We got some good feedback but our day-to-day lives took over and PerfectPage quickly took a back seat. After that, we could kiss the success of PerfectPage goodbye.
+		p I was pretty disappointed about all of the time spent and wasted - so I thought. Turns out that PerfectPage was how I learned PHP.
+					

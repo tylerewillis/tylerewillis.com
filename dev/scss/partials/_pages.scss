@@ -205,8 +205,17 @@
     max-width: 100%;
     height: auto;
 	}
+	img.no-border{
+		box-shadow: none;
+	}
 	a {
 		font-weight: 900;
+	}
+	.code-label {
+		background-color: #f5f2f0;
+		padding: 3px 5px;
+		border: 1px solid #d3d3d3;
+		border-radius: 3px;
 	}
 }
 

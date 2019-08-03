@@ -6,6 +6,12 @@
 		"category": "Personal"
 	},
 	{
+		"header": "Complete Binary Tree Code Implementation in JavaScript",
+		"url": "/page/binary-tree-javascript",
+		"description": "Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Building a Binary Heap in JavaScript",
 		"url": "/page/binary-heap-implementation",
 		"description": "Binary heaps allow for combined data insertion and max value extraction more efficiently than many other data structures and are used for the efficient heap sort algorithm.",

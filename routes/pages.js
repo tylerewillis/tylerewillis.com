@@ -154,4 +154,15 @@ router.get('/rabin-karp-javascript', (req, res) => {
   res.render('pages/rabin-karp', args)
 })
 
+//================================================
+// Binary Tree Implementation
+//================================================
+
+router.get('/binary-tree-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/binary-tree-javascript' }
+  res.render('pages/binary-tree-implementation', args)
+})
+
 module.exports = router

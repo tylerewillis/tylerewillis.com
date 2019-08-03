@@ -2282,8 +2282,15 @@ footer {
     margin: 30px auto;
     max-width: 100%;
     height: auto; }
+  .page-example img.no-border {
+    box-shadow: none; }
   .page-example a {
     font-weight: 900; }
+  .page-example .code-label {
+    background-color: #f5f2f0;
+    padding: 3px 5px;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px; }
 
 .example-footer hr {
   margin: 50px 100px; }

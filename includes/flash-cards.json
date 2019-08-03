@@ -1365,8 +1365,23 @@
 		"answer": "A distributed diary that is difficult to forge by leveraging hashing. It also uses binary trees to improve efficiency of operations."
 	},
 	{
-		"id": 270,
+		"id": 271,
 		"question": "What is a 'Merkle Tree'?",
+		"answer": ""
+	},
+	{
+		"id": 272,
+		"question": "What are 'Binary Search Trees'?",
+		"answer": ""
+	},
+	{
+		"id": 273,
+		"question": "",
+		"answer": ""
+	},
+	{
+		"id": 274,
+		"question": "",
 		"answer": ""
 	}
 ]

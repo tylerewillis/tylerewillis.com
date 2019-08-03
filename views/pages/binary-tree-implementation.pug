@@ -1,0 +1,57 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Complete Binary Tree Code Implementation in JavaScript
+	meta(name='description', content='Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output. Here is a complete JavaScript implementation.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Complete Binary Tree Code Implementation in JavaScript')
+	meta(property='og:description', content='Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output. Here is a complete JavaScript implementation.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Complete Binary Tree Code Implementation in JavaScript",
+			"about": "Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output. Here is a complete JavaScript implementation.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Complete Binary Tree Code Implementation in JavaScript
+		h2 Use Case:
+		p Binary tree data structures consist of nodes who contain some data, point to a parent node and have up to 2 children. A few reasons why binary trees might be used in place of other data structures including arrays, stacks or queues include:
+		ul
+			li Trees may best represent the hierarchy of the data set with their parent/child relationships
+			li Binary trees are very efficient at core functions such as inserting new values and searching - O(log n) for both
+			li Trees are flexible data structures allowing for reorganization of parents and children
+		p Below is a complete implementation of a binary tree in JavaScript including functionality for finding nodes, inserting nodes, returning a range of nodes, deleting nodes, keeping track of the size, height and depth of nodes, and keeping the trees balanced and AVL compliant for efficiency purposes.
+		p Here is the information that each node will contain:
+		img(src='#')
+		p And here is what we will have built by the end of this exercise:
+		img(src='#')
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function Node(key) {
+					|	this.key = key
+					|	this.parent = null
+					|	this.height = 1
+					|	this.size = 1
+					|	this.depth = 0
+					|	this.left = null
+					|	this.right = null
+					|}
+
+		p The first thing that we need to do is set up our Node class. Each node will hold the following information:
+		ul
+			li key: What we'll use as the value for each node in this example
+			li parent: The parent that the node belongs to

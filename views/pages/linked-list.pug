@@ -1,0 +1,340 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Linked List Data Structure Implementation
+	meta(name='description', content='Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Linked List Data Structure Implementation')
+	meta(property='og:description', content='Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Linked List Data Structure Implementation",
+			"about": "Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, linked list, data structure"
+		}
+
+block example-content
+	.write-up
+		h1 Linked List Data Structure Implementation
+		h2 Use Case:
+		p Linked Lists are dynamic data structures that can grow and shrink as need be without the need for declaring a maximum size on creation. Because of not needing to allocate memory beforehand, linked lists are generally more memory efficient that other data structures such as arrays. Adding and removing values from the front of a list can be done in constant time and operations done at the end or middle of the list can be done easily in linear time.
+		p Disadvantages of linked lists include memory consumption (twice the memory needed because you're storing a pointer in addition to a value) and there isn't constant time, random access to values located inside of the list. Returning a value would require following pointers starting at the head of the list until the value is discovered.
+		p Below is an implementation of a linked list in JavaScript using 2 classes - a Node class and a Linked List class. Please read through the code below and let me know if you're aware of a better, more efficient way to implement linked lists!
+		h3 1. Node Class
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|class Node {
+					|	constructor(data) {
+					|		this.data = data // data or value of node is equal to parameter data value
+					|		this.next = null // the node's pointer is null by default
+					|	}
+					|}
+
+		p Our 
+			span.code-label node
+			|  class will be pretty simple as each node will contain only a value and a pointer to the next node in the list. The pointer will be null by default and we'll update the pointer later when new nodes are added to the list.
+		h3 2. Linked List Class
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|class LinkedList {
+					|
+					|	constructor() {
+					|		this.head = null // head node of linked list is null by default
+					|	}
+
+		p The 
+			span.code-label LinkedList
+			|  class will only be concerned about holding a head node in the list. This node and all subsequent nodes will contain the meat of the linked list from here on our (values and pointers).
+		p
+			strong Note:
+			|  all functions from here on out in this post will belong to this 
+			span.code-label LinkedList
+			|  class and should be placed inside accordingly.
+		h3 3. Size of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|size() {
+					|	let temp = this.head // create temp variable and set equal to head node of linked list
+					|	let i = 0 // create counter variable
+					|	while (temp) { // while temp is not null
+					|		temp = temp.next // set temp variable equal to next node in list
+					|		i++ // increment counter
+					|	}
+					|	return i // return counter value
+					|}
+
+		p The linked list's 
+			span.code-label size
+			|  function will return the size of our linked list in total number of nodes. We'll create a temp variable to hold the value of the head of our linked list and variable 
+			strong i
+			|  to be used to hold the actual size of our list. Then, while our temp variable is not equal to null, we'll loop through the linked list and increment our counter variable which we'll return once our loop is finished.
+		h3 4. Check if Linked List is Empty
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|empty() {
+					|	return this.head == false // if linked list of empty, this conditional statement will be true, else false
+					|}
+
+		p Our 
+			span.code-label empty
+			|  function will allow us to check if the linked list is empty or not, simply by returning the conditional statement that the head of our linked list is equal to false. This function will return 
+			strong true
+			|  if the list is indeed empty and 
+			strong false
+			|  if the list is not empty.
+		h3 5. Front Value of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|front() {
+					|	return this.head // return head node of linked list
+					|}
+
+		p We'll also create 2 functions that will return to us the first and last values in our linked list without removing them. The 
+			span.code-label front
+			|  function will simply return the node located at the head of our linked list.
+		h3 6. Back Value of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|back() {
+					|	let temp = this.head // create temp variable and set equal to head node of linked list
+					|	while (temp.next) { // while node has a pointer value
+					|		temp = temp.next // set temp variable equal to next node in linked list
+					|	}
+					|	return temp // return last node
+					|}
+
+		p The 
+			span.code-label back
+			|  function will return the very last node in our list. However, to get there it will loop through our list until the current node's pointer is null. When this is the case then the current node will be returned.
+		h3 7. Push to Front of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|pushFront(data) {
+					|	let node = new Node(data) // create new node
+					|	let next = this.head // set next variable equal to head node of linked list
+					|	this.head = node // set head of linked list equal to new node
+					|	if (next) { // if next variable is not null
+					|		node.next = next // set pointer for new node equal to node previously at head of list
+					|	}
+					|}
+
+		p Our 
+			span.code-label LinkedList
+			|  class will need 2 methods created for adding new values to our list - to the front of the list and the back.
+		p The 
+			span.code-label pushFront
+			|  function will allow us to add a new node to the front of our linked list. We'll create a new node, then get the node located at the head of the linked list. Then we'll set the head equal to our new node and set the first node's pointer equal to the next node in our list (the node that was formerly at the head).
+		h3 8. Push to Back of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|pushBack(data) {
+					|	let node = new Node(data) // create new node
+					|	if (this.head == null) { // if head of linked list is null
+					|		this.head = node // set head equal to node
+					|	} else { // if head of linked list is not null
+					|		let temp = this.head // create temp variable and set equal to head node
+					|		while (temp.next) { // while current node has a pointer that's not equal to null
+					|			temp = temp.next // set temp variable equal to next node in list
+					|		}
+					|		temp.next = node // after while loop, set current node's pointer equal to new node
+					|	}
+					|}
+
+		p We'll create the 
+			span.code-label pushBack
+			|  function to allow us to add new nodes to the back of our linked list. In order to do this, we'll need to loop through our entire linked list (following the pointers) to find the final node in our list. This operation will need to be done in linear time - O(n) - which is a negative drawback to using linked lists.
+		p After we follow the pointers to the final value, we'll change it's pointers value from null to the new node that we created.
+		h3 9. Pop from Front of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|popFront() {
+					|	let first = this.head // create first variable and set equal to first node in linked list
+					|	if (first.next) { // if current node has a pointer to another node
+					|		let second = first.next // create second variable and set equal to next node
+					|		this.head = second // set head equal to second node
+					|		this.head.next = second.next // set head node pointer equal to second node's pointer
+					|	} else { // if head node doesn't have a pointer
+					|		this.head = null // set head equal to null
+					|	}
+					|	return
+					|}
+
+		p We'll now create 2 functions to be used for removing nodes from our list. The first - 
+			span.code-label popFront
+			|  will allow us to remove the first node in our linked list. We'll just set the head of our list equal to the second node (if it exists) and then if the second node's pointer points to a node, we'll set this as the new head node's pointer.
+		p As opposed to arrays which require linear time - O(n) - for this operation due to having to shift all subsequent items forward, this operation can be done in constant time - O(1) - for linked lists since we're simply updating the first value and it's pointer and don't need to visit the following items.
+		h3 10. Pop from End of Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|popBack() {
+					|	let temp = this.head // create temp variable and set equal to first node in linked list
+					|	let prev = null // create prev variable and set equal to null
+					|	while (temp) { // while temp is not null
+					|		if (temp.next) { // if current node has a pointer to next node in list
+					|			prev = temp // set prev variable equal to current node
+					|			temp = temp.next // set temp variable equal to next node
+					|		} else { // If current node doesn't have a pointer to next node in list
+					|			temp = null // set current node equal to null
+					|			prev.next = null // set previous node's pointer equal to null
+					|			return // return from function
+					|		}
+					|	}
+					|}
+
+		p To remove a value from the end of our list, we do have to follow our entire list starting at the first, head node. We'll then loop through our list as long as the current node's pointer points to a valid node. Once we've come across a node whose pointer is null, we'll set that node equal to null and set the previous node's pointer equal to null.
+		h3 11. Get Value at Index in Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|valueAt(index) {
+					|	let temp = this.head // create temp variable and set equal to first node in linked list
+					|	let i = 0 // set i = 0 to be used as counter
+					|	if (temp && i == index) { // if temp is not null and i is equal to index value
+					|		return temp.data // return temp node's value
+					|	}
+					|	while (temp) { // while temp is not equal to null
+					|		if (i == index) { // if is is equal to index value
+					|			return temp.data // return temp node's value
+					|		}
+					|		i++ // increment counter
+					|		temp = temp.next // set temp variable equal to next node in list
+					|	}
+					|}
+
+		p There may be occasion to get the value of a list item at a specific index in our list. Since linked lists aren't index-based lists like arrays, we don't have random access to each value and would need to follow our pointers until we arrived at the nth-node item.
+		p To do this, we'll create a variable - 
+			strong i
+			|  to hold our counter. Then we'll loop through our list while nodes exist until we've reached the point where our counter equals the index value that we're searching for. At that point we'll return the value (or data in this case) of the node.
+		h3 12. Remove Nodes from Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|remove(data) {
+					|	let temp = this.head // create temp variable and set equal to first node in linked list
+					|	let prev = null // create prev variable and set to null
+					|	if (temp && temp.data == data) { // if temp is not null and temp node's data is equal to value to be removed
+					|		this.head = temp.next // set head of linked list equal to next node
+					|		temp = null // set temp variable equal to null
+					|		return // return from function
+					|	}
+					|	while (temp) { // while temp is not null
+					|		if (temp.data == data) { // if node's data equals data to be removed
+					|			break // break from loop
+					|		}
+					|		prev = temp // set prev variable equal to temp node
+					|		temp = temp.next // set temp equal to next node in linked list
+					|	}
+					|	if (!temp) { // If temp is null
+					|		return // return from function
+					|	}
+					|	prev.next = temp.next // set previous node's pointer equal to current node's next node
+					|	temp = null // set temp variable equal to null
+					|}
+
+		p We'll need a way to delete specific values from our list, so we'll create a method in our linked list class called 
+			span.code-label remove
+			|  that will accept a paramater called 
+			strong data
+			|  that will contain the value to be removed.
+		p We'll loop through our linked list, following the pointers, until we find the value. While we're looping, we'll need to keep track of the current node's previous node so that we can update its pointer to the list item after the item we delete.
+		h3 13. Reverse a Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|reverse() {
+					|	let prev = null // create prev variable and set to null
+					|	let temp = this.head // create temp variable and set equal to first node in linked list
+					|	while (temp) { // while node is not null
+					|		let next = temp.next // set next equal to next node in list
+					|		temp.next = prev // set temp node's pointer equal to prev node
+					|		prev = temp // set prev variable equal to current node
+					|		temp = next // set temp variable equal to next node in list
+					|	}
+					|	this.head = prev // at the end, set the head node equal to node at prev variable
+					|}
+
+		p If a factor in our program has changed that requires the order of our list to be flipped, we'll need a way to change or 
+			span.code-label reverse
+			|  our linked list. At first thought, it seems like we may have to loop through our list, put the items into an array, and then recreate a new list working backwards in the array. That's not very efficient, however, and would require a time equivalent to O(n * 2). Since we're only dealing with pointers, we don't need to pluck the values out of our list, we can just update our pointers.
+		p So we'll visit each node in our list, starting with the node located at the linked list's head, and update it's pointer to point to the node previous to it instead of the next node, then, after iterating through our list, we'll set the head node equal to the very last node we come to. This can be done in linear time - O(n) - which is exactly half of the time that the previous way would require.
+		h3 14. Print the Values of a Linked List
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|print() {
+					|	let temp = this.head // create current variable and set equal to first node in linked list
+					|	while (temp) { // while node is not null
+					|		console.log(temp.data) // log value
+					|		temp = temp.next // set temp equal to next node in list
+					|	}
+					|}
+
+		p If we want an easy way to see our values (whether it's logging them or echoing them to the browser window), we'll need to create a 
+			span.code-label print
+			|  function. This will just loop through our linked list and log each value (data) that it comes across to the console.
+		h3 15. Implementation
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var list = new LinkedList
+					|list.pushBack(5)
+					|list.pushBack(3)
+					|list.pushBack(4)
+					|list.pushBack(6)
+					|list.pushBack(2)
+					|list.pushFront(8)
+					|console.log(list.size()) // 6
+					|list.print() // 8,5,3,4,6,2
+
+		p Start using the linked list by creating a new 
+			strong LinkedList
+			|  object, pushing to, checking the size, printing, etc.

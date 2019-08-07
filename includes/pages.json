@@ -66,6 +66,12 @@
 		"category": "Code Examples"
 	},
 	{
+		"header": "Linked List Data Structure Implementation",
+		"url": "/page/linked-lists",
+		"description": "Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Sorting Algorithm Animations",
 		"url": "/page/sorting-algorithm-animations",
 		"description": "Animations and code examples for popular sorting algorithms.",

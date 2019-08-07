@@ -165,4 +165,15 @@ router.get('/binary-tree-javascript', (req, res) => {
   res.render('pages/binary-tree-implementation', args)
 })
 
+//================================================
+// Linked Lists
+//================================================
+
+router.get('/linked-lists', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/linked-lists' }
+  res.render('pages/linked-list', args)
+})
+
 module.exports = router

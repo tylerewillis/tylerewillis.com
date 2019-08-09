@@ -176,4 +176,15 @@ router.get('/linked-lists', (req, res) => {
   res.render('pages/linked-list', args)
 })
 
+//================================================
+// Hash Table with Linear Probing
+//================================================
+
+router.get('/hash-table-linear-probing', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/hash-table-linear-probing' }
+  res.render('pages/hash-table-linear-probing', args)
+})
+
 module.exports = router

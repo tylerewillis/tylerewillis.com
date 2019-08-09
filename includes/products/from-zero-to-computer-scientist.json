@@ -1,0 +1,146 @@
+[
+	{
+		"An Overview of Computer Science": {
+			"History": {
+				"1": {
+					"title": "Crash Course Computer Science",
+					"description": "Watch this entire YouTube video series presented by Carrie Anne Philbin and PBS to learn about the history of computers, how they began, improved and what we can expect in the near future. Each video is approximately 10-12 minutes long and will cover key computer science terms and ideas.",
+					"instructions": "Pay attention and take notes",
+					"time": "8.5 hours",
+					"links": [
+						"https://www.youtube.com/watch?v=tpIctyqH29Q&list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo&index=1"
+					],
+					"categories": [
+						"video",
+						"notes"
+					]
+				}
+			},
+			"Fundamentals": {
+				"1": {
+					"title": "CS50's Introduction to Computer Science",
+					"description": "This computer science course provided by Harvard will provide you with the basic building blocks for some of the core topics of computer science including data structures, algorithms, resource management, and web development. You'll also have the opportunity to practice what you're learning in real-world problem sets.",
+					"instructions": "Take notes and work through all of the problem sets",
+					"time": "25 hours",
+					"links": [
+						"https://courses.edx.org/courses/course-v1:HarvardX+CS50+X/course/"
+					],
+					"categories": [
+						"video",
+						"practice",
+						"notes"
+					]
+				}
+			}
+		},
+		"Front-End Coding": {
+			"HTML": {
+
+			},
+			"CSS": {
+
+			},
+			"JavaScript": {
+
+			}
+		},
+		"Server-Side Programming": {
+			"C": {
+
+			},
+			"Python": {
+
+			},
+			"Node.js": {
+
+			},
+			"SQL": {
+				
+			}
+		},
+		"Building Efficient Programs": {
+			"Data Structures": {
+				"1": {
+					"title": "UC San Diego's Data Structure Fundamentals",
+					"description": "A short series of videos, this course will walk you through how to understand and implement data structures including arrays, linked lists, priority queues, binary search trees, and more. You'll learn the most here by taking the time to implement each of these data structures in your programming language of choice.",
+					"instructions": "Take notes and work through all of the problem sets",
+					"time": "40 hours",
+					"links": [
+						"https://courses.edx.org/courses/course-v1:UCSanDiegoX+ALGS201x+1T2019/course/"
+					],
+					"categories": [
+						"video",
+						"practice",
+						"notes",
+						"teach"
+					]
+				}
+			},
+			"Algorithmic Complexity": {
+
+			},
+			"Sorting": {
+
+			},
+			"Graphs": {
+
+			},
+			"Recursion": {
+
+			},
+			"Dynamic Programming": {
+
+			},
+			"Object-Oriented Programming": {
+
+			},
+			"Design Patterns": {
+
+			},
+			"Combinatorics": {
+
+			},
+			"NP": {
+
+			},
+			"Caches": {
+
+			},
+			"Processes & Threads": {
+
+			},
+			"Testing": {
+
+			},
+			"Scheduling": {
+
+			},
+			"String Manipulation": {
+
+			},
+			"Tries": {
+
+			},
+			"Floating Point Numbers": {
+
+			},
+			"Unicode": {
+
+			},
+			"Endianness": {
+
+			},
+			"Networking": {
+
+			}
+		},
+		"System Design": {
+			"Scalability": {
+
+			},
+			"Data Handling": {
+
+			}
+		}
+	}
+]

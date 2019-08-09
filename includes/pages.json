@@ -12,6 +12,12 @@
 		"category": "Code Examples"
 	},
 	{
+		"header": "Hash Table JavaScript Implementation with Linear Probing",
+		"url": "/page/hash-table-linear-probing",
+		"description": "Probing allows hash tables to have dynamic sizes which greatly influence memory and time efficiency. Here's how you can build the functionality in JavaScript.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Building a Binary Heap in JavaScript",
 		"url": "/page/binary-heap-implementation",
 		"description": "Binary heaps allow for combined data insertion and max value extraction more efficiently than many other data structures and are used for the efficient heap sort algorithm.",

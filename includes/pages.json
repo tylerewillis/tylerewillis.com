@@ -30,6 +30,12 @@
 		"category": "Code Examples"
 	},
 	{
+		"header": "Storing Big Data With Distributed Hash Tables Simulation",
+		"url": "/page/distributed-hash-table",
+		"description": "Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.",
+		"category": "Projects"
+	},
+	{
 		"header": "Creating a Constant-Time JavaScript Stack",
 		"url": "/page/javascript-stack",
 		"description": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",

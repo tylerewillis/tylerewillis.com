@@ -187,4 +187,15 @@ router.get('/hash-table-linear-probing', (req, res) => {
   res.render('pages/hash-table-linear-probing', args)
 })
 
+//================================================
+// Distributed Hash Table
+//================================================
+
+router.get('/distributed-hash-table', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/distributed-hash-table' }
+  res.render('pages/distributed-hash-table', args)
+})
+
 module.exports = router

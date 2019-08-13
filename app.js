@@ -37,11 +37,9 @@ if (cluster.isMaster) {
 
 	// Router
 	const mainRoutes = require('./routes')
-	const sitemap = require('./routes/sitemap')
 	const pageRoutes = require('./routes/pages')
 	const productRoutes = require('./routes/products')
 	app.use(mainRoutes)
-	app.use(sitemap)
 	app.use('/page', pageRoutes)
 	app.use(productRoutes)
 

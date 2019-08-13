@@ -1,0 +1,98 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Binary Search Algorithm with Arrays in JavaScript
+	meta(name='description', content='The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Binary Search Algorithm with Arrays in JavaScript')
+	meta(property='og:description', content='The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Binary Search Algorithm with Arrays in JavaScript",
+			"about": "The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, binary search, logarithmic time, arrays"
+		}
+
+block example-content
+	.write-up
+		h1 Binary Search Algorithm with Arrays in JavaScript
+		h2 Use Case:
+		p The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data (already-sorted being of utmost importance).
+		p A simple way to visualize this is by looking up someone phone number in a phone book (I know, this isn't done anymore!). What you know is the person's first name and last name. Let's say it's Phil Snow. How would you go about searching for this name? Would you start on page 1 and then flip pages one at a time until you found Phil Snow?
+		img(src='/static/media/phone-book.gif')
+		p It probably wouldn't be the most efficient way ... so, how 
+			em would
+			|  we do it?
+		p Well, we know that "Snow" would be listed closer to the back of the book, alphabetically, so we'll open the book to somewhere near the back half, and then go back and forth, narrowing our search, until we've found the page where "Snow" resides and, ultimately, the person we're looking for - Phil Snow. Now, how can we tell a computer to do it this way, too?
+		p The easiest way is via 
+			strong binary search
+			| . Binary search takes data (in our case, an array), looks at the value at the very center and asks 
+			em is the value I'm searching for greater or less than this value?
+			|  If it's bigger, then it will discard the entire front-half of the book immediately cutting our data set in half (if it's smaller, then the opposite). Then the algorithm will take the center of the new data set and do the same thing by comparing the value searching for by the center.
+		p Quickly, we'll get to the value we're looking for. This searching can be done in logarithmic time - O(log n) - where as if we went page by page that would take linear time - O(n). You can learn more about logarithmic time complexity by reading 
+			a(href='https://medium.com/swlh/a-gentle-explanation-of-logarithmic-time-complexity-79842728a702' target='_blank') this post
+			| .
+		p Perhaps the best part is that as our data set grows, the time needed to search for values changes only fractionally. For example, since we're cutting out half of our data set with each step of the binary search algorithm, when our data doubles in size, it will only take 1 additional step to locate our data.
+		p The binary search algorithm is typically used on tree data structures (and, in a previous post, you can learn more about 
+			a(href='/page/binary-tree-javascript' target='_blank') implementing a complete binary tree data structure
+			| ) but we'll keep it easy today and run a binary search on an array of presorted integers. This will require only 3 steps.
+		h3 1. Create an Array of Data
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = []
+					|for (i = 0; i < 1000; i++) {
+					|	array.push(i)
+					|}
+
+		p We'll use a native JavaScript 
+			strong for loop
+			|  to push 1,000 integers to our array - in order from 0 to 999.
+		h3 2. Binary Search Function
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function binarySearch(k, array) {
+					|	let mid = Math.floor(array.length / 2)
+					|	if (k > array[mid]) {
+					|		array = array.slice(-mid)
+					|		binarySearch(k, array)
+					|	} else if (k < array[mid]) {
+					|		array.length = mid
+					|		binarySearch(k, array)
+					|	} else {
+					|		return array[mid]
+					|	}
+					|}
+
+		p Then we'll create our recursive 
+			span.code-label binarySearch
+			|  function which will accept a value - 
+			strong k
+			|  and an array. The first thing our function will do is establish a mid-point of our array. Then, it'll use a series of conditional statements to check if our value - k - is greater than, less than, or equal to the array value at our mid point.
+		p If it's greater or less than, we'll cut our data set in half and recall the function passing in our value - k and the updated data set.
+		p Finally, when we find the value we're looking for, we'll return it from the function.
+		h3 3. Implementation
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|binarySearch(123, array) // 500, 250, 125, 62, 94, 109, 117, 121
+					|binarySearch(777, array) // 500, 750, 875, 812, 781, 765, 773
+					|binarySearch(456, array) // 500, 250, 375, 437, 469, 453, 461, 457, 455
+
+		p Now we'll call our function and search for a value. Above, you'll see a series of searches with comments listing each mid point that was discovered prior to reaching the value to prove the efficiency of this algorithm and how we can locate a value from a data set of 1,000 in just a few steps.

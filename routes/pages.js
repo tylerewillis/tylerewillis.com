@@ -198,4 +198,15 @@ router.get('/distributed-hash-table', (req, res) => {
   res.render('pages/distributed-hash-table', args)
 })
 
+//================================================
+// Binary Search with Array
+//================================================
+
+router.get('/binary-search-array', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/binary-search-array' }
+  res.render('pages/binary-search-array', args)
+})
+
 module.exports = router

@@ -30,6 +30,12 @@
 		"category": "Code Examples"
 	},
 	{
+		"header": "Binary Search Algorithm with Arrays in JavaScript",
+		"url": "/page/binary-search-array",
+		"description": "The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Storing Big Data With Distributed Hash Tables Simulation",
 		"url": "/page/distributed-hash-table",
 		"description": "Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.",

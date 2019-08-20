@@ -220,4 +220,27 @@ router.get('/depth-first-traversal-orders', (req, res) => {
   res.render('pages/depth-first-traversal-orders', args)
 })
 
+//================================================
+// Is Binary Search Tree
+//================================================
+
+router.get('/is-binary-search-tree', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/is-binary-search-tree' }
+  res.render('pages/is-binary-search-tree', args)
+})
+
+//================================================
+// Get Successor in Binary Search Tree
+//================================================
+
+router.get('/binary-search-tree-successor', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/binary-search-tree-successor' }
+  res.render('pages/binary-search-tree-successor', args)
+})
+
+
 module.exports = router

@@ -6,9 +6,15 @@
 		"category": "Personal"
 	},
 	{
-		"header": "Complete Binary Tree Code Implementation in JavaScript",
+		"header": "Complete Binary Search Tree Code Implementation in JavaScript",
 		"url": "/page/binary-tree-javascript",
 		"description": "Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output.",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Check if Binary Search Tree Structure is Valid",
+		"url": "/page/is-binary-search-tree",
+		"description": "Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here's how to check if a binary search tree is valid.",
 		"category": "Code Examples"
 	},
 	{
@@ -87,6 +93,12 @@
 		"header": "Linked List Data Structure Implementation",
 		"url": "/page/linked-lists",
 		"description": "Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Find Inorder Successor in Binary Search Tree",
+		"url": "/page/binary-search-tree-successor",
+		"description": "Binary search trees aren't a linear data structure, but here's how you can return the next value in the data set just like you can with arrays and linked lists but more efficiently.",
 		"category": "Code Examples"
 	},
 	{

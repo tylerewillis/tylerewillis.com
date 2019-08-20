@@ -209,4 +209,15 @@ router.get('/binary-search-array', (req, res) => {
   res.render('pages/binary-search-array', args)
 })
 
+//================================================
+// Depth-First Traversal Orders
+//================================================
+
+router.get('/depth-first-traversal-orders', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/depth-first-traversal-orders' }
+  res.render('pages/depth-first-traversal-orders', args)
+})
+
 module.exports = router

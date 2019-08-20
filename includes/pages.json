@@ -102,6 +102,12 @@
 		"category": "Projects"
 	},
 	{
+		"header": "Depth-First Traversal Orders in Binary Trees",
+		"url": "/page/depth-first-traversal-orders",
+		"description": "Unlike common data structures such as arrays, stacks and linked lists, tree data structures can be traversed and values returned in multiple ways. Here are a few depth-first traversal orders.",
+		"category": "Code Examples"
+	},
+	{
 		"header": "Using Rabin-Karp's Algorithm to Find All Occurrences of Substring",
 		"url": "/page/rabin-karp-javascript",
 		"description": "Rabin-Karp's Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.",

@@ -24,13 +24,13 @@
 		"category": "Code Examples"
 	},
 	{
-		"header": "Building a Binary Heap in JavaScript",
-		"url": "/page/binary-heap-implementation",
-		"description": "Binary heaps allow for combined data insertion and max value extraction more efficiently than many other data structures and are used for the efficient heap sort algorithm.",
+		"header": "Building a Binary Max Heap in JavaScript",
+		"url": "/page/binary-max-heap",
+		"description": "Binary max heaps allow for efficient data insertion and max value extraction and are used for the efficient heap sort algorithm.",
 		"category": "Code Examples"
 	},
 	{
-		"header": "Binary Heap Sort Algorithm in JavaScript",
+		"header": "Binary Max Heap Sort Algorithm in JavaScript",
 		"url": "/page/heap-sort-algorithm",
 		"description": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
 		"category": "Code Examples"

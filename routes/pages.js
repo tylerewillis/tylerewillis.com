@@ -103,11 +103,11 @@ router.get('/dynamic-array-replication', (req, res) => {
 // Binary Heap
 //================================================
 
-router.get('/binary-heap-implementation', (req, res) => {
+router.get('/binary-max-heap', (req, res) => {
 
   // Render page
-  var args = { url: '/page/binary-heap-implementation' }
-  res.render('pages/binary-heaps', args)
+  var args = { url: '/page/binary-max-heap' }
+  res.render('pages/binary-max-heap', args)
 })
 
 //================================================

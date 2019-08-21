@@ -1,7 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Binary Heap Sort Algorithm in JavaScript
+	title Binary Max Heap Sort Algorithm in JavaScript
 	meta(name='description', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
 	meta(property='og:locale', content='en_US')
 	meta(property='og:type', content='website')
@@ -16,7 +16,7 @@ block pages-head
 			"@context": "http://schema.org",
 			"@type": "BlogPosting",
 			"author": "Tyler Willis",
-			"headline": "Binary Heap Sort Algorithm in JavaScript",
+			"headline": "Binary Max Heap Sort Algorithm in JavaScript",
 			"about": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
 			"inLanguage": "en-US",
 			"keywords": "JavaScript, heap sort, sorting, algorithm, O(n log n)"
@@ -26,41 +26,91 @@ block example-content
 	.write-up
 		h1 Binary Heap Sort Algorithm in JavaScript
 		h2 Use Case:
-		p This post is a follow up of my previous post on 
-			a(href='/page/binary-heap-implementation') building a binary heap in JavaScript
+		p This post is a continuation of my previous post on 
+			a(href='/page/binary-max-heap') building a binary max heap in JavaScript
 			|. Heap sort is an efficient sorting algorithm - O(n log n) - (both for timing and storage) that compares values against each other. Below is my concise implementation of this algorithm.
+		p These functions are assumed to be placed inside of the 
+			span.code-label Heap
+			|  class we created in the previous post.
+		h3 1. buildHeap Function
+		p We need to create a way for an array data structure to be turned into a heap structure.
 
-	.examples
 		.example.javascript-example
 			p.label JavaScript
 			pre
 				code.language-javascript
-					|function heapSort(heap) {
-					|	for (i = heap.array().length - 1; i >= 0; i--) {
-					|		console.log(heap.extractMax())
+					|buildHeap = (array) => {
+					|	this.maxSize += array.length
+					|	for (let index of array) {
+					|		heap.insert(index)
 					|	}
+					|	return heap.H
 					|}
 
-		p Once we constructed our binary heap (as outlined in the previous post), we simply need to create a loop that will run for the size of the heap and return our maximum values.
-		p In this example, we're just logging them to the console but you could add them to a new data type starting at the end and working your way forward (or reverse - depending on ascending or descending order).
+		p Our 
+			span.code-label buildHeap
+			|  function will accept an array structure, increase the maximum size allowed for our heap to fit the number of elements in our array, and then insert each value into our heap. This assumes that you've already created an instance of the 
+			span.code-label Heap
+			|  class. Then, it'll return the updated heap data.
+		h3 2. heapSort Function
 
 		.example.javascript-example
 			p.label JavaScript
 			pre
 				code.language-javascript
-					|// Array to Heap, then call Heap Sort
+					|heapSort = () => { // O(n log n)
+					|	var sorted = []
+					|	for (var i = this.H.length - 1; i >= 0; i--) {
+					|		sorted[i] = this.extractMax()
+					|	}
+					|	return sorted
+					|}
+
+		p Once we've constructed our binary heap (as outlined in the previous post), we simply need to create a loop that will run for the size of the heap and return our maximum values.
+		p Here, we're adding them to our 
+			strong sorted
+			|  array in backwards order so that our smallest values end up being first.
+		h3 3. partialSort Function
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|partialSort = (k) => { // O(k log n)
+					|	var results = []
+					|	for (var i = k - 1; i >= 0; i--) {
+					|		results[i] = this.extractMax()
+					|	}
+					|	return results
+					|}
+
+		p As an aside, let's say that you wanted to sort only a portion of the heap data set. Here, we've created a function called 
+			span.code-label partialSort
+			|  that accepts an integer of k that determines how large of a returned result set we'd like to receive.
+		p This particular function can be done more quickly than the full 
+			span.code-label heapSort
+			|  function as it is only running on 
+			strong k
+			|  elements instead of all elements - 
+			strong n
+			| .
+		h3 4. Results
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
 					|var array = [5,2,3,8,1,6,7,3,4,9]
-					|function arrayToHeap(array) {
 					|
-					|	// Create a new heap and insert each value from array
-					|	var heap = new Heap(10)
-					|	for (i = 0; i < array.length; i++) {
-					|		heap.insert(array[i])
-					|	}
-					|
-					|	// After building heap, call heapSort algorithm
-					|	heapSort(heap)
-					|}
-					|arrayToHeap(array)
+					|var heap = new Heap(5)
+					|heap.buildHeap(array)
+					|console.log(heap.heapSort()) // 1,2,3,3,4,5,6,7,8,9
+					|console.log(heap.partialSort(4)) // 6,7,8,9
 					
-		p To call our 'heapSort' function, we'll first iterate through the array variable to pull in our values, add them to our heap using our 'heap.insert' function, and then call our 'heapSort' function to log the values in descending order to the console.
+		p Here we're creating and then building our 
+			strong heap
+			|  and then logging the results of the 2 algorithms (note, that you can't call them back-to-back since the sorting algorithms remove elements when sorting). The run time of our 
+			span.code-label heapSort
+			|  algorithm, in this instance, was O(10 log 10) and the run time of our 
+			span.code-label partialSort
+			|  algorithm was O(4 log 10).

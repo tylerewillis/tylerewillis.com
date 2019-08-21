@@ -34,9 +34,9 @@ block example-content
 			li Trees are flexible data structures allowing for reorganization of parents and children
 		p Below is a complete implementation of a binary tree in JavaScript including functionality for finding nodes, inserting nodes, returning a range of nodes, deleting nodes, keeping track of the size, height and depth of nodes, and keeping the trees balanced and AVL compliant for efficiency purposes.
 		p Here is what each node will look like:
-		img.no-border(src='/static/media/binary-tree-node-characteristics.png')
+		img.no-border.img-medium(src='/static/media/binary-tree-node-characteristics.png')
 		p And here is what we will have built by the end of this exercise:
-		img.no-border(src='/static/media/binary-tree-data-structure.png')
+		img.no-border.img-medium(src='/static/media/binary-tree-data-structure.png')
 		h3 1. Node Class
 
 		.example.javascript-example
@@ -234,7 +234,7 @@ block example-content
 			strong P
 			|  - the place, increase the size of the parent to account for the added node, and then, whether the new node is bigger or less than the value of the parent, we'll add it as a child node of the parent. Finally, we'll return the new node.
 		p This function inserts a new node into our tree, but it doesn't keep the tree balanced when doing so. In fact, if we use this function as-is to insert a bunch of nodes, we could end up with something like this:
-		img.no-border(src='/static/media/unbalanced-binary-tree.png')
+		img.no-border.img-small(src='/static/media/unbalanced-binary-tree.png')
 		p This won't work for our binary tree implementation because, for efficiency purposes, we want the sizes of the root nodes children to be the same (or within 1). So we're going to add a new function upon insertion that will keep our tree balanced.
 		h3 9. AVL Insert Function
 

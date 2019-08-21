@@ -1,0 +1,97 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Merge Sort Implementation in JavaScript
+	meta(name='description', content='')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Merge Sort Implementation in JavaScript')
+	meta(property='og:description', content='')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Merge Sort Implementation in JavaScript",
+			"about": "",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, merge sort, recursive, algorithm"
+		}
+
+block example-content
+	.write-up
+		h1 Merge Sort Implementation in JavaScript
+		h2 Use Case:
+		p If you've ever heard the expression
+			strong divide and conquer
+			|  when undergoing a large project or facing a difficult situation, then you already understand the basic foundation of the merge sort algorithm. When given a large data set, merge sort doesn't try to sort the data as it is, instead, it breaks the data down into smaller components (all the way down to individual elements, in fact).
+		p When comparing 2 individual elements, we can determine the proper sorting order of the 2 by asking just 1 question - 
+			strong is the first element greater than the second?
+			|  If yes, then they should swap order. If not, then they should stay as is. Either way, once we've determined the proper order between the 2, we can group them together. Then we'll move on to the next set of numbers and repeat the question.
+		p Once we've answered this question for each pair of individual elements, we can start to group, or 
+			strong merge
+			|  our data back together by starting back at the beginning - now the grouping of our first 2 elements. We'll compare the first 2 elements to the second 2 elements and ask the same question as previously to put them in order. Then we'll continue and repeat this process until we've rebuilt our now-sorted data set.
+		h3 Implementation
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|mergeSort = (array) => {
+					| if (array.length <= 1) return array
+					|	let mid = Math.floor(array.length / 2)
+					|	let left = array.slice(0,mid)
+					|	let right = array.slice(mid)
+					|	return merge(mergeSort(left),mergeSort(right))
+					|}
+					
+		p This first 
+			span.code-label mergeSort
+			|  function will be what we use to 
+			strong divide
+			|  our data set into smaller components. First, we'll be sure that we have a data set that is greater than 1. Then we'll find the middle of our data set, divide it into the left and right halves, and then recurse the function on the left and right halves to find
+			em their
+			|  left and right halves. Finally, we'll return the results of this divided data called in the 
+			span.code-label merge
+			|  function.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|merge = (left,right) => {
+					|	let result = [], lIndex = 0, rIndex = 0
+					|	while (lIndex < left.length && rIndex < right.length) {
+					|		if (left[lIndex] < right[rIndex]) {
+					|			result.push(left[lIndex])
+					|			lIndex++
+					|		} else {
+					|			result.push(right[rIndex])
+					|			rIndex++
+					|		}
+					|	}
+					|	return [...result, ...left.slice(lIndex), ...right.slice(rIndex)]
+					|}
+
+		p Our 
+			span.code-label merge
+			|  function will rebuild our data set. It'll create a new array to hold our sorted values, and then push the value of the left or right side depending on which is smaller. Then we'll return a concatenated array of our sorted result and the remainders in our left and right arrays.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = [8,3,5,9,1,5,9,2,3,8,4]
+					|console.log(mergeSort(array)) // 1,2,3,3,4,5,5,8,8,9,9
+
+		h3 Performance
+		p The merge sort algorithm can be performed in O(n log n) time which is considered pretty efficient in the world of sorting algorithms. The drawback is that merge sort requires use of additional memory since we're actually duplicating our data set during the 
+			em dividing
+			|  part of our divide and conquer actions.
+		p See an 
+			a(href='sorting-algorithms') animation of the merge sort algorithm
+			| .

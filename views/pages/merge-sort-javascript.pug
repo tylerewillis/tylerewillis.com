@@ -2,11 +2,11 @@ extends ../pages/pages/layout.pug
 
 block pages-head
 	title Merge Sort Implementation in JavaScript
-	meta(name='description', content='')
+	meta(name='description', content='The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.')
 	meta(property='og:locale', content='en_US')
 	meta(property='og:type', content='website')
 	meta(property='og:title', content='Merge Sort Implementation in JavaScript')
-	meta(property='og:description', content='')
+	meta(property='og:description', content='The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.')
 	meta(property='og:image', content='/static/media/social-media.png')
 	meta(property='og:url', content=`${url}`)
 
@@ -17,7 +17,7 @@ block pages-head
 			"@type": "BlogPosting",
 			"author": "Tyler Willis",
 			"headline": "Merge Sort Implementation in JavaScript",
-			"about": "",
+			"about": "The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.",
 			"inLanguage": "en-US",
 			"keywords": "JavaScript, merge sort, recursive, algorithm"
 		}
@@ -92,6 +92,19 @@ block example-content
 		p The merge sort algorithm can be performed in O(n log n) time which is considered pretty efficient in the world of sorting algorithms. The drawback is that merge sort requires use of additional memory since we're actually duplicating our data set during the 
 			em dividing
 			|  part of our divide and conquer actions.
-		p See an 
-			a(href='sorting-algorithms') animation of the merge sort algorithm
-			| .
+		p Check out other sorting algorithm implementations in JavaScript:
+		ul
+			li 
+				a(href='/page/radix-sort-javascript') Radix Sort
+			li 
+				a(href='/page/selection-sort-javascript') Selection Sort
+			li 
+				a(href='/page/shell-sort-javascript') Shell Sort
+			li 
+				a(href='/page/bubble-sort-javascript') Bubble Sort
+			li 
+				a(href='/page/heap-sort-javascript') Heap Sort
+			li 
+				a(href='/page/insertion-sort-javascript') Insertion Sort
+			li 
+				a(href='/page/quick-sort-javascript') Quick Sort

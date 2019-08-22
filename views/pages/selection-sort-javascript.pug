@@ -1,0 +1,115 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Selection Sort Algorithm Implementation in JavaScript
+	meta(name='description', content='The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it\'ll swap it with the value that currently resides in the left-most opening.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Selection Sort Algorithm Implementation in JavaScript')
+	meta(property='og:description', content='The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it\'ll swap it with the value that currently resides in the left-most opening.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Selection Sort Algorithm Implementation in JavaScript",
+			"about": "The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it'll swap it with the value that currently resides in the left-most opening.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Selection Sort Algorithm Implementation in JavaScript
+		h2 Use Case:
+		p The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it'll swap it with the value that currently resides in the left-most opening.
+		p Here's a description from 
+			a(href='https://en.wikipedia.org/wiki/Selection_sort', target='_blank') Wikipedia
+			| :
+		.quote
+			p Selection sort is a sorting algorithm, specifically an in-place comparison sort. It has O(n2) time complexity, making it inefficient on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its simplicity, and it has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.
+		p Here, we're going to implement the Selection Sort algorithm in JavaScript.
+		h3 1. Swap Values Function
+		p We first need to creater a helper function to help us swap the 2 values in our dataset.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|swap = (array, i, j) => { // O(1)
+					|	var temp = array[i]
+					|	array[i] = array[j]
+					|	array[j] = temp
+					|}
+
+		p The 
+			span.code-label swap
+			|  function takes the array and the 2 indexes whose values will be swapping places.
+		h3 2. Selection Sort Function
+		p That's the only helper function we'll need, so now we can loop through our dataset.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|selectionSort = array => { // O(n2)
+					|	for (var i = 0; i < array.length; i++) {
+					|		var min = i
+					|		for (var j = i + 1; j < array.length; j++) {
+					|			if (array[j] < array[min]) { min = j }
+					|		}
+					|		if (min !== i) { swap(array,i,min) }
+					|	}
+					|	return array
+					|}
+
+		p The 
+			span.code-label selectionSort
+			|  function will take an array and perform a loop for each value in the array. With each loop, the variable 
+			strong min
+			|  will be reset so we know where we're starting from and which value to swap the identified smallest value with.
+		p Then we'll loop through each value of the array again inside of the current loop starting at the next value in the dataset. During the loop, after we've combed through the entire dataset again, we'll swap the smallest value we found with the value at position 
+			strong min
+			| . Then we'll return the array.
+		h3 Results
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = [8,3,5,9,1,5,9,2,3,8,4]
+					|selectionSort(array)
+					|// 1,3,5,9,8,5,9,2,3,8,4
+					|// 1,2,5,9,8,5,9,3,3,8,4
+					|// 1,2,3,9,8,5,9,5,3,8,4
+					|// 1,2,3,3,8,5,9,5,9,8,4
+					|// 1,2,3,3,4,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,5,9,9,8,8
+					|// 1,2,3,3,4,5,5,8,9,9,8
+					|// 1,2,3,3,4,5,5,8,8,9,9
+
+		p The time complexity of the Selection Sort algorithm isn't the best being 
+			strong O(n^2)
+			| . This algorithm wouldn't be efficient on large lists. The space complexity (at least in this iteration) is very good however, being considered 
+			strong O(1)
+			| . Because of that, the Selection Sort algorithm may make sense for a program if the dataset isn't too large and you're looking to save memory.
+		p Check out other sorting algorithm implementations in JavaScript:
+		ul
+			li 
+				a(href='/page/merge-sort-javascript') Merge Sort
+			li 
+				a(href='/page/radix-sort-javascript') Radix Sort
+			li 
+				a(href='/page/shell-sort-javascript') Shell Sort
+			li 
+				a(href='/page/bubble-sort-javascript') Bubble Sort
+			li 
+				a(href='/page/heap-sort-javascript') Heap Sort
+			li 
+				a(href='/page/insertion-sort-javascript') Insertion Sort
+			li 
+				a(href='/page/quick-sort-javascript') Quick Sort

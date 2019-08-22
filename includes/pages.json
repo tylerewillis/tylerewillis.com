@@ -31,7 +31,7 @@
 	},
 	{
 		"header": "Binary Max Heap Sort Algorithm in JavaScript",
-		"url": "/page/heap-sort-algorithm",
+		"url": "/page/heap-sort-javascript",
 		"description": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
 		"category": "Code Examples"
 	},
@@ -93,6 +93,63 @@
 		"header": "Linked List Data Structure Implementation",
 		"url": "/page/linked-lists",
 		"description": "Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Merge Sort Algorithm Implementation in JavaScript",
+		"url": "/page/merge-sort-javascript",
+		"description": "The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"merge sort"
+		]
+	},
+	{
+		"header": "Radix Sort Algorithm Implementation in JavaScript",
+		"url": "/page/radix-sort-javascript",
+		"description": "The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"radix sort"
+		]
+	},
+	{
+		"header": "Selection Sort Algorithm Implementation in JavaScript",
+		"url": "/page/selection-sort-javascript",
+		"description": "The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it'll swap it with the value that currently resides in the left-most opening.",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"selection sort"
+		]
+	},
+	{
+		"header": "Shell Sort Algorithm Implementation in JavaScript",
+		"url": "/page/shell-sort-javascript",
+		"description": "",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Bubble Sort Algorithm Implementation in JavaScript",
+		"url": "/page/bubble-sort-javascript",
+		"description": "",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Insertion Sort Algorithm Implementation in JavaScript",
+		"url": "/page/insertion-sort-javascript",
+		"description": "",
+		"category": "Code Examples"
+	},
+	{
+		"header": "Quick Sort Algorithm Implementation in JavaScript",
+		"url": "/page/quick-sort-javascript",
+		"description": "",
 		"category": "Code Examples"
 	},
 	{

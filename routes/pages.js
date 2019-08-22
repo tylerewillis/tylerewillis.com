@@ -114,11 +114,11 @@ router.get('/binary-max-heap', (req, res) => {
 // Binary Heap Algorithm
 //================================================
 
-router.get('/heap-sort-algorithm', (req, res) => {
+router.get('/heap-sort-javascript', (req, res) => {
 
   // Render page
-  var args = { url: '/page/heap-sort-algorithm' }
-  res.render('pages/heap-sort-algorithm', args)
+  var args = { url: '/page/heap-sort-javascript' }
+  res.render('pages/heap-sort-javascript', args)
 })
 
 //================================================
@@ -242,5 +242,37 @@ router.get('/binary-search-tree-successor', (req, res) => {
   res.render('pages/binary-search-tree-successor', args)
 })
 
+//================================================
+// Merge Sort Algorithm
+//================================================
+
+router.get('/merge-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/merge-sort-javascript' }
+  res.render('pages/merge-sort-javascript', args)
+})
+
+//================================================
+// Radix Sort Algorithm
+//================================================
+
+router.get('/radix-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/radix-sort-javascript' }
+  res.render('pages/radix-sort-javascript', args)
+})
+
+//================================================
+// Selection Sort Algorithm
+//================================================
+
+router.get('/selection-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/selection-sort-javascript' }
+  res.render('pages/selection-sort-javascript', args)
+})
 
 module.exports = router

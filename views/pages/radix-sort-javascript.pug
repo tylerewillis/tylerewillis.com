@@ -1,0 +1,140 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Radix Sort Algorithm Implementation in JavaScript
+	meta(name='description', content='The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Radix Sort Algorithm Implementation in JavaScript')
+	meta(property='og:description', content='The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Radix Sort Algorithm Implementation in JavaScript",
+			"about": "The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Radix Sort Algorithm Implementation in JavaScript
+		h2 Use Case:
+		p The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.
+		p Here's a description from 
+			a(href='https://en.wikipedia.org/wiki/Radix_sort' target='_blank') Wikipedia
+			| :
+		.quote
+			p Radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the individual digits which share the same significant position and value. A positional notation is required, but because integers can represent strings of characters (e.g., names or dates) and specially formatted floating point numbers, radix sort is not limited to integers.
+		p Below is how we can implement the Radix Sort in JavaScript.
+		h3 1. Get Max Length of Integers
+		p The first thing we need to do is create a function that will scan our dataset and give us the largest number in terms of how many places (e.g. 1s, 10s, 100s) it contains.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|getMax = array => { // O(n)
+					|	let max = 0
+					|	for (let num of array) {
+					|		max = (max < num.toString().length) ? num.toString().length : max
+					|	}
+					|	return max
+					|}
+
+		p This 
+			span.code-label getMax
+			|  function will accept an array and return the maximum value discovered. It'll find this by looping through the entire array dataset (thus, linear time - O(n)) and determining if the current data value, when translated to a string (to find the length in JavaScript) is longer than the maximum length found up until that point. If it is than it will replace the current max with its length and continue the loop.
+		h3 2. Get Value at Position in Integer
+		p We need a second helper function that will help us to return the number in the integer in the current place we're comparing.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|getPosition = (num,place) => Math.floor(num / Math.pow(10,place)) % 10 // O(1)
+
+		p The 
+			span.code-label getPosition
+			|  function accepts a number and a place and performs some math to find the value of the integer in position of 
+			strong place
+			| . We're using 2 native JavaScript functions - Math.pow gives us the result of the base to the exponent power. In this case, it would be 10 to the 
+			strong place
+			|  power. That number will be divided into 2 and the Math.floor function will round the resulting value down to a whole number. Lastly, we'll take that rounded-down number modulo 10 (the remaining value after dividing it by 10) and return it from our 
+			span.code-label getPosition
+			|  function.
+		p This was definitely the trickiest part of our algorithm so far but that's only because we're dealing with math that isn't found in other algorithm implementations.
+		h3 3. Radix Sort Function
+		p Now we can take advantage of the 2 prior functions and loop through our dataset.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|radixSort = array => { // O(nk)
+					|	var max = getMax(array)
+					|	for (let i = 0; i < max; i++) {
+					|		let buckets = Array.from({length:10}, () => [])
+					|		for (let j = 0; j < array.length; j++) {
+					|			buckets[getPosition(array[j], i)].push(array[j])
+					|		}
+					|		array = [].concat(...buckets)
+					|	}
+					|	return array
+					|}
+
+		p We start off the 
+			span.code-label radixSort
+			|  function by getting the max value (length of longest number) of our dataset. Then we'll perform a few loops until we've looped as many times as the max number result was.
+		p While we're looping, we'll create 10 buckets to represent each possible place value from 0-9. We'll need these buckets to hold our relevant data.
+		p Then we'll loop through every value in our dataset and push the data into the bucket if its returned position matches the bucket's index. After we do that for every value, we'll update our array with the result from the buckets and then return the array.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = [8,3,5,9,1,5,9,2,3,8,4]
+					|radixSort(array)
+					|// 8
+					|// 3,8
+					|// 3,5,8
+					|// 3,5,8,9
+					|// 1,3,5,8,9
+					|// 1,3,5,5,8,9
+					|// 1,3,5,5,8,9,9
+					|// 1,2,3,5,5,8,9,9
+					|// 1,2,3,3,5,5,8,9,9
+					|// 1,2,3,3,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+
+		p As far as efficiency is concerned, the time complexity of the Radix Sort algorithm is 
+			strong O(nk)
+			|  where 
+			strong n
+			|  is the size of the dataset and 
+			strong k
+			|  is the number of places of the largest number (max). Space complexity is quite a bit worse than many algorithms as it is 
+			strong O(n + k)
+			|  because we're duplicating our dataset into buckets for each possible place value.
+		p Check out other sorting algorithm implementations in JavaScript:
+		ul
+			li 
+				a(href='/page/merge-sort-javascript') Merge Sort
+			li 
+				a(href='/page/selection-sort-javascript') Selection Sort
+			li 
+				a(href='/page/shell-sort-javascript') Shell Sort
+			li 
+				a(href='/page/bubble-sort-javascript') Bubble Sort
+			li 
+				a(href='/page/heap-sort-javascript') Heap Sort
+			li 
+				a(href='/page/insertion-sort-javascript') Insertion Sort
+			li 
+				a(href='/page/quick-sort-javascript') Quick Sort

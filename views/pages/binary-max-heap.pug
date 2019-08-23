@@ -29,7 +29,7 @@ block example-content
 		p Binary heaps are data structures in computer science that allows for a program to both insert into and extra the max value from efficiently - in O(log n) time. This is favorable to JavaScript arrays where values can be pushed to the back of the array in O(1), or constant time, but retrieving the maximum value would be measured in O(n) - or linear time.
 		p For this reason alone, binary heaps may not make sense for your program. However, for sorting purposes, binary max heaps and the heap sort algorithm for incredibly efficient both in terms of time and space.
 		p Below is my implementation for building a binary max heap in JavaScript which we'll use the implementation of in my next post on the 
-			a(href='/page/heap-sort-algorithm') heap sort algorithm
+			a(href='/page/heap-sort-javascript') heap sort algorithm
 			| .
 		h3 1. Creating a Heap Class
 
@@ -230,5 +230,5 @@ block example-content
 		p As noted in the code examples, each of the above functions can be done in logarithmic time - O(log n) - except for the 2 
 			strong get
 			|  functions that can be done in constant time - O(1). While data structures being able to perform multiple basic operations in logarithmic time is notably efficient, most operations would be constant time except for the need to abide by our ordered "max heap" rules. But having our heap ordered by maximum value will allow us to perform a sorting algorithm in O(n log n) which is the topic of my next post on the 
-			a(href='/page/heap-sort-algorithm') heap sort algorithm
+			a(href='/page/heap-sort-javascript') heap sort algorithm
 			| .

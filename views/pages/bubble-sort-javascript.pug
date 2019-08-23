@@ -1,0 +1,200 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Bubble Sort Algorithm Implementation in JavaScript
+	meta(name='description', content='Bubble Sort is a simple linear algorithm that loops through a dataset comparing elements that are side-by-side and swapping their order if the next value is smaller than the current one.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Bubble Sort Algorithm Implementation in JavaScript')
+	meta(property='og:description', content='Bubble Sort is a simple linear algorithm that loops through a dataset comparing elements that are side-by-side and swapping their order if the next value is smaller than the current one.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Bubble Sort Algorithm Implementation in JavaScript",
+			"about": "Bubble Sort is a simple linear algorithm that loops through a dataset comparing elements that are side-by-side and swapping their order if the next value is smaller than the current one.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, bubble sort, algorithm"
+		}
+
+block example-content
+	.write-up
+		h1 Bubble Sort Algorithm Implementation in JavaScript
+		h2 Use Case:
+		p Bubble Sort is a simple linear algorithm that loops through a dataset comparing elements that are side-by-side and swapping their order if the next value is smaller than the current one.
+		p Here's a description from 
+			a(href='https://en.wikipedia.org/wiki/Bubble_sort', target='_blank') Wikipedia
+			| :
+		.quote
+			p Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list.
+		p We're going to implement the Bubble Sort algorithm in JavaScript below.
+		h3 1. Swap Items Function
+		p We need 1 helper function for our algorithm that will be in charge of swapping the 2 items in our dataset.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|swap = (array, i, j) => {
+					|	var temp = array[i]
+					|	array[i] = array[j]
+					|	array[j] = temp	  
+					|}
+					
+		p The 
+			span.code-label swap
+			|  function is pretty straight-forward. It receives an array of our dataset and 2 index values 
+			strong i
+			|  and 
+			strong j
+			| . Then it swaps the 2 values.
+		h3 2. Bubble Sort Function
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|bubbleSort = array => { // O(n2)
+					|	if (array.length <= 1) return array
+					|	var swapped = true
+					|	while (swapped) {
+					|		swapped = false
+					|		for (var i = 0; i < array.length; i++) {
+					|			if (array[i] && array[i + 1] && array[i] > array[i + 1]) {
+					|				swap(array, i, i + 1)
+					|				swapped = true
+					|			}
+					|		}
+					|	}
+					|	return array
+					|}
+
+		p The 
+			span.code-label bubbleSort
+			|  function takes the array of our dataset and returns the sorted array. First, it checks that the dataset is not of 1 value or less (because then sorting would be unnecessary), then it creates a variable of 
+			strong swapped
+			|  and sets it value to true.
+		p We'll then create a loop that will run while the value of 
+			strong swapped
+			|  is true. Inside the loop, we'll first set 
+			strong swapped
+			|  to false by default (which would end our loop unless it's returned to 
+			em true
+			| ), then we'll run through our dataset and check if the current value is greater than the next value. If it is, we'll call the 
+			span.code-label swap
+			|  function to swap the 2 values and change the 
+			strong swapped
+			|  variable to true signifying that we need to repeat our loop at least one more time (we'll continue with our algorithm until we've made a full clean loop through the dataset).
+		h3 3. Results
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = [8,3,5,9,1,5,9,2,3,8,4]
+					|bubbleSort(array)
+					|// 3,8,5,9,1,5,9,2,3,8,4
+					|// 3,5,8,9,1,5,9,2,3,8,4
+					|// 3,5,8,9,1,5,9,2,3,8,4
+					|// 3,5,8,1,9,5,9,2,3,8,4
+					|// 3,5,8,1,5,9,9,2,3,8,4
+					|// 3,5,8,1,5,9,9,2,3,8,4
+					|// 3,5,8,1,5,9,2,9,3,8,4
+					|// 3,5,8,1,5,9,2,3,9,8,4
+					|// 3,5,8,1,5,9,2,3,8,9,4
+					|// 3,5,8,1,5,9,2,3,8,4,9
+					|// 3,5,8,1,5,9,2,3,8,4,9
+					|// 3,5,8,1,5,9,2,3,8,4,9
+					|// 3,5,8,1,5,9,2,3,8,4,9
+					|// 3,5,1,8,5,9,2,3,8,4,9
+					|// 3,5,1,5,8,9,2,3,8,4,9
+					|// 3,5,1,5,8,9,2,3,8,4,9
+					|// 3,5,1,5,8,2,9,3,8,4,9
+					|// 3,5,1,5,8,2,3,9,8,4,9
+					|// 3,5,1,5,8,2,3,8,9,4,9
+					|// 3,5,1,5,8,2,3,8,4,9,9
+					|// 3,5,1,5,8,2,3,8,4,9,9
+					|// 3,5,1,5,8,2,3,8,4,9,9
+					|// 3,5,1,5,8,2,3,8,4,9,9
+					|// 3,1,5,5,8,2,3,8,4,9,9
+					|// 3,1,5,5,8,2,3,8,4,9,9
+					|// 3,1,5,5,8,2,3,8,4,9,9
+					|// 3,1,5,5,2,8,3,8,4,9,9
+					|// 3,1,5,5,2,3,8,8,4,9,9
+					|// 3,1,5,5,2,3,8,8,4,9,9
+					|// 3,1,5,5,2,3,8,4,8,9,9
+					|// 3,1,5,5,2,3,8,4,8,9,9
+					|// 3,1,5,5,2,3,8,4,8,9,9
+					|// 3,1,5,5,2,3,8,4,8,9,9
+					|// 1,3,5,5,2,3,8,4,8,9,9
+					|// 1,3,5,5,2,3,8,4,8,9,9
+					|// 1,3,5,5,2,3,8,4,8,9,9
+					|// 1,3,5,2,5,3,8,4,8,9,9
+					|// 1,3,5,2,3,5,8,4,8,9,9
+					|// 1,3,5,2,3,5,8,4,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,5,2,3,5,4,8,8,9,9
+					|// 1,3,2,5,3,5,4,8,8,9,9
+					|// 1,3,2,3,5,5,4,8,8,9,9
+					|// 1,3,2,3,5,5,4,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,3,2,3,5,4,5,8,8,9,9
+					|// 1,2,3,3,5,4,5,8,8,9,9
+					|// 1,2,3,3,5,4,5,8,8,9,9
+					|// 1,2,3,3,5,4,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+					|// 1,2,3,3,4,5,5,8,8,9,9
+
+		p As you can see, there are a lot of loops required, including an additional loop through the entire dataset at the end just to verify the correct order. Bubble sort is a stable sorting algorithm, however, it's time complexity isn't very good at 
+			strong O(n^2)
+			| . It does have an efficient space complexity of 
+			strong O(1)
+			| , however, so it may be a sorting algorithm that would work for you or your program if you're not dealing with a large dataset and you're looking to keep memory usage at a minimum.
+
+		p Check out other sorting algorithm implementations in JavaScript:
+		ul
+			li 
+				a(href='/page/merge-sort-javascript') Merge Sort
+			li 
+				a(href='/page/selection-sort-javascript') Selection Sort
+			li 
+				a(href='/page/shell-sort-javascript') Shell Sort
+			li 
+				a(href='/page/radix-sort-javascript') Radix Sort
+			li 
+				a(href='/page/heap-sort-javascript') Heap Sort
+			li 
+				a(href='/page/insertion-sort-javascript') Insertion Sort
+			li 
+				a(href='/page/quick-sort-javascript') Quick Sort

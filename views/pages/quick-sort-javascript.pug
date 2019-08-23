@@ -1,0 +1,199 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Quick Sort Algorithm Implementation in JavaScript
+	meta(name='description', content='The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Quick Sort Algorithm Implementation in JavaScript')
+	meta(property='og:description', content='The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Quick Sort Algorithm Implementation in JavaScript",
+			"about": "The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, quick sort, algorithm"
+		}
+
+block example-content
+	.write-up
+		h1 Quick Sort Algorithm Implementation in JavaScript
+		h2 Use Case:
+		p The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.
+		p Here's a description from 
+			a(href='https://en.wikipedia.org/wiki/Quicksort', target='_blank') Wikipedia
+			| :
+		.quote
+			p Quicksort is a comparison sort, meaning that it can sort items of any type for which a "less-than" relation (formally, a total order) is defined. In efficient implementations it is not a stable sort, meaning that the relative order of equal sort items is not preserved.
+		p Below we're going to implement the Quick Sort algorithm in JavaScript.
+		h3 1. Swap Elements Function
+		p The Quick Sort algorithm will require 2 helper functions and the first will help us to swap 2 items in the dataset.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|swap = (array, i, j) => {
+					|	var temp = array[i]
+					|	array[i] = array[j]
+					|	array[j] = temp	  
+					|}
+					
+		p The 
+			span.code-label swap
+			|  function will accept the dataset as an array and 2 index values, and then swap the values at the 2 indexes.
+		h3 2. Partition Function
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|partition = (array,low,high) => {
+					|	var pivot = array[Math.floor((high + low) / 2)],
+					|			i = low,
+					|			j = high
+					|
+					|	while (i <= j) {
+					|		while (array[i] < pivot) { i++ }
+					|		while (array[j] > pivot) { j-- }
+					|		if (i <= j) {
+					|			swap(array,i,j)
+					|			i++
+					|			j--
+					|		}
+					|	}
+					|	return i
+					|}
+
+		p The 
+			span.code-label partition
+			|  function accepts our dataset as an array and 2 values, 
+			strong low
+			|  and 
+			strong high
+			| . First, it determines a pivot value to use for comparison based on the value of 
+			strong high
+			|  plus 
+			strong low
+			|  divided by 2. Then it sets the values of 
+			strong i
+			|  and 
+			strong j
+			|  for simplicity.
+		p Then we'll loop for as long as 
+			strong i
+			|  isn't greater than 
+			strong j
+			| . While looping, we'll perform 2 internal loops. The first will increment 
+			strong i
+			|  every time a value is found that it less than the pivot value. The second loop will decrement 
+			strong j
+			|  every time a value is found that is greater than the pivot value.
+		p After the loops are complete, if 
+			strong i
+			|  is still not greater than 
+			strong j
+			| , then we'll call the 
+			span.code-label swap
+			|  function sending in the array and the 2 values and increment/decrement the values 1 more time. Finally, we'll return the value of 
+			strong i
+			| .
+		p A good explanation with a visual of this process can be found 
+			a(href='https://medium.com/karuna-sehgal/a-quick-explanation-of-quick-sort-7d8e2563629b', target='_blank') here
+			| .
+		h3 3. Quick Sort Function
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|quickSort = (array,low,high) => {
+					|	var low = (low) ? low : 0,
+					|			high = (high) ? high : array.length - 1,
+					|			index
+					|	if (array.length > 1) {
+					|		index = partition(array,low,high)
+					|		if (low < index - 1) { quickSort(array,low,index - 1) }
+					|		if (index < high) { quickSort(array,index,high) }
+					|	}
+					|	return array
+					|}
+
+		p The 
+			span.code-label quickSort
+			|  function will accept an array of our dataset and values for low and high. Since I like to make things easy for myself later on, to make this function easier to call you can do so with just an array value since we'll set the values of 
+			strong low
+			|  and 
+			strong high
+			|  if not already set. We'll also declare an 
+			strong index
+			|  variable.
+		p Then we'll verify that our dataset is larger than 1, and set our index equal to the returning value from the 
+			span.code-label partition
+			|  function when the array and low and high values are passed into it.
+		p If the value of 
+			strong low
+			|  is less than the index value minus 1, then we'll recurse the 
+			span.code-label quickSort
+			|  function. Additionally, we'll recurse it again if the index value is less than the value of 
+			strong high
+			| .
+		p Finally, we'll return our sorted array.
+		h3 Results
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = [8,3,5,9,1,5,9,2,3,8,4]
+					|quickSort(array)
+					|//4,3,5,9,1,5,9,2,3,8,8
+					|//4,3,3,9,1,5,9,2,5,8,8
+					|//4,3,3,2,1,5,9,9,5,8,8
+					|//4,3,3,2,1,5,9,9,5,8,8
+					|//1,3,3,2,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,9,9,5,8,8
+					|//1,2,3,3,4,5,5,9,9,8,8
+					|//1,2,3,3,4,5,5,8,9,8,9
+					|//1,2,3,3,4,5,5,8,8,9,9
+					|//1,2,3,3,4,5,5,8,8,9,9
+					|//1,2,3,3,4,5,5,8,8,9,9
+
+		p Quick Sort is a generally efficient sorting algorithm. Its worst case time complexity is 
+			strong O(n^2)
+			|  which is similar to other less efficient algorithms such as the Bubble and Insertion sorts, but its average time complexity is actually 
+			strong Θ(n log n)
+			|  which puts it on par with Merge and Heap sorts. It's at its worst in datasets with many of the same values.
+		p Since it is dividing the dataset into smaller sets, its space complexity isn't O(1) but rather can be measured at 
+			strong O(log n)
+			|  which is still considered efficient (and better than Merge Sort).
+		p Also, it isn't a stable sorting algorithm as equal values are likely to be moved and not retain their indexed order.
+		p Check out other sorting algorithm implementations in JavaScript:
+		ul
+			li 
+				a(href='/page/merge-sort-javascript') Merge Sort
+			li 
+				a(href='/page/selection-sort-javascript') Selection Sort
+			li 
+				a(href='/page/shell-sort-javascript') Shell Sort
+			li 
+				a(href='/page/radix-sort-javascript') Radix Sort
+			li 
+				a(href='/page/heap-sort-javascript') Heap Sort
+			li 
+				a(href='/page/bubble-sort-javascript') Bubble Sort
+			li 
+				a(href='/page/insertion-sort-javascript') Insertion Sort
+					

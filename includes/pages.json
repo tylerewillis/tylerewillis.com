@@ -131,26 +131,46 @@
 	{
 		"header": "Shell Sort Algorithm Implementation in JavaScript",
 		"url": "/page/shell-sort-javascript",
-		"description": "",
-		"category": "Code Examples"
+		"description": "Shell sort is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort).",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"shell sort"
+		]
 	},
 	{
 		"header": "Bubble Sort Algorithm Implementation in JavaScript",
 		"url": "/page/bubble-sort-javascript",
-		"description": "",
-		"category": "Code Examples"
+		"description": "Bubble Sort is a simple linear algorithm that loops through a dataset comparing elements that are side-by-side and swapping their order if the next value is smaller than the current one.",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"bubble sort"
+		]
 	},
 	{
 		"header": "Insertion Sort Algorithm Implementation in JavaScript",
 		"url": "/page/insertion-sort-javascript",
-		"description": "",
-		"category": "Code Examples"
+		"description": "The Insertion Sorting algorithm is a program that runs one loop through a dataset and upon coming to a value, it checks for values in the dataset prior to the current value that are larger than the current value. Then, if there are larger values, it moves the current value forward to its ordered place and shifts all other values back.",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"insertion sort"
+		]
 	},
 	{
 		"header": "Quick Sort Algorithm Implementation in JavaScript",
 		"url": "/page/quick-sort-javascript",
-		"description": "",
-		"category": "Code Examples"
+		"description": "The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.",
+		"category": "Code Examples",
+		"keywords": [
+			"javascript",
+			"sorting",
+			"quick sort"
+		]
 	},
 	{
 		"header": "Find Inorder Successor in Binary Search Tree",

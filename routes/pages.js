@@ -275,4 +275,48 @@ router.get('/selection-sort-javascript', (req, res) => {
   res.render('pages/selection-sort-javascript', args)
 })
 
+//================================================
+// Shell Sort Algorithm
+//================================================
+
+router.get('/shell-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/shell-sort-javascript' }
+  res.render('pages/shell-sort-javascript', args)
+})
+
+//================================================
+// Bubble Sort Algorithm
+//================================================
+
+router.get('/bubble-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/bubble-sort-javascript' }
+  res.render('pages/bubble-sort-javascript', args)
+})
+
+//================================================
+// Insertion Sort Algorithm
+//================================================
+
+router.get('/insertion-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/insertion-sort-javascript' }
+  res.render('pages/insertion-sort-javascript', args)
+})
+
+//================================================
+// Quick Sort Algorithm
+//================================================
+
+router.get('/quick-sort-javascript', (req, res) => {
+
+  // Render page
+  var args = { url: '/page/quick-sort-javascript' }
+  res.render('pages/quick-sort-javascript', args)
+})
+
 module.exports = router

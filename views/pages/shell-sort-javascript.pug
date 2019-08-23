@@ -1,0 +1,123 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title Shell Sort Algorithm Implementation in JavaScript
+	meta(name='description', content='Shell sort is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort).')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='Shell Sort Algorithm Implementation in JavaScript')
+	meta(property='og:description', content='Shell sort is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort).')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "Shell Sort Algorithm Implementation in JavaScript",
+			"about": "Shell sort is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort).",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
+		}
+
+block example-content
+	.write-up
+		h1 Shell Sort Algorithm Implementation in JavaScript
+		h2 Use Case:
+		p The Shell Sort Algorithm is similar to the 
+			a(href='/insertion-sort-javascript') Insertion Sort
+			|  algorithm in that we work through our dataset moving values forward when they are smaller than the values ahead, except that with Shell Sort we try to cheat a bit by not starting back at the beginning every time.
+		p Here's a description from 
+			a(href='#', target='_blank') Wikipedia
+			| :
+		.quote
+			p Shell sort is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort). The method starts by sorting pairs of elements far apart from each other, then progressively reducing the gap between elements to be compared. Starting with far apart elements, it can move some out-of-place elements into position faster than a simple nearest neighbor exchange.
+		p We're going to implement the Shell Sort algorithm in JavaScript below.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|shellSort = (array,gaps) => {
+					|	for (var g = 0; g < gaps.length; g++) {
+					|		var gap = gaps[g]
+					|		for (var i = gap; i < array.length; i++) {
+					|			var temp = array[i]
+					|			for (var j = i; j >= gap && array[j - gap] > temp; j -= gap) {
+					|				array[j] = array[j - gap]
+					|			}
+					|			array[j] = temp
+					|		}
+					|	}
+					|	return array
+					|}
+					
+		p We don't need any helper functions here, just the 
+			span.code-label shellSort
+			|  function.
+		p It accepts 2 arrays, the array that holds our dataset and the gaps array that holds our list of gaps that will allow us to start our loop over in places other than just the front.
+		p First, we'll loop through our gaps array and determine the gap that will be used during the pass. Then, we'll loop through our dataset starting at the gap and continuing to the end of the dataset. We'll sent the variable 
+			strong temp
+			|  equal to the array value at the index of gap.
+		p Our final inset loop will start at 
+			strong i
+			| , and if 
+			strong j
+			|  is greater or equal to the gap and the array value at index 
+			strong j - gap
+			|  is greater than the temporary array value then we'll assign the array at index 
+			strong j
+			|  the value of temp and reloop after deducting 
+			strong j
+			|  the value of 
+			strong gap
+			| . Then we'll return the 
+			strong array
+			|  value.
+
+		.example.javascript-example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var array = [8,3,5,9,1,5,9,2,3,8,4]
+					|var gaps = [66,31,14,5,1]
+					|shellSort(array,gaps)
+					|// 5,3,5,9,1,8,9,2,3,8,4
+					|// 5,3,5,9,1,8,9,2,3,8,4
+					|// 5,3,2,9,1,8,9,5,3,8,4
+					|// 5,3,2,3,1,8,9,5,9,8,4
+					|// 4,3,2,3,1,5,9,5,9,8,8
+					|// 3,4,2,3,1,5,9,5,9,8,8
+					|// 2,3,4,3,1,5,9,5,9,8,8
+					|// 2,3,3,4,1,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,9,5,9,8,8
+					|// 1,2,3,3,4,5,5,9,9,8,8
+					|// 1,2,3,3,4,5,5,8,9,9,8
+					|// 1,2,3,3,4,5,5,8,8,9,9
+
+		p The Shell Sort algorithm requires a lot of looping, so the time complexity isn't very efficient at 
+			strong O(n^2)
+			| . The space complexity is good at O(1). Something else to keep in mind is the Shell Sort is not a stable sorting algorithm as values of equal size are liable to change place.
+		p Check out other sorting algorithm implementations in JavaScript:
+		ul
+			li 
+				a(href='/page/merge-sort-javascript') Merge Sort
+			li 
+				a(href='/page/radix-sort-javascript') Radix Sort
+			li 
+				a(href='/page/selection-sort-javascript') Selection Sort
+			li 
+				a(href='/page/bubble-sort-javascript') Bubble Sort
+			li 
+				a(href='/page/heap-sort-javascript') Heap Sort
+			li 
+				a(href='/page/insertion-sort-javascript') Insertion Sort
+			li 
+				a(href='/page/quick-sort-javascript') Quick Sort
+					

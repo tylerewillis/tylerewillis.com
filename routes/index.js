@@ -20,7 +20,6 @@ app.use(compression())
 
 // Home
 router.get('/', (req, res) => {
-  const home = true
 
   // Get pages from file
   var json = fs.readFileSync('./includes/pages.json')

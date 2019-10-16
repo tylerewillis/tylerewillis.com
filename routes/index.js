@@ -35,7 +35,10 @@ router.get('/', (req, res) => {
   res.render('index', args)
 })
 
-// Pages
+//===============================================
+//= Pages
+//===============================================
+
 router.get('/pages', (req, res) => {
   // Get pages from file
   var json = fs.readFileSync('./includes/pages.json')
@@ -43,6 +46,20 @@ router.get('/pages', (req, res) => {
 
   // Render page
   var args = { pages }
+  res.render('pages', args)
+})
+
+//===============================================
+//= Pages with keyword
+//===============================================
+
+router.get('/pages/:keyword', (req, res) => {
+  // Get pages from file
+  var json = fs.readFileSync('./includes/pages.json')
+  let pages = JSON.parse(json)
+
+  // Render page
+  var args = { pages, init: req.params.keyword }
   res.render('pages', args)
 })
 

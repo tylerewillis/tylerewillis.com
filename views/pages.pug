@@ -15,6 +15,16 @@ block content
 	.page.page-pages
 		h1 Pages
 		p.sub-header Computer science, programming and code examples, blog posts, and small projects.
+
+		//- Search
+		.pages-search-container
+			if init
+				input.pages-search.pages-search-init(type='text', placeholder='Search', value=`${init}`)
+			else
+				input.pages-search(type='text', placeholder='Search')
+			p
+
+		//- Listing of pages	
 		.pages-container
 
 			//-
@@ -34,4 +44,7 @@ block content
 						p #{page.description}
 						a(href=`${page.url}`) View
 							i.fas.fa-chevron-right
+
+			//- No results
+			p.pages-search-no-results
 		

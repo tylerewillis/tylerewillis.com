@@ -1,103 +1,109 @@
 [
 	{
 		"header": "My Founder's Journey",
-		"url": "/page/founders-journey",
+		"url": "founders-journey",
 		"description": "9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.",
 		"category": "Personal"
 	},
 	{
+		"header": "Building My Own CMS in Node.js",
+		"url": "nodejs-cms",
+		"description": "Usually, there are tools out there that make a project more efficient, but sometimes it's best to build something from scratch. Why I built a Node.js client CMS from scratch ...",
+		"category": "Personal"
+	},
+	{
 		"header": "Complete Binary Search Tree Code Implementation in JavaScript",
-		"url": "/page/binary-tree-javascript",
+		"url": "binary-tree-javascript",
 		"description": "Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Check if Binary Search Tree Structure is Valid",
-		"url": "/page/is-binary-search-tree",
+		"url": "is-binary-search-tree",
 		"description": "Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here's how to check if a binary search tree is valid.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Hash Table JavaScript Implementation with Linear Probing",
-		"url": "/page/hash-table-linear-probing",
+		"url": "hash-table-linear-probing",
 		"description": "Probing allows hash tables to have dynamic sizes which greatly influence memory and time efficiency. Here's how you can build the functionality in JavaScript.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Building a Binary Max Heap in JavaScript",
-		"url": "/page/binary-max-heap",
+		"url": "binary-max-heap",
 		"description": "Binary max heaps allow for efficient data insertion and max value extraction and are used for the efficient heap sort algorithm.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Binary Max Heap Sort Algorithm in JavaScript",
-		"url": "/page/heap-sort-javascript",
+		"url": "heap-sort-javascript",
 		"description": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Binary Search Algorithm with Arrays in JavaScript",
-		"url": "/page/binary-search-array",
+		"url": "binary-search-array",
 		"description": "The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Storing Big Data With Distributed Hash Tables Simulation",
-		"url": "/page/distributed-hash-table",
+		"url": "distributed-hash-table",
 		"description": "Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.",
 		"category": "Projects"
 	},
 	{
 		"header": "Creating a Constant-Time JavaScript Stack",
-		"url": "/page/javascript-stack",
+		"url": "javascript-stack",
 		"description": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Network Packet Processing Simulation in JavaScript",
-		"url": "/page/network-packet-processing",
+		"url": "network-packet-processing",
 		"description": "This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.",
 		"category": "Projects"
 	},
 	{
 		"header": "Maximum Value in JavaScript Sliding Window Queue",
-		"url": "/page/javascript-sliding-window",
+		"url": "javascript-sliding-window",
 		"description": "We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Using Priority Queues to Simulate Parallel Processing",
-		"url": "/page/priority-queue-processing-simulation",
+		"url": "priority-queue-processing-simulation",
 		"description": "We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Check balance of brackets in code",
-		"url": "/page/bracket-balance",
+		"url": "bracket-balance",
 		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Tree Data Structures in JavaScript & PHP",
-		"url": "/page/tree-data-structures",
+		"url": "tree-data-structures",
 		"description": "See how to create, add to trees, remove from trees, traverse trees and more in these JavaScript and PHP coding examples.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Replicating a Dynamic Array in JavaScript",
-		"url": "/page/dynamic-array-replication",
+		"url": "dynamic-array-replication",
 		"description": "Although arrays in JavaScript size-up automatically, we can create a stack object to replicate the process of creating a dynamically allocated array.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Linked List Data Structure Implementation",
-		"url": "/page/linked-lists",
+		"url": "linked-lists",
 		"description": "Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Merge Sort Algorithm Implementation in JavaScript",
-		"url": "/page/merge-sort-javascript",
+		"url": "merge-sort-javascript",
 		"description": "The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.",
 		"category": "Code Examples",
 		"keywords": [
@@ -108,7 +114,7 @@
 	},
 	{
 		"header": "Radix Sort Algorithm Implementation in JavaScript",
-		"url": "/page/radix-sort-javascript",
+		"url": "radix-sort-javascript",
 		"description": "The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.",
 		"category": "Code Examples",
 		"keywords": [
@@ -119,7 +125,7 @@
 	},
 	{
 		"header": "Selection Sort Algorithm Implementation in JavaScript",
-		"url": "/page/selection-sort-javascript",
+		"url": "selection-sort-javascript",
 		"description": "The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it'll swap it with the value that currently resides in the left-most opening.",
 		"category": "Code Examples",
 		"keywords": [
@@ -130,7 +136,7 @@
 	},
 	{
 		"header": "Shell Sort Algorithm Implementation in JavaScript",
-		"url": "/page/shell-sort-javascript",
+		"url": "shell-sort-javascript",
 		"description": "Shell sort is an in-place comparison sort. It can be seen as either a generalization of sorting by exchange (bubble sort) or sorting by insertion (insertion sort).",
 		"category": "Code Examples",
 		"keywords": [
@@ -141,7 +147,7 @@
 	},
 	{
 		"header": "Bubble Sort Algorithm Implementation in JavaScript",
-		"url": "/page/bubble-sort-javascript",
+		"url": "bubble-sort-javascript",
 		"description": "Bubble Sort is a simple linear algorithm that loops through a dataset comparing elements that are side-by-side and swapping their order if the next value is smaller than the current one.",
 		"category": "Code Examples",
 		"keywords": [
@@ -152,7 +158,7 @@
 	},
 	{
 		"header": "Insertion Sort Algorithm Implementation in JavaScript",
-		"url": "/page/insertion-sort-javascript",
+		"url": "insertion-sort-javascript",
 		"description": "The Insertion Sorting algorithm is a program that runs one loop through a dataset and upon coming to a value, it checks for values in the dataset prior to the current value that are larger than the current value. Then, if there are larger values, it moves the current value forward to its ordered place and shifts all other values back.",
 		"category": "Code Examples",
 		"keywords": [
@@ -163,7 +169,7 @@
 	},
 	{
 		"header": "Quick Sort Algorithm Implementation in JavaScript",
-		"url": "/page/quick-sort-javascript",
+		"url": "quick-sort-javascript",
 		"description": "The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.",
 		"category": "Code Examples",
 		"keywords": [
@@ -174,37 +180,37 @@
 	},
 	{
 		"header": "Find Inorder Successor in Binary Search Tree",
-		"url": "/page/binary-search-tree-successor",
+		"url": "binary-search-tree-successor",
 		"description": "Binary search trees aren't a linear data structure, but here's how you can return the next value in the data set just like you can with arrays and linked lists but more efficiently.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Sorting Algorithm Animations",
-		"url": "/page/sorting-algorithm-animations",
+		"url": "sorting-algorithm-animations",
 		"description": "Animations and code examples for popular sorting algorithms.",
 		"category": "Projects"
 	},
 	{
 		"header": "Computer Science Flashcards",
-		"url": "/page/flashcards",
+		"url": "flashcards",
 		"description": "Hundreds of flashcards that I've put together to help with the transformation from self-taught coder to computer scientist.",
 		"category": "Projects"
 	},
 	{
 		"header": "Depth-First Traversal Orders in Binary Trees",
-		"url": "/page/depth-first-traversal-orders",
+		"url": "depth-first-traversal-orders",
 		"description": "Unlike common data structures such as arrays, stacks and linked lists, tree data structures can be traversed and values returned in multiple ways. Here are a few depth-first traversal orders.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Using Rabin-Karp's Algorithm to Find All Occurrences of Substring",
-		"url": "/page/rabin-karp-javascript",
+		"url": "rabin-karp-javascript",
 		"description": "Rabin-Karp's Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.",
 		"category": "Code Examples"
 	},
 	{
 		"header": "Storing Phone Numbers with Direct Address Hashing",
-		"url": "/page/direct-addressing",
+		"url": "direct-addressing",
 		"description": "Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here's a JavaScript implementation.",
 		"category": "Code Examples"
 	}

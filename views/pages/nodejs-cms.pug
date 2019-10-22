@@ -1,0 +1,71 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	title 
+	meta(name='description', content='')
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:title', content='')
+	meta(property='og:description', content='')
+	meta(property='og:image', content='/static/media/social-media.png')
+	meta(property='og:url', content=`${url}`)
+
+	//- Schema
+	script(type='application/ld+json').
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"author": "Tyler Willis",
+			"headline": "",
+			"about": "",
+			"inLanguage": "en-US",
+			"keywords": "JavaScript, Node.js, CMS, client software"
+		}
+
+block example-content
+	.write-up
+		h1 Building a Content Management System in Node.js
+		p Open-source content management systems (CMS) are great. By leveraging them, you can put up a new website in minutes, have access to hundreds (if not thousands) of free and cheap plugins for advanced functionality, and find a ton of mostly-good support.
+		p I've built dozens of websites leveraging Joomla's and WordPress's CMSs and have produced many happy clients.
+
+		//-
+		h2 Why take the time?
+		p So why spend the time to build a new CMS from scratch?
+		p It started with PHP. My programming knowledge had expanded so instead of needing to leverage plugins for things such as contact forms and image galleries I could just build them myself. This way I also wouldn't be constrained by the limitations of the chosen plugin.
+		p The same was true for templates - it was just easier for me to layout and design my own pages than to use a prebuilt template and override CSS and JavaScript styles to make the template do what I wanted.
+		p So, I really didn't need WordPress or Joomla anymore. In fact, they sort of just 
+			em got in the way.
+		p The next few websites were built using just PHP for server-side programming and MySQL and JavaScript, CSS and HTML for front-end design. Then, wanting to leverage certain technologies, I started building client sites with Node.js.
+
+		//-
+		h2 Existing CMS Functionality
+		p It was easy for me to manage the code, but I had many clients who wanted to make their own changes (makes sense), so I needed to build out a complete content management system. Based on different client needs, the CMS now contains default functionality for:
+		ul
+			li Managing page content (images, text, tables, slides, image galleries, etc.)
+			li View and export form submissions
+			li Create and edit events
+			li Create and edit blog posts
+			li Create and edit news articles
+			li Upload and link to media files
+			li Manage Admins and Permissions
+			li Review analytical data from Google Analytics
+			li Manage page metadata for search engine optimization
+			li Create, manage and design alerts and banners
+			li Create and send invoices via Stripe
+			li Create and edit products (using Stripe for payment processing)
+			li Track sales of products
+			li Show reservations and ticket sales (Stripe)
+
+		//-
+		h2 Results So Far
+		p There are currently 12 websites built using this CMS and many of them, having come from other, difficult to use platforms, are happy with the simplicity of the administrator pages and the ability to edit and manage nearly all of the content existing on any page on the front-end of the websites.
+
+		//-
+		h2 Screenshots
+		p Here are a few screenshots of the administrator pages:
+		img(src='/static/media/cms-dashboard.jpg')
+		img(src='/static/media/cms-page-inner.jpg')
+		img(src='/static/media/cms-page-meta.jpg')
+		img(src='/static/media/cms-alert-design.jpg')
+		img(src='/static/media/cms-admin-resources.jpg')
+		img(src='/static/media/cms-admin-analytics.jpg')

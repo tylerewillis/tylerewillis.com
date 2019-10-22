@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Creating Tree Data Structures in JavaScript & PHP
-	meta(name='description', content='In this coding example, we create tree data structures in JavaScript and PHP. We also see how to add to existing trees, remove from them, traverse, and get their heights.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Creating Tree Data Structures in JavaScript & PHP')
-	meta(property='og:description', content='In this coding example, we create tree data structures in JavaScript and PHP. We also see how to add to existing trees, remove from them, traverse, and get their heights.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Creating Tree Data Structures in JavaScript & PHP",
-			"about": "In this coding example, we create tree data structures in JavaScript and PHP. We also see how to add to existing trees, remove from them, traverse, and get their heights.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, PHP, tree data structure, recursion, tree traversal"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

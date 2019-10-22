@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Find Inorder Successor in Binary Search Tree
-	meta(name='description', content='Binary search trees aren\'t a linear data structure, but here\'s how you can return the next value in the data set just like you can with arrays and linked lists but more efficiently.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Find Inorder Successor in Binary Search Tree')
-	meta(property='og:description', content='Binary search trees aren\'t a linear data structure, but here\'s how you can return the next value in the data set just like you can with arrays and linked lists but more efficiently.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Find Inorder Successor in Binary Search Tree",
-			"about": "Binary search trees aren't a linear data structure, but here's how you can return the next value in the data set just like you can with arrays and linked lists but more efficiently.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, binary search tree, inorder successor, linear time"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Using Rabin-Karp's Algorithm to Find All Occurrences of Substring
-	meta(name='description', content='Rabin-Karp\'s Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Using Rabin-Karp\'s Algorithm to Find All Occurrences of Substring')
-	meta(property='og:description', content='Rabin-Karp\'s Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Using Rabin-Karp's Algorithm to Find All Occurrences of Substring",
-			"about": "Rabin-Karp's Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, Rabin-Karp, hashing, locating strings"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

@@ -26,4 +26,9 @@ block content
 
 			//- Footer for example pages
 			.example-footer
+				//- Keywords
+				if keywords
+					.ef-keywords
+						each keyword in keywords
+							a(href=`/pages/${keyword}`) ##{keyword}
 				hr

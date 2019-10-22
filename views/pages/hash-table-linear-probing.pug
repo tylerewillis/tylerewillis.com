@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Hash Table JavaScript Implementation with Linear Probing
-	meta(name='description', content='Probing allows hash tables to have dynamic sizes which greatly influence memory and time efficiency. Here\'s how you can build the functionality in JavaScript.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Hash Table JavaScript Implementation with Linear Probing')
-	meta(property='og:description', content='Probing allows hash tables to have dynamic sizes which greatly influence memory and time efficiency. Here\'s how you can build the functionality in JavaScript.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Hash Table JavaScript Implementation with Linear Probing",
-			"about": "Probing allows hash tables to have dynamic sizes which greatly influence memory and time efficiency. Here's how you can build the functionality in JavaScript.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, hash table, linear probing"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

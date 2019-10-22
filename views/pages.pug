@@ -42,6 +42,13 @@ block content
 					.page-details
 						h2 #{page.header}
 						p #{page.description}
+
+						//- Keywords
+						if page.keywords
+							.pd-keywords
+								each keyword in page.keywords
+									a(href=`/pages/${keyword}`) ##{keyword}
+
 						a(href=`/page/${page.url}`) View
 							i.fas.fa-chevron-right
 

@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Insertion Sort Algorithm Implementation in JavaScript
-	meta(name='description', content='The Insertion Sorting algorithm is a program that runs one loop through a dataset and upon coming to a value, it checks for values in the dataset prior to the current value that are larger than the current value. Then, if there are larger values, it moves the current value forward to its ordered place and shifts all other values back.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Insertion Sort Algorithm Implementation in JavaScript')
-	meta(property='og:description', content='The Insertion Sorting algorithm is a program that runs one loop through a dataset and upon coming to a value, it checks for values in the dataset prior to the current value that are larger than the current value. Then, if there are larger values, it moves the current value forward to its ordered place and shifts all other values back.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Insertion Sort Algorithm Implementation in JavaScript",
-			"about": "The Insertion Sorting algorithm is a program that runs one loop through a dataset and upon coming to a value, it checks for values in the dataset prior to the current value that are larger than the current value. Then, if there are larger values, it moves the current value forward to its ordered place and shifts all other values back.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, insertion sort, algorithm"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

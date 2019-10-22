@@ -1,0 +1,23 @@
+title #{title}
+meta(name='description', content=`${description}`)
+meta(property='og:locale', content='en_US')
+meta(property='og:type', content='website')
+meta(property='og:title', content=`${title}`)
+meta(property='og:description', content=`${description}`)
+meta(property='og:image', content='https://tylerewillis.com/static/media/social-media.png')
+meta(property='og:url', content=`https://tylerewillis.com${url}`)
+meta(name='twitter:card', content='summary_large_image')
+meta(name='twitter:site', content='@tylerewillis')
+meta(name='twitter:creator', content='@tylerewillis')
+
+//- Schema
+script(type='application/ld+json').
+	{
+		"@context": "http://schema.org",
+		"@type": "BlogPosting",
+		"author": "Tyler Willis",
+		"headline": "#{title}",
+		"about": "#{description}",
+		"inLanguage": "en-US",
+		"keywords": "#{keywordString}"
+	}

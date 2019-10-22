@@ -27,7 +27,8 @@ router.get('/:url', (req, res) => {
   pages.forEach(async function(page) {
     if (page.url == req.params.url) {
       exists = true
-      var args = { url: `/page/${req.params.url}` }
+      var keywordString = page.keywords.join(', ')
+      var args = { title: page.header, description: page.description, keywords: page.keywords, keywordString, url: `/page/${req.params.url}` }
       res.render(`pages/${req.params.url}`, args)
     }
   })

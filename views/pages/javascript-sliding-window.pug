@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Maximum Value in JavaScript Sliding Window Queue
-	meta(name='description', content='We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Maximum Value in JavaScript Sliding Window Queue')
-	meta(property='og:description', content='We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:image', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Maximum Value in JavaScript Sliding Window Queue",
-			"about": "We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, sliding window, constant time, stack, queue, object"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

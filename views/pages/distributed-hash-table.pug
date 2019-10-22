@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Storing Big Data With Distributed Hash Tables Simulation
-	meta(name='description', content='Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Storing Big Data With Distributed Hash Tables Simulation')
-	meta(property='og:description', content='Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Storing Big Data With Distributed Hash Tables Simulation",
-			"about": "Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, distributed hash tables, consistent hashing, overlay network, distributed storage"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

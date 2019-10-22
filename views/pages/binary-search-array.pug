@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Binary Search Algorithm with Arrays in JavaScript
-	meta(name='description', content='The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Binary Search Algorithm with Arrays in JavaScript')
-	meta(property='og:description', content='The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Binary Search Algorithm with Arrays in JavaScript",
-			"about": "The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, binary search, logarithmic time, arrays"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

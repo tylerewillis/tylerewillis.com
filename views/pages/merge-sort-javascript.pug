@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Merge Sort Implementation in JavaScript
-	meta(name='description', content='The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Merge Sort Implementation in JavaScript')
-	meta(property='og:description', content='The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Merge Sort Implementation in JavaScript",
-			"about": "The merge sort algorithm works by dividing larger data sets into small ones - think divide and conquer - before rebuilding the dataset in the sorted order.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, merge sort, recursive, algorithm"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

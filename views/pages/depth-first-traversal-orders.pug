@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Depth-First Traversal Orders in Binary Trees
-	meta(name='description', content='Unlike common data structures such as arrays, stacks and linked lists, tree data structures can be traversed and values returned in multiple ways. Here are a few depth-first traversal orders.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Depth-First Traversal Orders in Binary Trees')
-	meta(property='og:description', content='Unlike common data structures such as arrays, stacks and linked lists, tree data structures can be traversed and values returned in multiple ways. Here are a few depth-first traversal orders.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Depth-First Traversal Orders in Binary Trees",
-			"about": "Unlike common data structures such as arrays, stacks and linked lists, tree data structures can be traversed and values returned in multiple ways. Here are a few depth-first traversal orders.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, trees, graphs, data structures, traversal"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

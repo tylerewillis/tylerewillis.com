@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Network Packet Processing Simulation in JavaScript
-	meta(name='description', content='This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Network Packet Processing Simulation in JavaScript')
-	meta(property='og:description', content='This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.')
-	meta(property='og:url' content=`${url}`)
-	meta(property='og:image', content='/static/media/social-media.png')
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Network Packet Processing Simulation in JavaScript",
-			"about": "This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, network, packet processing, network simulation"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

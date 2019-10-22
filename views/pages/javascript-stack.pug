@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Creating a Constant-Time JavaScript Stack
-	meta(name='description', content='You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Creating a Constant-Time JavaScript Stack')
-	meta(property='og:description', content='You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.')
-	meta(property='og:url', content=`${url}`)
-	meta(property='og:image', content='/static/media/social-media.png')
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Creating a Constant-Time JavaScript Stack",
-			"about": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, stack, constant time"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

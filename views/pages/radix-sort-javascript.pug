@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Radix Sort Algorithm Implementation in JavaScript
-	meta(name='description', content='The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Radix Sort Algorithm Implementation in JavaScript')
-	meta(property='og:description', content='The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Radix Sort Algorithm Implementation in JavaScript",
-			"about": "The Radix Sorting Algorithm is an interesting program that puts integers in order by breaking up integers into their individual places - think 1s place, 10s place, 100s place and so on in decimal.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

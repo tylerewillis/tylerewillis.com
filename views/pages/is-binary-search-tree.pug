@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Check if Binary Search Tree Structure is Valid
-	meta(name='description', content='Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here\'s how to check if a binary search tree is valid.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Check if Binary Tree Structure is Valid')
-	meta(property='og:description', content='Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here\'s how to check if a binary search tree is valid.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Check if Binary Search Tree Structure is Valid",
-			"about": "Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here's how to check if a binary search tree is valid.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, binary tree, tree data structure, valid"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

@@ -117,6 +117,12 @@ $(document).ready(function(){
 			} else {
 				document.getElementsByClassName('pages-search-no-results')[0].innerHTML = ''
 			}
+
+			// Show keywords
+			var keywords = document.getElementsByClassName('pd-keywords')
+			for (i = 0; i < keywords.length; i++) {
+				keywords[i].className += ' pd-keywords-show'
+			}
 		}
 	}
 
@@ -150,6 +156,12 @@ $(document).ready(function(){
 				document.getElementsByClassName('pages-search-no-results')[0].innerHTML = "Sorry, I haven't written anything about <strong>" + keyword + "</strong> yet. Tweet me <a href='https://twitter.com/TylerEWillis' target='_blank'>@tylerewillis</a> if you think I should!"
 			} else {
 				document.getElementsByClassName('pages-search-no-results')[0].innerHTML = ''
+			}
+
+			// Show keywords
+			var keywords = document.getElementsByClassName('pd-keywords')
+			for (i = 0; i < keywords.length; i++) {
+				keywords[i].className += ' pd-keywords-show'
 			}
 		}
 	}

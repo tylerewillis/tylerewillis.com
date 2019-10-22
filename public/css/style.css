@@ -1650,7 +1650,7 @@ a:hover {
 
 p {
   font-size: .9em;
-  line-height: 1.5em;
+  line-height: 1.7em;
   margin-bottom: 1.25em;
   font-weight: 300; }
 
@@ -2207,6 +2207,17 @@ footer {
         display: inline-block; }
         .page-pages .page-single .page-details a i {
           padding-left: 5px; }
+      .page-pages .page-single .page-details .pd-keywords {
+        margin-bottom: 15px;
+        display: none; }
+        .page-pages .page-single .page-details .pd-keywords a {
+          color: gray;
+          font-size: .8em;
+          margin-right: 10px; }
+          .page-pages .page-single .page-details .pd-keywords a:hover {
+            color: #333; }
+      .page-pages .page-single .page-details .pd-keywords-show {
+        display: block; }
   .page-pages .pages-search-container {
     display: flex;
     justify-content: flex-start;
@@ -2373,6 +2384,12 @@ footer {
     padding-left: 20px; }
     .page-example .quote p {
       font-style: italic; }
+
+.example-footer .ef-keywords {
+  margin-top: 30px; }
+  .example-footer .ef-keywords a {
+    margin-right: 10px;
+    font-weight: 500; }
 
 .example-footer hr {
   margin: 50px 100px; }

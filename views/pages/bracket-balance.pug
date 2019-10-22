@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Check balance of brackets in code
-	meta(name='description', content='Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Check balance of brackets in code')
-	meta(property='og:description', content='Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Check balance of brackets in code",
-			"about": "Using stacks to verify string balance in terms of opening and closing brackets in JavaScript and PHP.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

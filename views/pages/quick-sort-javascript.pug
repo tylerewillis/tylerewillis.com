@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Quick Sort Algorithm Implementation in JavaScript
-	meta(name='description', content='The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Quick Sort Algorithm Implementation in JavaScript')
-	meta(property='og:description', content='The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Quick Sort Algorithm Implementation in JavaScript",
-			"about": "The Quick Sort algorithm is similar to Merge Sort in that it divides the dataset into smaller, more manageable datasets and sorts them before combining and returning.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, quick sort, algorithm"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

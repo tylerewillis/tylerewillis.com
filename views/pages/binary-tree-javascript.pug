@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Complete Binary Tree Code Implementation in JavaScript
-	meta(name='description', content='Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output. Here is a complete JavaScript implementation.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Complete Binary Tree Code Implementation in JavaScript')
-	meta(property='og:description', content='Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output. Here is a complete JavaScript implementation.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Complete Binary Tree Code Implementation in JavaScript",
-			"about": "Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output. Here is a complete JavaScript implementation.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, binary tree, binary search tree, avl tree, order statistic tree, logarithmic time"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

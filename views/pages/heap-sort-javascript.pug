@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Binary Max Heap Sort Algorithm in JavaScript
-	meta(name='description', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
-	meta(property='og:description', content='The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Binary Max Heap Sort Algorithm in JavaScript",
-			"about": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, heap sort, sorting, algorithm, O(n log n)"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

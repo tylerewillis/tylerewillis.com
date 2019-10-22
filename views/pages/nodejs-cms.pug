@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title 
-	meta(name='description', content='')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='')
-	meta(property='og:description', content='')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "",
-			"about": "",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, Node.js, CMS, client software"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

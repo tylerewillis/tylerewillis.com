@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Storing Phone Numbers with Direct Address Hashing
-	meta(name='description', content='Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here\'s a JavaScript implementation.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Storing Phone Numbers with Direct Address Hashing')
-	meta(property='og:description', content='Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here\'s a JavaScript implementation.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Storing Phone Numbers with Direct Address Hashing",
-			"about": "Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here's a JavaScript implementation.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, direct addressing, array, hashing"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

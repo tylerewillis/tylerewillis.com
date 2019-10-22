@@ -9,97 +9,193 @@
 		"header": "Building a CMS in Node.js",
 		"url": "nodejs-cms",
 		"description": "Usually, there are tools out there that make a project more efficient, but sometimes it's best to build something from scratch. Why I built a Node.js client CMS ...",
-		"category": "Personal"
+		"category": "Personal",
+		"keywords": [
+			"JavaScript",
+			"Node.js",
+			"CMS",
+			"client software"
+		]
 	},
 	{
 		"header": "Complete Binary Search Tree Code Implementation in JavaScript",
 		"url": "binary-tree-javascript",
 		"description": "Binary Trees are common data structures used in computer science specifically for programs geared toward high efficiency searching and output.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"binary tree",
+			"binary search tree",
+			"avl tree",
+			"order statistic tree",
+			"logarithmic time"
+		]
 	},
 	{
 		"header": "Check if Binary Search Tree Structure is Valid",
 		"url": "is-binary-search-tree",
 		"description": "Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here's how to check if a binary search tree is valid.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"binary tree",
+			"tree data structure"
+		]
 	},
 	{
 		"header": "Hash Table JavaScript Implementation with Linear Probing",
 		"url": "hash-table-linear-probing",
 		"description": "Probing allows hash tables to have dynamic sizes which greatly influence memory and time efficiency. Here's how you can build the functionality in JavaScript.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"hash table",
+			"linear probing"
+		]
 	},
 	{
 		"header": "Building a Binary Max Heap in JavaScript",
 		"url": "binary-max-heap",
 		"description": "Binary max heaps allow for efficient data insertion and max value extraction and are used for the efficient heap sort algorithm.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"binary max heaps",
+			"heap sort"
+		]
 	},
 	{
 		"header": "Binary Max Heap Sort Algorithm in JavaScript",
 		"url": "heap-sort-javascript",
 		"description": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"heap sort",
+			"sorting",
+			"algorithm"
+		]
 	},
 	{
 		"header": "Binary Search Algorithm with Arrays in JavaScript",
 		"url": "binary-search-array",
 		"description": "The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"binary search",
+			"logarithmic time",
+			"array"
+		]
 	},
 	{
 		"header": "Storing Big Data With Distributed Hash Tables Simulation",
 		"url": "distributed-hash-table",
 		"description": "Hash tables provide a great data structure method for storing large quantities of data because, on average, they provide constant time search access to the data.",
-		"category": "Projects"
+		"category": "Projects",
+		"keywords": [
+			"JavaScript",
+			"distributed hash tables",
+			"consistent hashing",
+			"overlay network",
+			"distributed storage"
+		]
 	},
 	{
 		"header": "Creating a Constant-Time JavaScript Stack",
 		"url": "javascript-stack",
 		"description": "You can create a stack object in JavaScript that will enable you to maintain your data in constant time including pushing, popping and getting the maximum value.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"stack",
+			"constant time"
+		]
 	},
 	{
 		"header": "Network Packet Processing Simulation in JavaScript",
 		"url": "network-packet-processing",
 		"description": "This is a simulation of a network packet processor actively receiving new packets, placing incoming packets in queues and processing them according to size and memory constraints.",
-		"category": "Projects"
+		"category": "Projects",
+		"keywords": [
+			"JavaScript",
+			"network",
+			"packet processing",
+			"simulation"
+		]
 	},
 	{
 		"header": "Maximum Value in JavaScript Sliding Window Queue",
 		"url": "javascript-sliding-window",
 		"description": "We can create an object in JavaScript to behave like a stack and a queue to help us with the sliding window, constant-time conundrum.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"sliding window",
+			"constant time",
+			"stack",
+			"queue",
+			"object"
+		]
 	},
 	{
 		"header": "Using Priority Queues to Simulate Parallel Processing",
 		"url": "priority-queue-processing-simulation",
 		"description": "We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"queue",
+			"binary heap"
+		]
 	},
 	{
 		"header": "Check balance of brackets in code",
 		"url": "bracket-balance",
 		"description": "Code examples for validating string balance particularly when it comes to opening and closing brackets.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"PHP",
+			"string balance",
+			"constant time",
+			"linear time"
+		]
 	},
 	{
 		"header": "Tree Data Structures in JavaScript & PHP",
 		"url": "tree-data-structures",
 		"description": "See how to create, add to trees, remove from trees, traverse trees and more in these JavaScript and PHP coding examples.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"PHP",
+			"tree data structure",
+			"recursion",
+			"traversal"
+		]
 	},
 	{
 		"header": "Replicating a Dynamic Array in JavaScript",
 		"url": "dynamic-array-replication",
 		"description": "Although arrays in JavaScript size-up automatically, we can create a stack object to replicate the process of creating a dynamically allocated array.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"dynamic arrays",
+			"array",
+			"stack"
+		]
 	},
 	{
 		"header": "Linked List Data Structure Implementation",
 		"url": "linked-lists",
 		"description": "Linked Lists are a computer science data structure that uses pointers to connect nodes located at different points in memory. Here we implement linked lists in JavaScript.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"linked list"
+		]
 	},
 	{
 		"header": "Merge Sort Algorithm Implementation in JavaScript",
@@ -109,7 +205,8 @@
 		"keywords": [
 			"javascript",
 			"sorting",
-			"merge sort"
+			"merge sort",
+			"recursion"
 		]
 	},
 	{
@@ -182,36 +279,66 @@
 		"header": "Find Inorder Successor in Binary Search Tree",
 		"url": "binary-search-tree-successor",
 		"description": "Binary search trees aren't a linear data structure, but here's how you can return the next value in the data set just like you can with arrays and linked lists but more efficiently.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"binary search tree",
+			"inorder successor",
+			"linear time"
+		]
 	},
 	{
 		"header": "Sorting Algorithm Animations",
 		"url": "sorting-algorithm-animations",
 		"description": "Animations and code examples for popular sorting algorithms.",
-		"category": "Projects"
+		"category": "Projects",
+		"keywords": [
+
+		]
 	},
 	{
 		"header": "Computer Science Flashcards",
 		"url": "flashcards",
 		"description": "Hundreds of flashcards that I've put together to help with the transformation from self-taught coder to computer scientist.",
-		"category": "Projects"
+		"category": "Projects",
+		"keywords": [
+
+		]
 	},
 	{
 		"header": "Depth-First Traversal Orders in Binary Trees",
 		"url": "depth-first-traversal-orders",
 		"description": "Unlike common data structures such as arrays, stacks and linked lists, tree data structures can be traversed and values returned in multiple ways. Here are a few depth-first traversal orders.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"trees",
+			"graphs",
+			"traversal"
+		]
 	},
 	{
 		"header": "Using Rabin-Karp's Algorithm to Find All Occurrences of Substring",
 		"url": "rabin-karp-javascript",
 		"description": "Rabin-Karp's Substring Algorithm allows us to find occurrences of substrings in text using hashing. Here is an implementation of the algorithm in JavaScript.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"Rabin-Karp",
+			"hashing",
+			"search"
+		]
 	},
 	{
 		"header": "Storing Phone Numbers with Direct Address Hashing",
 		"url": "direct-addressing",
 		"description": "Direct addressing is method of storing values in a variable that allow for constant time addition, deletion and value returning. Here's a JavaScript implementation.",
-		"category": "Code Examples"
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"direct addressing",
+			"array",
+			"hashing"
+		]
 	}
 ]

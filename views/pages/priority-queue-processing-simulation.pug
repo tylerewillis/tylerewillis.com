@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Using Priority Queues to Simulate Parallel Processing
-	meta(name='description', content='We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Using Priority Queues to Simulate Parallel Processing')
-	meta(property='og:description', content='We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Using Priority Queues to Simulate Parallel Processing",
-			"about": "We can use binary heaps to create efficient priority queues. In this code example, we simulate a scheduler program that sends jobs to multiple processors based on priority.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, binary heaps, heap sort"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

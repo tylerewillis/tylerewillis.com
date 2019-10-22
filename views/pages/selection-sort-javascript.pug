@@ -1,26 +1,7 @@
 extends ../pages/pages/layout.pug
 
 block pages-head
-	title Selection Sort Algorithm Implementation in JavaScript
-	meta(name='description', content='The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it\'ll swap it with the value that currently resides in the left-most opening.')
-	meta(property='og:locale', content='en_US')
-	meta(property='og:type', content='website')
-	meta(property='og:title', content='Selection Sort Algorithm Implementation in JavaScript')
-	meta(property='og:description', content='The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it\'ll swap it with the value that currently resides in the left-most opening.')
-	meta(property='og:image', content='/static/media/social-media.png')
-	meta(property='og:url', content=`${url}`)
-
-	//- Schema
-	script(type='application/ld+json').
-		{
-			"@context": "http://schema.org",
-			"@type": "BlogPosting",
-			"author": "Tyler Willis",
-			"headline": "Selection Sort Algorithm Implementation in JavaScript",
-			"about": "The Selection Sort algorithm sorts a dataset by finding the smallest value and moving it to the left of the data structure. When it locates the smallest number from the remainder of the unsorted dataset, it'll swap it with the value that currently resides in the left-most opening.",
-			"inLanguage": "en-US",
-			"keywords": "JavaScript, PHP, string balance, constant time, linear time"
-		}
+	include ../pages/pages/meta.pug
 
 block example-content
 	.write-up

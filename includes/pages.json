@@ -6,9 +6,9 @@
 		"category": "Personal"
 	},
 	{
-		"header": "Building a CMS in Node.js",
+		"header": "Why I Created a New CMS for My Clients in Node.js",
 		"url": "nodejs-cms",
-		"description": "Usually, there are tools out there that make a project more efficient, but sometimes it's best to build something from scratch. Why I built a Node.js client CMS ...",
+		"description": "Usually, there are tools out there that make a project more efficient, but sometimes it's best to build something from scratch. Here's why I built a Node.js client CMS ...",
 		"category": "Personal",
 		"keywords": [
 			"JavaScript",

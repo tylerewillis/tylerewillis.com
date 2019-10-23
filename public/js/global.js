@@ -41,25 +41,47 @@ $('.pf-close').click(function(){
   })
 })
 
-// Animsition
-$(".animsition").animsition({
-	inClass: 'fade-in',
-	outClass: 'fade-out',
-	inDuration: 400,
-	outDuration: 0,
-	linkElement: '.animsition-link',
-	loading: false,
-	loadingParentElement: 'body',
-	loadingClass: 'animsition-loading',
-	loadingInner: '', // e.g '<img src="loading.svg" />'
-	timeout: false,
-	timeoutCountdown: 5000,
-	onLoadEvent: true,
-	browser: [ 'animation-duration', '-webkit-animation-duration'],
-	overlay : false,
-	overlayClass : 'animsition-overlay-slide',
-	overlayParentElement : 'body',
-	transition: function(url){ window.location.href = url; }
+//========================================
+//= Light/Dark Toggle
+//========================================
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  var mode = getCookie("mode");
+  if (mode == 'dark') { $('body').addClass('dark') }
+}
+checkCookie()
+
+
+$('.light-dark-toggle').click(function() {
+	if ($('body').hasClass('dark')) {
+		$('body').removeClass('dark')
+		setCookie('mode', 'light', 365)
+	} else {
+		$('body').addClass('dark')
+		setCookie('mode', 'dark', 365)
+	}
 })
 
 })

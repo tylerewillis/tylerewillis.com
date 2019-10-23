@@ -16,7 +16,6 @@ html(lang='en')
 
 		//- Scripts
 		script(src='https://code.jquery.com/jquery-3.4.1.min.js', integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=', crossorigin='anonymous')
-		script(type='text/javascript', src='/static/js/animsition.js')
 		script(type='text/javascript', src='/static/js/global.js')
 
 		//- Schema
@@ -34,7 +33,9 @@ html(lang='en')
 		//- Page specific head
 		block head
 	body
-		.animsition
-			include layout/header.pug
-			block content
-			include layout/footer.pug
+
+		i.fas.fa-adjust.light-dark-toggle
+
+		include layout/header.pug
+		block content
+		include layout/footer.pug

@@ -1592,7 +1592,17 @@ textarea {
   box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth; }
+  scroll-behavior: smooth;
+  -webkit-animation: pageFade 0.3s ease-in forwards;
+  -moz-animation: pageFade 0.3s ease-in forwards;
+  -ms-animation: pageFade 0.3s ease-in forwards;
+  -o-animation: pageFade 0.3s ease-in forwards; }
+
+@keyframes pageFade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 body {
   color: #333; }
@@ -1736,6 +1746,37 @@ li {
     margin: 8px;
     cursor: pointer; }
 
+.light-dark-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #d3d3d3;
+  cursor: pointer; }
+
+.dark {
+  background-color: #333;
+  color: #f2f2f2; }
+  .dark .light-dark-toggle {
+    box-shadow: 0px 0px 5px #555;
+    color: #f2f2f2; }
+  .dark a,
+  .dark .page-home h1 span:nth-child(1),
+  .dark .page-home h1 span:nth-child(2),
+  .dark .home-header .header-logo p {
+    color: #3eb7fb !important; }
+  .dark .page-home .pages .post h3 .page-icon-personal {
+    color: #a9a9a9; }
+  .dark .page-example h2 {
+    color: #3eb7fb; }
+  .dark .page-example .code-label {
+    color: #333; }
+  .dark .page-example img {
+    background-color: #f2f2f2; }
+  .dark .page-pages .page-single .page-icon-personal {
+    background-color: gray; }
+
 .header-container {
   width: 95%;
   max-width: 700px;
@@ -1743,7 +1784,7 @@ li {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-content: center;
+  align-items: center;
   padding: 15px 0px;
   align-items: center; }
   .header-container .header-logo img {
@@ -2031,7 +2072,7 @@ li {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    align-content: center;
+    align-items: center;
     width: 95%;
     max-width: 550px;
     margin: 0px auto; }
@@ -2058,7 +2099,7 @@ li {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
-      align-content: flex-start; }
+      align-items: flex-start; }
       .skills-container .sc-inner .sc-back .scb-vertical line {
         width: 2px;
         background-color: #f2f2f2;
@@ -2073,7 +2114,7 @@ li {
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
-      align-content: space-around; }
+      align-items: space-around; }
       .skills-container .sc-inner .sc-back .scb-horizontal line {
         width: 100%;
         height: 2px;
@@ -2082,14 +2123,14 @@ li {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    align-content: flex-end;
+    align-items: flex-end;
     height: 100%;
     position: relative; }
     .skills-container .sc-inner .sc-front .sc-bars {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
-      align-content: flex-end;
+      align-items: flex-end;
       width: 100%;
       align-items: baseline;
       height: 100%;
@@ -2186,7 +2227,7 @@ footer {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      align-content: center; }
+      align-items: center; }
       .page-pages .page-single .page-icon i {
         color: #fff;
         font-size: 1.6em; }
@@ -2223,7 +2264,7 @@ footer {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    align-content: center; }
+    align-items: center; }
     .page-pages .pages-search-container .pages-search {
       width: 100%;
       max-width: 300px;
@@ -2265,7 +2306,7 @@ footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-content: center;
+  align-items: center;
   width: 200px; }
   .social-share-container p {
     margin-right: 10px;
@@ -2274,11 +2315,11 @@ footer {
     height: 40px;
     width: 40px;
     border-radius: 3px;
-    color: #fff;
+    color: #fff !important;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    align-content: center; }
+    align-items: center; }
     .social-share-container a:hover {
       color: #fff;
       background-color: #333; }
@@ -2310,7 +2351,7 @@ footer {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      align-content: center;
+      align-items: center;
       height: 35vh;
       padding: 0px 20px;
       overflow-y: scroll; }
@@ -2325,7 +2366,7 @@ footer {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      align-content: center;
+      align-items: center;
       padding: 0 1em; }
       .page .cards .card .bar i {
         font-size: 2.5em;
@@ -2424,7 +2465,7 @@ footer {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-content: flex-start; }
+    align-items: flex-start; }
     .numbers-container .numbers .number {
       display: inline-block;
       width: 70px;
@@ -2455,7 +2496,7 @@ footer {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    align-content: center; }
+    align-items: center; }
     .sliding-window-example .swe-numbers p {
       font-size: 3em;
       margin: 0px; }

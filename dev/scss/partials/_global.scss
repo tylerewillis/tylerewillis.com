@@ -187,6 +187,14 @@ li {
 .dark {
 	background-color: $color-black;
 	color: #f2f2f2;
+	.home-header .header-logo img,
+	.header-container .header-logo img {
+		-webkit-filter: brightness(2);
+		-moz-filter: brightness(2);
+		-ms-filter: brightness(2);
+		-o-filter: brightness(2);
+		filter: brightness(2);
+	}
 	.light-dark-toggle {
 		box-shadow: 0px 0px 5px #555;
 		color: #f2f2f2;

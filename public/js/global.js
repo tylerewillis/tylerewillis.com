@@ -68,8 +68,16 @@ function getCookie(cname) {
 }
 
 function checkCookie() {
-  var mode = getCookie("mode");
-  if (mode == 'dark') { $('body').addClass('dark') }
+  var mode = getCookie("mode")
+  if (mode !== '') {
+    if (mode == 'dark') { $('body').addClass('dark') }
+  } else {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      $('body').addClass('dark')
+      setCookie('mode', 'dark', 365)
+      console.log('browser')
+    }
+  }
 }
 checkCookie()
 

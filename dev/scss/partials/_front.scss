@@ -239,7 +239,6 @@
 			.sc-bars {
 				@include flex-container(space-around, flex-end);
 				width: 100%;
-				align-items: baseline;
 				height: 100%;
 				padding-top: 20px;
 				.s-bar {

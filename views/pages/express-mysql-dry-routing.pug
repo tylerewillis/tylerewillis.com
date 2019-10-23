@@ -1,0 +1,172 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 DRY Routing Techniques Using Express Middleware and MySQL
+		h2 Use Case: To make code easier to change and easier to read
+		p Sometimes a database needs to be queried more than once in order to provide the data needing to be rendered by a page. An example of this is the 
+			a(href='/page/nodejs-cms') content management system that I created for my clients in Node.js
+			| .
+		p In the CMS, the database is queried for:
+		ul
+			li Page content
+			li Metadata
+			li Checking for alerts
+		p - and that's for 
+			em each page
+			| . Some pages need to make additional queries like when the home page wants to also display the 3 most recent blog posts, for example.
+		p Without leveraging middleware or writing DRY code, that could look like this:
+
+		.example
+			pre
+				code.language-javascript
+					|router.get('/', (req, res) => {
+					|	const sql0 = `SELECT * FROM meta WHERE page = 'Home'`
+					|	const sql1 = `SELECT * FROM alerts WHERE published = 'on'`
+					|	const sql2 = `SELECT * FROM pages WHERE name = 'Home'`
+					|	const sql3 = `SELECT * FROM events WHERE published = 'on' ORDER BY start_date ASC`
+					|	pool.query(`${sql0};${sql1};${sql2};${sql3}`, function (error, results) {
+					|
+					|		// Do stuff with results
+					|
+					|		// Render page
+					|		var args = { meta: results[0][0], alerts: results[1], ... }
+					|		res.render('index', args)
+					|	})
+					|})
+
+		p This looks terrible, but I've even seen people nest MySQL queries inside of queries like this:
+
+		.example
+			pre
+				code.language-javascript
+					|router.get('/', (req, res) => {
+					|	const sql0 = `SELECT * FROM meta WHERE page = 'Home'`
+					|	pool.query(sql0, function (error, results) {
+					|
+					|		// Do stuff with results
+					|
+					|		const sql1 = `SELECT * FROM alerts WHERE published = 'on'`
+					|		pool.query(sql1, function (error, results) {
+					|
+					|			// Do stuff with results
+					|
+					|			const sql2 = `SELECT * FROM pages WHERE name = 'Home'`
+					|			pool.query(sql2, function (error, results) {
+					|
+					|				// Do stuff with results
+					|
+					|				const sql3 = `SELECT * FROM events WHERE end_date >= ${pool.escape(todayInt)} AND published = 'on' ORDER BY start_date ASC`
+					|				pool.query(sql3, function (error, results) {
+					|
+					|					// Do stuff with results
+					|
+					|					// Render page
+					|					var args = { meta: results[0][0], alerts: results[1], ... }
+					|					res.render('index', args)
+					|				})
+					|			})
+					|		})
+					|	})
+					|})
+
+		p Can you imagine repeating this block of code for every single route? Way too much work and way too much clutter. At least, I thought so, so here's how I fixed it:
+		h3 Using Express Middleware
+		p The first thing I did was break the database query for alerts into its own middleware function. Every page (at least on the front end) would be using this, so might as well write the code once and make it easy to reuse.
+
+		.example
+			pre
+				code.language-javascript
+					|var alerts = (req, res, next) => {
+					|	db.pool.query(`SELECT * FROM alerts WHERE published = 'on'`, function (error, results) {
+					|		req.alerts = results[0]
+					|		next()
+					|	})
+					|}
+
+		p We'll check the database for any alerts and then create a new property on the request or 
+			strong req
+			|  variable for 
+			strong alerts
+			| .
+		p Then I needed to divide up my routes based on those that render simply static content versus those that render more dynamic content. So here's our static middleware:
+
+		.example
+			pre
+				code.language-javascript
+					|var static = (req, res, next) => {
+					|	const sql0 = `SELECT * FROM meta WHERE url = '${req.originalUrl}'`
+					|	const sql1 = `SELECT * FROM pages WHERE url = '${req.originalUrl}'`
+					|	db.pool.query(`${sql0};${sql1}`, function (error, results) {
+					|
+					|		// Do stuff with results
+					|
+					|		// Render page
+					|		req.args = { meta: results[0][0], alerts: req.alerts, ... }
+					|		next()
+					|	})
+					|}
+
+		p So, for each page deemed to be 'static', I'll load this middleware that'll get metadata and page content for each route. Then, we'll attach a property called 
+			strong args
+			|  to 
+			strong req
+			|  to hold our results thus far to be used by the rendered page.
+		p Lastly, we'll need middleware for our dynamic routes.
+
+		.example
+			pre
+				code.language-javascript
+					|var dynamic = (req, res, next) => {
+					|	req.args = { alerts: req.alerts, ... }
+					|	next()
+					|}
+
+		p Unfortunately, there isn't much that we can do ahead of time since, as the name suggests, this middleware will be used on dynamic routes that don't share a lot similarities. Those that do, however, we'll load here.
+		h3 Applying Middleware to Routes
+		p Here's how we can now apply the middleware we created on our static routes:
+
+		.example
+			pre
+				code.language-javascript
+					|router.get('/about', alerts, static, (req, res) => {
+					|	res.render('about', req.args)
+					|})
+
+		p Much better don't you think? We'll call the 
+			strong alerts
+			|  and 
+			strong static
+			|  middleware functions in our 
+			strong router.get
+			|  function, then render our page using the 
+			strong about
+			|  template and passing in the arguments that we previously saved.
+		p Okay, that looks awesome. Now how about our dynamic routes?
+
+		.example
+			pre
+				code.language-javascript
+					|router.get('/events/:id', alerts, dynamic, (req, res) => {
+					|	const sql = `SELECT * FROM events WHERE ID = ${db.pool.escape(req.params.id)}`
+					|	db.pool.query(`${sql}`, function (error, results) {
+					|
+					|  // Do stuff with results
+					|
+					|		// Render page
+					|		req.args.event = results[0]
+					|		res.render('events/single', req.args)
+					|	})
+					|})
+
+		p In this route, we'll be loading individual events based on ID. Because of this, the page content can't be static but rather changes for each event. So we'll call the 
+			strong dynamic
+			|  function along with the 
+			strong alert
+			|  function to pull in what we can, then we'll manipulate the current event's results and render those with the page.
+		h3 Results
+		p Clear, concise, don't-repeat-yourself programming with Express middleware. Now, as I think of other ways to improve my programs I'll need to make changes in only one location instead of at each individual route.
+		p Note - for sake of clarity, I cut out a few things (i.e. error handling) - in case you use this post for reference.

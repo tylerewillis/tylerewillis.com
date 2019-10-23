@@ -65,6 +65,20 @@
 		]
 	},
 	{
+		"header": "DRY Routing Techniques Using Express Middleware and MySQL",
+		"url": "express-mysql-dry-routing",
+		"description": "When utilizing a lot of data from multiple MySQL databases, routes in Express can get a little messy. Here's my strategy on leveraging Express Middleware to achieve DRY code.",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"Node.js",
+			"Express.js",
+			"Middleware",
+			"DRY",
+			"MySQL"
+		]
+	},
+	{
 		"header": "Binary Max Heap Sort Algorithm in JavaScript",
 		"url": "heap-sort-javascript",
 		"description": "The heap sort algorithm is one of the most efficient ways to sort values in computer science. This post includes a concise JavaScript implementation of the algorithm.",
@@ -86,6 +100,16 @@
 			"binary search",
 			"logarithmic time",
 			"array"
+		]
+	},
+	{
+		"header": "How I Reduce Contact Form Spam for My Clients",
+		"url": "reduce-spam",
+		"description": "Website-generated spam is a major problem - one that doesn't go away and is next to impossible to solve. Here's what I did to all but solve the problem entirely.",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"Spam"
 		]
 	},
 	{

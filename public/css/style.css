@@ -2151,7 +2151,8 @@ footer {
   width: 95%;
   max-width: 700px;
   margin: 0px auto;
-  margin: 50px auto; }
+  margin: 50px auto;
+  position: relative; }
   .page-pages h1 {
     font-size: 2em;
     margin-bottom: 15px; }
@@ -2241,6 +2242,21 @@ footer {
     margin: 50px 0px 0px; }
     .page-pages .pages-search-no-results strong, .page-pages .pages-search-no-results a {
       font-weight: 700; }
+  .page-pages .pages-keywords {
+    position: absolute;
+    top: 175px;
+    right: -120px;
+    width: 100px; }
+    @media (max-width: 1000px) {
+      .page-pages .pages-keywords {
+        display: none; } }
+    .page-pages .pages-keywords a {
+      display: block;
+      margin-bottom: 10px;
+      font-size: .8em;
+      color: #c9c9c9; }
+      .page-pages .pages-keywords a:hover {
+        color: #333; }
 
 .social-share-container {
   width: 95%;

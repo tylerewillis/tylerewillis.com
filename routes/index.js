@@ -44,8 +44,22 @@ router.get('/pages', (req, res) => {
   var json = fs.readFileSync('./includes/pages.json')
   let pages = JSON.parse(json)
 
+  function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index
+  }
+
+  var allKeywords = []
+  for (i = 0; i < pages.length; i++) {
+    if (pages[i].keywords) {
+      for (j = 0; j < pages[i].keywords.length; j++) {
+        allKeywords.push(pages[i].keywords[j].toLowerCase())
+      }
+    }
+  }
+  var keywords = allKeywords.filter(onlyUnique)
+
   // Render page
-  var args = { pages }
+  var args = { pages, keywords }
   res.render('pages', args)
 })
 
@@ -58,8 +72,22 @@ router.get('/pages/:keyword', (req, res) => {
   var json = fs.readFileSync('./includes/pages.json')
   let pages = JSON.parse(json)
 
+  function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index
+  }
+
+  var allKeywords = []
+  for (i = 0; i < pages.length; i++) {
+    if (pages[i].keywords) {
+      for (j = 0; j < pages[i].keywords.length; j++) {
+        allKeywords.push(pages[i].keywords[j].toLowerCase())
+      }
+    }
+  }
+  var keywords = allKeywords.filter(onlyUnique)
+
   // Render page
-  var args = { pages, init: req.params.keyword }
+  var args = { pages, init: req.params.keyword, keywords }
   res.render('pages', args)
 })
 

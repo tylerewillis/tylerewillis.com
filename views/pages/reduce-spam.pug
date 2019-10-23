@@ -1,0 +1,107 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 How I Reduce Contact Form Spam for My Clients
+		h2 Use Case: Solving Spam - Enough Said!
+		p Spam is a problem. It's annoying, it kills productivity, it clogs up our inboxes, and it's even potentially dangerous to both our personal lives and systems.
+		p But it's also a challenge because it's not easy to get rid of. Sure, we can set up CAPTCHAs to attempt to block bots and web crawlers 
+			a(href='https://lockergnome.com/2011/09/27/does-captcha-really-work/', target='_blank') but that really doesn't work ...
+		p Also, it's not just bots that submit forms these days - there are a lot of 
+			em real people
+			|  hired by companies that fill out and submit website forms all day.
+		p Unfortunately, there isn't one global fix for this. However, here are the 6 things that I've done to all but remove the spamming problem entirely.
+
+		h3 Hidden URL Field
+		p To stop any bots that may crawl your page and submit your form, create a phony input field that, when filled out, will be an obvious spam attempt.
+		p Do this by creating a text field and calling it "url" (because spammers love to give you a URL). We can hide this field (display:none;) when rendered in the browser because we're just targeting bots here and we don't want to confuse our users. What we should do, however, is create a paragraph element next to our input field that says simply "Leave empty" in case, for some reason, the user does end up seeing the input.
+		p Then, on the server side, check if this field contains a value. If it does, then we know that it was generated a value by a web crawler and we can ignore the submission.
+
+		.example
+			pre
+				code.language-html
+					|&lt;div class='antispam'&gt;
+					|	&lt;p&gt;Leave empty:&lt;/p&gt;
+					|	&lt;input type='text' name='url'&gt;
+					|&lt;/div&gt;
+
+		h3 Messages Containing HTML
+		p To control the formatting of their submitted messages, many spammers will submit form inquiries as HTML, including tags such as 
+			strong &lt;p&gt;
+			| ,
+			strong &lt;a href='#'&gt;
+			|  and 
+			strong &lt;strong&gt;
+			| .
+		p We can safely assume that a legitimate user of ours wouldn't do that, so we'll ignore submissions that include HTML. We can determine this by using a regular expression in JavaScript. If the message does not contain HTML, then submit:
+
+		.example
+			pre
+				code.language-javascript
+					|if (!/<[a-z][\s\S]*>/i.test(message)) {
+					|	// Submit
+					|}
+
+		h3 Messages Containing Vulgar or Promotional Language
+		p Some spammers won't be very discrete and will instead just submit a form inquiry with explicit language. Some of these words and phrases (I'll spare you an example) are clearly not appropriate regardless of your business or industry. However, for some it may be difficult to know for sure and you wouldn't want to filter out legitimate submissions.
+		p So we'll confidently ignore any submissions containing obvious vulgar language and take other promotional language on a case-by-case basis.
+		p We can do this by creating a function in JavaScript that iterates through each word/phrase in an array and returning false if the message isn't "clean" and returning true if it is.
+
+		.example
+			pre
+				code.language-javascript
+					|function cleanInquiryString(string) {
+					|	const ignoreWords = ['dropship','promote your website', 'build links', ...]
+					|	for (let word of ignoreWords) {
+					|		if (string.includes(word)) { 
+					|			return false
+					|		}
+					|	}
+					|	return true
+					|}
+
+		h3 Messages Not in English
+		p I had a client once that received contact form spam in Chinese and Russian. It was clearly not relevant for this particular business so I added a filter to ignore contact form submissions that were not primarily in the English language.
+		p Node.js has a great module called 
+			a(href='https://www.npmjs.com/package/languagedetect', target='_blank') Node Language Detect
+			|  that, when passed a string, returns an array of the languages discovered in the string ordered by relevance. If the top language isn't English, I'll ignore the submission. You can do this the opposite way by just ignoring certain languages.
+
+		.example
+			pre
+				code.language-javascript
+					|var language = lngDetector.detect(message)[0][0]
+					|
+					|if (language == 'english') {
+					| // Submit
+					|}
+
+		h3 Track IP Address
+		p If the form submission passes the previous filters, then I'll insert it into the database and email the administrator/client. However, understanding that spam could still make its way through, I'll record the IP address of the sender. By recording this, I can then block the IP address. That wouldn't be enough to stop the initial submission, but it would allow me to block any and all future submissions - at least those belonging to the same IP address.
+		p We'll create a hidden input field in our form and then leverage the API at jsonip.com to get the client's IP address and populate the hidden input. Then we'll submit this with our form and save it to the database.
+
+		.example
+			pre
+				code.language-javascript
+					|async function getIp(url){
+					|	try {
+					|		const response = await fetch(url)
+					|		const json = await response.json()
+					|		inputIp[0].value = json.ip
+					|	} catch (error) {
+					|		return null
+					|	}
+					|}
+					|
+					|var inputIp = document.getElementsByClassName('input-ip')
+					|if (inputIp.length) {
+					|	getIp("https://jsonip.com")
+					|}
+
+		h3 Confirmation Screen Regardless
+		p The final step to my submission cleansing is the return screen. Regardless of whether or not the spam makes it through the filters, it's important that the person submitting the spam thinks it did.
+		p I'll send a confirmation screen with a "Thanks, Tyler. Your message has been received." or something like that so that the spammer will feel like his or her job is complete and move on. See, I can play games too!
+		p So that's my form filtering program. It's not fully subjective - there are parts that need to be modified depending on the client/situation, but we've been happy with the results till now.
+		p Let me know what you've tried that works!

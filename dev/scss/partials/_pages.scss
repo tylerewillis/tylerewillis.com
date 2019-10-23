@@ -5,6 +5,7 @@
 .page-pages {
 	@include global-width(0px auto, 700px);
 	margin: 50px auto;
+	position: relative;
 	h1 {
 		font-size: 2em;
 		margin-bottom: 15px;
@@ -105,6 +106,24 @@
 		strong, a {
 			font-weight: 700;
 		}
+	}
+	.pages-keywords {
+    position: absolute;
+    top: 175px;
+    right: -120px;
+    width: 100px;
+    @include mq(l) {
+    	display: none;
+    }
+    a {
+			display: block;
+			margin-bottom: 10px;
+			font-size: .8em;
+			color: #c9c9c9;
+    	&:hover {
+    		color: #333;
+    	}
+    }
 	}
 }
 

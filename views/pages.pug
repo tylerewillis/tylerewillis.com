@@ -54,4 +54,9 @@ block content
 
 			//- No results
 			p.pages-search-no-results
+
+		//- Keywords
+		.pages-keywords
+			each keyword in keywords
+				a(href=`/pages/${keyword}`) ##{keyword}
 		

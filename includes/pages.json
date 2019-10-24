@@ -91,6 +91,18 @@
 		]
 	},
 	{
+		"header": "Combining Routes with Closures in Express.js",
+		"url": "expressjs-closures",
+		"description": "Combining Express.js route calls and using closures in a way that will make any DRY programmer giddy ...",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"Express.js",
+			"Node.js",
+			"closures"
+		]
+	},
+	{
 		"header": "Binary Search Algorithm with Arrays in JavaScript",
 		"url": "binary-search-array",
 		"description": "The binary search algorithm is one of the most efficient ways to find an element in an already-sorted set of data. We can implement binary search with a simple array data structure in JavaScript.",

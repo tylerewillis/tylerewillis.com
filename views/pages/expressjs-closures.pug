@@ -1,0 +1,111 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Combining Routes with Closures in Express.js
+		h2 Use Case:
+		p In a previous article, I discussed how I used Express.js middleware 
+			a(href='https://tylerewillis.com/page/express-mysql-dry-routing', target='_blank') to reduce the repetition in my code
+			| .
+		p Previously, I had a serious repetition problem with 
+			a(href='https://tylerewillis.com/page/nodejs-cms', target='_blank') the Node.js CMS that I built for my clients
+			| . Middleware made that easier where, for most of the routes, I only needed to call the middleware then render the page, like this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|router.get('/about', alerts, static, (req, res) => {
+					|	res.render('about', req.args)
+					|})
+
+		p For the '/about' route, I'd first call the 
+			strong alerts
+			|  middleware that would check the database for any existing front-end alerts. Then, I'd call the 
+			strong static
+			|  middleware to get relevant page and metadata from the database for the route. Finally, I'd render the page with the collected arguments.
+		p This proved to be way better than before where I'd basically copy/paste the database calls and data formatting for each route. However, I was still left with a lot of these:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|router.get('/about', alerts, static, (req, res) => {
+					|	res.render('about', req.args)
+					|})
+					|
+					|router.get('/contact', alerts, static, (req, res) => {
+					|	res.render('contact', req.args)
+					|})
+					|
+					|router.get('/faqs', alerts, static, (req, res) => {
+					|	res.render('faqs', req.args)
+					|})
+
+		p Not terrible, but still repeating code, so I found 2 ways to make it even better.
+
+		h3 Combine Route Definitions into an Array
+		p In the
+			a(href='http://expressjs.com/en/4x/api.html#app.all', target='_blank') Express.js docs
+			| , a path can be 
+			strong a string, a path, a regular expression, or an array of the above
+			| . So we can combine our 'static' routes into one, singular definition that will replace all 3 above:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var staticRoutes = ['/about', '/contact', '/faqs']
+					|router.get(staticRoutes, alerts, static, (req, res) => {
+					|	res.render(req.originalUrl.substr(1), req.args)
+					|})
+
+		p The only thing we changed was adding the routes to an array, calling the array inside the router function and then using the request value's 
+			strong originalUrl
+			|  along with JavaScript's native 
+			strong substr
+			|  function to cut off the leading '/'. Quite simply, I'm telling Express to render the file names 'about', 'contact' or 'faqs' depending on the route.
+
+		h3 Replace Express.js Middleware with Node.js Closure
+		p Instead of having multiple middleware functions, I put everything inside of one JavaScript closure.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function staticRender() {
+					|	return function(req,res) {
+					|		const sql0 = `SELECT * FROM meta WHERE url = '${req.originalUrl}'`
+					|		const sql1 = `SELECT * FROM pages WHERE url = '${req.originalUrl}'`
+					|		const sql2 = `SELECT * FROM alerts WHERE published = 'on'`
+					|		db.pool.query(`${sql0};${sql1};${sql2}`, function (error, results) {
+					|
+					|			// Do stuff with results
+					|
+					|			// Render page
+					|			req.args = { meta: results[0][0], alerts: results[2][0] ... }
+					|			res.render(req.originalUrl.substr(1), req.args)
+					|		})
+					|	}
+					|}
+
+		p The closure would handle the 
+			strong req
+			|  and 
+			strong res
+			|  parameters, the database calls and formatting, and the rendering of the page depending on the 
+			strong originalUrl
+			|  value for the requested route.
+		p Now that we have our closure, we can make our route definition even shorter:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var staticRoutes = ['/about', '/contact', '/faqs']
+					|router.get(staticRoutes, staticRender())
+
+		p Note: for sake of clarity I left out such things as error handling. If you use this post for reference, don't forget to add it in!

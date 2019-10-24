@@ -1746,6 +1746,34 @@ li {
     margin: 8px;
     cursor: pointer; }
 
+.new-tab {
+  position: relative; }
+  .new-tab:hover:after {
+    visibility: visible;
+    opacity: 1;
+    top: 130%; }
+  .new-tab:after {
+    content: 'Opens a new tab';
+    white-space: nowrap;
+    position: absolute;
+    background-color: #333;
+    padding: 3px 10px;
+    z-index: 1000;
+    border-radius: 4px;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 0.3s ease;
+    -webkit-transform: translate(-50%, 0px);
+    -moz-transform: translate(-50%, 0px);
+    -ms-transform: translate(-50%, 0px);
+    -o-transform: translate(-50%, 0px);
+    transform: translate(-50%, 0px);
+    color: #fff;
+    left: 50%;
+    top: 100%;
+    font-size: .8em;
+    line-height: 1.5em; }
+
 .light-dark-toggle {
   position: absolute;
   top: 20px;
@@ -1783,6 +1811,9 @@ li {
     background-color: #f2f2f2; }
   .dark .page-pages .page-single .page-icon-personal {
     background-color: gray; }
+  .dark .new-tab:after {
+    background-color: #d3d3d3;
+    color: #333; }
 
 .header-container {
   width: 95%;
@@ -2406,7 +2437,8 @@ footer {
       position: absolute;
       top: .5em;
       right: .5em;
-      font-size: .75em; }
+      font-size: .75em;
+      color: gray; }
     .page-example .example pre {
       margin-bottom: 20px;
       border-radius: 10px 0px 10px 0px;

@@ -1,0 +1,119 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Adding Tooltips to Links Using JavaScript Closures
+		h2 Use Case: Manipulating DOM elements to ensure accessibility compliance
+		p One criteria for having an accessibility compliant website is 
+			a(href='https://www.w3.org/TR/WCAG20-TECHS/G201.html', target='_blank') to give users advanced warning
+			|  when opening a new window or tab. Some developers would tell you that you should never set a link to open in a new tab. I don't feel strongly one way or the other but, when I do set a link to open in a new tab, I make sure to be compliant.
+		p Adding a tooltip to a link in JavaScript would be simple task if you were only targeting one link - maybe something like this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var link = document.getElementsById('link-id')
+					|link.addEventListener('mouseover', function() {
+					|	link.className += ' new-tab'
+					|})
+
+		p Where the class name of 
+			strong new-tab
+			|  would contain the following CSS (and leverage the 
+			em after
+			|  pseudo-element).
+
+		.example
+			p.label SCSS
+			pre
+				code.language-css
+					|.new-tab {
+					|	position: relative;
+					|	&:hover:after {
+					|		visibility: visible;
+					|		opacity: 1;
+					|		top: 130%;
+					|	}
+					|	&:after {
+					|		content: 'Opens a new tab';
+					|		white-space: nowrap;
+					|		position: absolute;
+					|		background-color: $color-black;
+					|		padding: 3px 10px;
+					|		z-index: 1000;
+					|		border-radius: 4px;
+					|		visibility: hidden;
+					|		opacity: 0;
+					|		-webkit-transition: all 0.3s ease;
+					|		-moz-transition: all 0.3s ease;
+					|		-ms-transition: all 0.3s ease;
+					|		-o-transition: all 0.3s ease;
+					|		-transition: all 0.3s ease;
+					|		-webkit-transform: translate(-50%, 0px);
+					|		-moz-transform: translate(-50%, 0px);
+					|		-ms-transform: translate(-50%, 0px);
+					|		-o-transform: translate(-50%, 0px);
+					|		transform: translate(-50%, 0px);
+					|		color: $color-white;
+					|		left: 50%;
+					|		top: 100%;
+					|		font-size: .8em;
+					|		line-height: 1.5em;
+					|	}
+					|}
+
+		p (You could remove most of the CSS above if you'd like to keep things simple.)
+		p But realistically, not all of our links will have IDs and we can't target them specifically. No, it'd be better to consider all links and then detect if they have their 
+			strong target
+			|  attribute set to "_blank". How's how we could do that - the wrong way:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var links = document.getElementsByTagName('a')
+					|for (var link of links) {
+					|	var target = link.getAttribute('target')
+					|	if (target && target === '_blank') {
+					|		link.addEventListener('mouseover', function() {
+					|			link.className += ' new-tab'
+					|		})
+					|	}
+					|}
+
+		p I want to be clear that this is the bad, non-closure way of attempting to do this. What's wrong with it? Well, a 'mouseover' event listener will be added to each link, but ony the last link declared (the very last link found on the page) will receive the 'new-tab' class - over and over and over again with each hover event.
+		p This is because the 
+			strong link
+			|  variable has been left pointing at the last link on the page. We need a way to give each unique link their own 
+			strong lexical environment
+			|  so that overlapping won't be a problem. Here's the right way using a closure:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function getTargetCallback(link) {
+					|	return function() {
+					|		link.className += ' new-tab'
+					|	}
+					|}
+					|
+					|var links = document.getElementsByTagName('a')
+					|for (var link of links) {
+					|	var target = link.getAttribute('target')
+					|	if (target && target === '_blank') {
+					|		link.addEventListener('mouseover', getTargetCallback(link))
+					|	}
+					|}
+
+		p First, we declared our callback function which contains and returns our closure, then we update the above 'eventListener' code to call the function with each link. Doing this ensures that each link is given its own lexical environment and its tooltip will display as expected.
+		p See a working demo by hovering on the link at the top of this post or the one in the next paragraph.
+		p Note: 
+			a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let', target='_blank') ECMAScript 2015
+			|  introduces the 
+			strong let
+			|  keyword which, when used in place of var - let link of links, declares a block scope local variable for you without the need to create a closure. However, as of the time of this writing, the let keyword isn't supported in IE11.

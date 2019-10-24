@@ -42,6 +42,25 @@ $('.pf-close').click(function(){
 })
 
 //========================================
+// Links - Adding Target_blank and External Link Tooltips
+//========================================
+
+function getTargetCallback(link) {
+  return function() {
+    link.className += ' new-tab'
+  }
+}
+
+var links = document.getElementsByTagName('a')
+for (var link of links) {
+  var href = link.getAttribute('href')
+  var target = link.getAttribute('target')
+  if (target && target === '_blank') {
+    link.addEventListener('mouseover', getTargetCallback(link))
+  }
+}
+
+//========================================
 //= Light/Dark Toggle
 //========================================
 
@@ -80,7 +99,6 @@ function checkCookie() {
   }
 }
 checkCookie()
-
 
 $('.light-dark-toggle').click(function() {
 	if ($('body').hasClass('dark')) {

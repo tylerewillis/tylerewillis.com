@@ -103,7 +103,7 @@
 		]
 	},
 	{
-		"header": "How I Reduce Contact Form Spam for My Clients",
+		"header": "How I Reduce Contact Form Spam",
 		"url": "reduce-spam",
 		"description": "Website-generated spam is a major problem - one that doesn't go away and is next to impossible to solve. Here's what I did to all but solve the problem entirely.",
 		"category": "Code Examples",
@@ -134,6 +134,17 @@
 			"JavaScript",
 			"stack",
 			"constant time"
+		]
+	},
+	{
+		"header": "Adding Tooltips to Links Using JavaScript Closures",
+		"url": "tooltip-closures",
+		"description": "Closures in JavaScript provide a great way of manipulating multiple items in the DOM. Here's how I use a closure to make my links opening in new tabs accessibility-compliant.",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"closures",
+			"accessibility"
 		]
 	},
 	{

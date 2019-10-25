@@ -39,8 +39,6 @@ router.get('/', (req, res) => {
 //= getPages Middleware
 //===============================================
 
-const Heap = require('../routes/includes/heap')
-
 var getPages = (req,res,next) => {
   // Get pages from file
   var json = fs.readFileSync('./includes/pages.json')
@@ -58,7 +56,6 @@ var getPages = (req,res,next) => {
     }
   }
 
-  //-
   req.args = { pages, keywords }
   next()
 }

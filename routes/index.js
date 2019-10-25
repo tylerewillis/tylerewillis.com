@@ -36,59 +36,48 @@ router.get('/', (req, res) => {
 })
 
 //===============================================
-//= Pages
+//= getPages Middleware
 //===============================================
 
-router.get('/pages', (req, res) => {
+const Heap = require('../routes/includes/heap')
+
+var getPages = (req,res,next) => {
   // Get pages from file
   var json = fs.readFileSync('./includes/pages.json')
   let pages = JSON.parse(json)
 
-  function onlyUnique(value, index, self) { 
-    return self.indexOf(value) === index
-  }
-
-  var allKeywords = []
+  // Get keywords and counts
+  var keywords = []
   for (i = 0; i < pages.length; i++) {
     if (pages[i].keywords) {
       for (j = 0; j < pages[i].keywords.length; j++) {
-        allKeywords.push(pages[i].keywords[j].toLowerCase())
+        if (!keywords.includes(pages[i].keywords[j])) {
+          keywords.push(pages[i].keywords[j])
+        }
       }
     }
   }
-  var keywords = allKeywords.filter(onlyUnique)
 
-  // Render page
-  var args = { pages, keywords }
-  res.render('pages', args)
+  //-
+  req.args = { pages, keywords }
+  next()
+}
+
+//===============================================
+//= Pages
+//===============================================
+
+router.get('/pages', getPages, (req, res) => {
+  res.render('pages', req.args)
 })
 
 //===============================================
 //= Pages with keyword
 //===============================================
 
-router.get('/pages/:keyword', (req, res) => {
-  // Get pages from file
-  var json = fs.readFileSync('./includes/pages.json')
-  let pages = JSON.parse(json)
-
-  function onlyUnique(value, index, self) { 
-    return self.indexOf(value) === index
-  }
-
-  var allKeywords = []
-  for (i = 0; i < pages.length; i++) {
-    if (pages[i].keywords) {
-      for (j = 0; j < pages[i].keywords.length; j++) {
-        allKeywords.push(pages[i].keywords[j].toLowerCase())
-      }
-    }
-  }
-  var keywords = allKeywords.filter(onlyUnique)
-
-  // Render page
-  var args = { pages, init: req.params.keyword, keywords }
-  res.render('pages', args)
+router.get('/pages/:keyword', getPages, (req, res) => {
+  req.args.init = req.params.keyword
+  res.render('pages', req.args)
 })
 
 module.exports = router

@@ -1,0 +1,129 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Real-Time Social Proof Ticker using WebSockets with Node.js
+		h2 Use Case: To encourage ticket sales
+		p We often feel peer pressure ... 
+			em hard
+			| . We either want to join in the excitement or we just don't want to be left out.
+		p In a project I did for a client (a theatre), I leveraged peer pressure or "social proof" to help encourage the sale of tickets to their shows. I had to install a new module in Node.js called 
+			strong Socket.IO
+			|  which would allow the server to leverage websockets to communicate from the server back to the client without the need to refresh the page. I had to change a few things but all in all not very little additional code was needed.
+		h3 Update Server Configuration
+		p My typical Node.js server configuration looks something like this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const express = require('express')
+					|const app = express()
+					|app.listen(3000)
+
+		p To leverage the Socket.IO module, the above changed to this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const io = require('socket.io').listen(app.listen(3000))
+					|app.use(function(req,res,next) {
+					|	req.io = io
+					|	next()
+					|})
+
+		p The first line sets up our socket to listen to the server, then, to be sure that our routes can access the 
+			strong io
+			|  variable, we need to use middleware from 
+			strong Express.js
+			|  to save the variable to the request object. We'll be able to use it later via 
+			strong req.io
+			| .
+
+		h3 Send Messages on New Ticket Purchases
+		p Once a customer has finalized their reservation and it's been stored into the database, etc., we want to send out a message to everyone currently on the website that the new tickets have been purchased. Nothing too descriptive, maybe just the person's first name and the name of the show.
+		p We can send this data from the server side to the client side with this one line:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|req.io.emit('tickets-reserved', `${first} just reserved tickets to ${showName}!`)
+
+		p Note that this is inside our 
+			strong post
+			|  route and after our ticket reservation logic.
+		p We're levering the req.io variable with the function 
+			strong emit
+			|  which sends the data with a name - 'tickets-reserved' and a message - `${first} just reserved tickets to ${showName}!`. And that's all we need to do in our routes file.
+
+		h3 Listen and Print Messages in the Browser
+		p On the client side we just need to set up our socket and then listen for the 'tickets-reserved' action:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|a#tickets-reserved(href='/shows')
+					|script.
+					|	var socket = io.connect()
+					|	socket.on('tickets-reserved', function(msg) {
+					|		var resBlock = document.getElementById('tickets-reserved')
+					|		resBlock.innerHTML = msg
+					|		resBlock.classList.remove('is-active')
+					|		resBlock.classList += ' is-active'
+					|	})
+
+		p Note that I'm doing this in 
+			strong Pug.js
+			|  in case it looks a little different.
+		p The first line is simply an &lt;a&gt; tag that will hold the message coming from the server. Then, inside of a &lt;script&gt; tag, we're creating our socket by simply setting 
+			strong socket
+			|  equal to 
+			strong io.connect()
+			| . Then, inside the listener - 'on' - we manipulating the DOM by getting our &lt;a&gt; element, setting its inner HTML, removing the 'is-active' class if it exists from a prior message and then adding it back to trigger our CSS animation.
+		p Here's the CSS:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-css
+					|#tickets-reserved {
+					|	position: fixed;
+					|	bottom: 20px;
+					|	right: 20px;
+					|	background-color: rgba(255,255,255,.8);
+					|	@include transition(0.3s, opacity);
+					|	opacity: 0;
+					|	visibility: hidden;
+					|	font-size: 14px;
+					|	padding: 8px 10px;
+					|	z-index: 100;
+					|	border-radius: 5px;
+					|	color: #333;
+					|	box-shadow: 1px 1px 2px #d3d3d3;
+					|	&:hover {
+					|		color: $color-secondary;
+					|	}
+					|}
+					|#tickets-reserved.is-active {
+					|	@include animation(tickerFade, 7s);
+					|}
+					|@keyframes tickerFade {
+					|	0% {opacity: 0;visibility: visible;}
+					|	7% {opacity: 1;}
+					|	93% {opacity: 1;}
+					|	100% {opacity: 0;visibility: hidden;}
+					|}
+
+		p Note that the above CSS is actually SCSS to take advantage of mixins for 
+			em transitions
+			|  and 
+			em animations
+			|  in this example.
+		p Here's a (low-quality) GIF of the finished product - what any user of the website will see on any page when an individual reserves tickets:
+		img(src='/static/media/nodejs-eventemitter-socketio-ticket-purchase-animation.gif')

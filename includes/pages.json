@@ -1,5 +1,18 @@
 [
 	{
+		"header": "Real-Time Social Proof Ticker using WebSockets with Node.js",
+		"url": "nodejs-websockets",
+		"description": "To encourage ticket sales, I built a real-time tickets purchased ticker in Node.js using WebSockets in an incredibly short amount of code.",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"Node.js",
+			"Express.js",
+			"websockets",
+			"socket.io"
+		]
+	},
+	{
 		"header": "My Founder's Journey",
 		"url": "founders-journey",
 		"description": "9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.",
@@ -99,7 +112,8 @@
 			"JavaScript",
 			"Express.js",
 			"Node.js",
-			"closures"
+			"closures",
+			"lambda"
 		]
 	},
 	{
@@ -156,6 +170,7 @@
 		"keywords": [
 			"JavaScript",
 			"closures",
+			"lambda",
 			"accessibility"
 		]
 	},

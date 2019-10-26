@@ -225,6 +225,19 @@
 		]
 	},
 	{
+		"header": "Check User's Dark Mode Preferences Automatically in CSS and JavaScript",
+		"url": "dark-mode",
+		"description": "Some users prefer to view content with their screen set on 'dark mode'. Not only can we set up our website to provide a dark mode option, but we can automatically set it based on the user's preferences.",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"CSS",
+			"dark mode",
+			"prefers-color-scheme",
+			"UX"
+		]
+	},
+	{
 		"header": "Tree Data Structures in JavaScript & PHP",
 		"url": "tree-data-structures",
 		"description": "See how to create, add to trees, remove from trees, traverse trees and more in these JavaScript and PHP coding examples.",

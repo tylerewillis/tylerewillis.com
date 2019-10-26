@@ -1,0 +1,50 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Check User's Dark Mode Preferences Automatically in CSS and JavaScript
+		h2 Use Case: Improve user experience
+		p It's not just 
+			em cool
+			|  to have an option to toggle your site to dark- or light-mode, it's meangingful for the experience of users on your site or application.
+		p There are a lot of different ways that you can set this up with CSS and JavaScript, but you can take this a step further by updating your CSS style's automatically based on the user's preferences.
+		h3 How can we know this automatically?
+		p MacOS and Windows 10 allow the users of their operating systems to choose to use their computers in either dark- or light-mode (typically light-mode by default). Browsers such as Chrome and Firefox automatically detect this from the OS for the style of their windows. They then emit the preference to CSS in the form of a media query called 
+			strong prefers-color-scheme
+			|  - 
+			em light
+			|  or 
+			em dark
+			| .
+		p With CSS we can set a simple media query that sets styles depending on the mode, like this:
+
+		.example
+			p.label CSS
+			pre
+				code.language-css
+					|@media(prefers-color-scheme: dark) {
+					|	body {
+					|		background-color: black;
+					|	}
+					|	...
+					|}
+		
+		p And in JavaScript we can check the contents of the windows 
+			strong matchMedia
+			|  property:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					|	$('body').addClass('dark')
+					|	...
+					|}
+
+		p We could also check both of the above for 'light' instead of 'dark'.
+		p On this site, I check for your preferred setting and update the formatting of the pages accordingly. I also have a toggle button that you could click to override the mode in case you'd still like the option to choose!
+		img(src='/static/media/dark-mode-toggle-javascript.gif')

@@ -13,6 +13,16 @@
 		]
 	},
 	{
+		"header": "Practical Image Magnification using Canvas and JavaScript",
+		"url": "canvas-image-zoom",
+		"description": "I like using Canvas - especially for practical purposes such as making lightweight and user-friendly image magnifications.",
+		"category": "Code Examples",
+		"keywords": [
+			"Canvas",
+			"JavaScript"
+		]
+	},
+	{
 		"header": "My Founder's Journey",
 		"url": "founders-journey",
 		"description": "9 Product Hunt Submissions, a couple dozen domain names registered, dreams to last for years, and other notables from my journey as a solo-preneur.",

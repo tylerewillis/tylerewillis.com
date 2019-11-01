@@ -1,0 +1,412 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+	style.
+		canvas { margin: 50px auto; display: block; }
+		.canvas-container { width: 500px; margin: 50px auto; position: relative; border: 3px solid #d3d3d3; cursor: n-resize; }
+		.canvas-container i { color: #fff; font-size: 1.3em; position: absolute; right: 0; bottom: 0; margin: 10px; }
+		.canvas6 { margin: 0px; }
+
+block example-content
+	.write-up
+		h1 Practical Image Magnification using Canvas and JavaScript
+		h2 Use Case: So users can easily zoom in on large images
+		p HTML5's Canvas can help you create some pretty beautiful visuals for your website. I'm all for beauty, but I also want my programs and software to be useful as well. In this code example, I put the power of Canvas to use to allow users to simply and efficiently zoom in on large images.
+		p Usually, for performance purposes, you wouldn't want to load an image on your page that was larger than it displayed in terms of dimensions. However, there are times when the image is the main focus of the web page - for example, a product photo - and the user should be able to take in as much of the image as possible.
+		h3 Set Up the Canvas Element
+		p We'll start by creating an HTML Canvas element and then connecting to it with our JavaScript and setting its initial dimensions based on the image that we want to use. We should also set the offset position of the canvas relative to the page as we'll need this later.
+
+		.example
+			p.label HTML
+			pre
+				code.language-html
+					|&lt;canvas&gt;&lt;/canvas&gt;
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var canvas = document.querySelector('canvas')
+					|canvas.width = 500
+					|canvas.height = 325
+					|canvas.top = canvas.offsetTop
+					|canvas.left = canvas.offsetLeft
+					|var c = canvas.getContext('2d')
+
+		h3 Create Initial Canvas Image
+		p Now, we want to set up the initial image to display in and fill the container. We'll set up a function called 
+			span.code-label createImage
+			|  that will be simple to start but we'll edit later to work with our magnification animation.
+		p Then we'll call the function to create our first image.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function createImage() {
+					|	var width = canvas.width
+					|	var height = canvas.height
+					|	var x = 0
+					|	var y = 0
+					|
+					|	var img = new Image
+					|	img.onload = () => {
+					|		c.drawImage(img,x,y,width,height)
+					|	}
+					|	img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+					|}
+					|createImage(0, 0, 0)
+
+		canvas.canvas1
+
+		p Great - so now our image displays just like a regular image on the page - at least, as far as our users are concerned. But we didn't use all of this extra code just to put a static image on the page. Let's add some interactivity.
+
+		h3 Add Mouse Movement/Position Listener
+		p We're going set it up so that we'll be able to zoom in and out on the image based on the position of the mouse on the canvas. This way, the user will be able to zoom in on a particular section of the image and not just the center (or the top-left - coordinates 0,0).
+		p We'll create a 
+			span.code-label onmousemove
+			|  event listener on the canvas element itself that will call the
+			span.code-label createImage
+			|  function we created and send in the 
+			strong x
+			|  and 
+			strong y
+			|  coordinates of the mouse on the page as arguments. We also have to accept the arguments in our function and we'll go ahead and set the x and y variables equal to these parameters minus the previously set 
+			strong top
+			|  and 
+			strong left
+			|  element positioning variables.
+		p Also, we'll declare the 2 variables outside of our listener function so that we can reference them later.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var y = 0, x = 0
+					|canvas.onmousemove = (e) => {
+					|	x = e.pageX - canvas.left, y = e.pageY - canvas.top
+					|	createImage(x,y)
+					|}
+					|
+					|function createImage(posX,posY) {
+					|	...
+					|	var x = posX
+					|	var y = posY
+					|	...
+
+		p We have a problem though. Hover over the image below to see what it is.
+
+		canvas.canvas2
+
+		p The new images are being created only partially and not filling the entire canvas. We want the images to always take up the entire canvas at the very least, so we need to do a little math to make sure that our coordinates are always - at the very greatest - equal to 0.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function createImage(posX,posY) {
+					|	...
+					|	var x = 0 - (posX / canvas.width)
+					|	var y = 0 - (posY / canvas.width)
+					|	...
+
+		p And this is what we have now. Not really much going on here but with our next step we'll start to see some improved interactivity.
+
+		canvas.canvas3
+
+		h3 Add Mouse Wheel Listener
+		p We want our users to be able to zoom in and out on an image via the mouse wheel, or scrolling. We can do that by creating another listener event called 
+			span.code-label onwheel
+			|  and retrieving the 
+			strong delta
+			|  values of the wheel action to get the intensity level of the scroll (greater intensity should equal faster scrolling, right?).
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var intensity = 0
+					|canvas.onwheel = (e) => {
+					|	if (e.deltaY < 0) {
+					|		intensity = (intensity + e.deltaY > 0) ? intensity + e.deltaY : 0
+					|	} else {
+					|		intensity += e.deltaY
+					|	}
+					|	createImage(intensity, x, y)
+					|}
+
+		p We'll start by declaring a variable called 
+			strong intensity
+			|  and placing it outside of our scope so that it can be referenced elsewhere. Then, we'll call our function and determine if the scroll was up or down based on if the event's 
+			strong deltaY
+			|  value was greater than or less than 0.
+		p If less then 0 (or 
+			em down
+			| ) then we want to run a little conditional to calculate the intensity. Since we update the intensity value with each wheel action, if the value of intensity and deltaY is greater than 0, then we'll add the 2 together. If it's less than 0 then we'll just leave it at 0. Else, if the user is scrolling up (zooming in) then we'll keep increasing the intensity based on the deltaY value.
+		p Finally, we'll create another image and pass in the intensity value as an argument. So that this actually has an effect, we'll need to update our 
+			span.code-label createImage
+			|  function to accept this new parameter.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function createImage(intensity, posX, posY) {
+					|	var width = canvas.width + (intensity * (canvas.width / canvas.height))
+					|	var height = canvas.height + intensity
+					|	...
+
+		p We want our image to scale based on the intensity value passed to it. So we'll dynamically set the 
+			strong width
+			|  and 
+			strong height
+			|  variables. Previously, they were just the width and height of the canvas. Now, we'll add in our intensity value. Since this image is wider than it is tall, well need to multiple the intensity value by how much bigger the image is wide than tall.
+		p Here's what we have now:
+
+		canvas.canvas4
+
+		p Okay, we have some action, but there are 2 glaring things wrong here - the page continues to scroll so we can't focus on the image and the image appears to zoom in only on the top-left corner of the canvas.
+		p Let's add an event listener to keep the window from scrolling when we're hovered over the canvas:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|canvas.onmouseover = () => {
+					|	document.querySelector('body').style.overflow = 'hidden'
+					|}
+					|
+					|canvas.onmouseleave = () => {
+					|	document.querySelector('body').style.overflow = 'visible'
+					|}
+
+		p When our canvas is hovered over, we'll set the 
+			strong body
+			|  tag's overflow to hidden - cutting off the rest of the page temporarily. Then, when we move our mouse off of the canvas we'll return the CSS overflow property to its default of 
+			em visible
+			| .
+		p That fixed our scrolling problem. Now we need to update the coordinates of our image so that when we zoom in with the mouse we'll be able to narrow our focus to the position of the mouse itself and not the top-left corner.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function createImage(intensity, posX, posY) {
+					|	...
+					|	var x = 0 - (posX / canvas.width) * (width - canvas.width)
+					|	var y = 0 - (posY / canvas.height) * (height - canvas.height)
+					|	...
+
+		p Back to our 
+			span.code-label createImage
+			|  function, we need to add something to our coordinate values. As the size of the image changes, we want to dynamically change the coordinates based on that size difference. We'll get the size difference by substracting it from the canvas's size, and then multiplying it by the position of the mouse on the canvas.
+		p That gives us this:
+
+		canvas.canvas5
+
+		p Great! We can zoom in and move our mouse around to explore the picture.  Now let's just add an icon and some formatting to make it a little more user-friendly ...
+
+		.canvas-container
+			canvas.canvas6
+			i.fas.fa-search-plus
+
+		script.
+			// CANVAS 1
+			var canvas1 = document.querySelector('.canvas1')
+			canvas1.width = 500
+			canvas1.height = 325
+			var c1 = canvas1.getContext('2d')
+			function createImage1() {
+				var width = canvas1.width
+				var height = canvas1.height
+				var x = 0
+				var y = 0
+			
+				var img = new Image
+				img.onload = () => {
+					c1.drawImage(img,x,y,width,height)
+				}
+				img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+			}
+			createImage1()
+
+			// CANVAS 2
+			var canvas2 = document.querySelector('.canvas2')
+			canvas2.width = 500
+			canvas2.height = 325
+			canvas2.top = canvas2.offsetTop
+			canvas2.left = canvas2.offsetLeft
+			var c2 = canvas2.getContext('2d')
+			function createImage2(posX,posY) {
+				var width = canvas2.width
+				var height = canvas2.height
+				var x = posX
+				var y = posY
+			
+				var img = new Image
+				img.onload = () => {
+					c2.drawImage(img,x,y,width,height)
+				}
+				img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+			}
+			createImage2(0, 0)
+			var y = 0, x = 0
+			canvas2.onmousemove = (e) => {
+				x = e.pageX - canvas2.left, y = e.pageY - canvas2.top
+				createImage2(x,y)
+			}
+
+			// CANVAS 3
+			var canvas3 = document.querySelector('.canvas3')
+			canvas3.width = 500
+			canvas3.height = 325
+			canvas3.top = canvas3.offsetTop
+			canvas3.left = canvas3.offsetLeft
+			var c3 = canvas3.getContext('2d')
+			function createImage3(posX,posY) {
+				var width = canvas3.width
+				var height = canvas3.height
+				var x = 0 - (posX / canvas3.width)
+				var y = 0 - (posY / canvas3.height)
+			
+				var img = new Image
+				img.onload = () => {
+					c3.drawImage(img,x,y,width,height)
+				}
+				img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+			}
+			createImage3(0, 0)
+			var y = 0, x = 0
+			canvas3.onmousemove = (e) => {
+				x = e.pageX - canvas3.left, y = e.pageY - canvas3.top
+				createImage3(x,y)
+			}
+
+			// CANVAS 4
+			var canvas4 = document.querySelector('.canvas4')
+			canvas4.width = 500
+			canvas4.height = 325
+			canvas4.top = canvas4.offsetTop
+			canvas4.left = canvas4.offsetLeft
+			var c4 = canvas4.getContext('2d')
+			function createImage4(intensity, posX,posY) {
+				var width = canvas4.width + (intensity * (canvas4.width / canvas4.height))
+				var height = canvas4.height + intensity
+				var x = 0 - (posX / canvas4.width)
+				var y = 0 - (posY / canvas4.height)
+			
+				var img = new Image
+				img.onload = () => {
+					c4.drawImage(img,x,y,width,height)
+				}
+				img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+			}
+			createImage4(0, 0, 0)
+			var y = 0, x = 0
+			canvas4.onmousemove = (e) => {
+				x = e.pageX - canvas4.left, y = e.pageY - canvas4.top
+				createImage4(x,y)
+			}
+			var intensity = 0
+			canvas4.onwheel = (e) => {
+				if (e.deltaY < 0) {
+					intensity = (intensity + e.deltaY > 0) ? intensity + e.deltaY : 0
+				} else {
+					intensity += e.deltaY
+				}
+				createImage4(intensity, x, y)
+			}
+
+
+			// CANVAS 5
+			var canvas5 = document.querySelector('.canvas5')
+			canvas5.width = 500
+			canvas5.height = 325
+			canvas5.top = canvas5.offsetTop + 250
+			canvas5.left = canvas5.offsetLeft
+			var c5 = canvas5.getContext('2d')
+
+
+			function createImage5(intensity, posX, posY) {
+				var width = canvas5.width + (intensity * (canvas5.width / canvas5.height))
+				var height = canvas5.height + intensity
+				var x = 0 - (posX / canvas5.width) * (width - canvas5.width)
+				var y = 0 - (posY / canvas5.height) * (height - canvas5.height)
+
+				var img = new Image
+				img.onload = () => {
+					c5.drawImage(img,x,y, width, height)
+				}
+				img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+			}
+			createImage5(0, 0, 0)
+
+			var y = 0, x = 0
+			canvas5.onmousemove = (e) => {
+				x = e.pageX - canvas5.left, y = e.pageY - canvas5.top
+				createImage5(intensity5,x,y)
+			}
+			var intensity5 = 0
+			canvas5.onwheel = (e) => {
+				if (e.deltaY < 0) {
+					intensity5 = (intensity5 + e.deltaY > 0) ? intensity5 + e.deltaY : 0
+				} else {
+					intensity5 += e.deltaY
+				}
+				createImage5(intensity5, x, y)
+			}
+
+			canvas5.onmouseover = () => {
+				document.querySelector('body').style.overflow = 'hidden'
+			}
+			canvas5.onmouseleave = () => {
+				document.querySelector('body').style.overflow = 'visible'
+			}
+
+
+			// CANVAS 6
+			var canvas6 = document.querySelector('.canvas6')
+			canvas6.width = 500
+			canvas6.height = 325
+			canvas6.top = document.querySelector('.canvas-container').offsetTop + 250
+			console.log(canvas6.top)
+			canvas6.left = document.querySelector('.canvas-container').offsetLeft
+			var c6 = canvas6.getContext('2d')
+
+
+			function createImage6(intensity, posX, posY) {
+				var width = canvas6.width + (intensity * (canvas6.width / canvas6.height))
+				var height = canvas6.height + intensity
+				var x = 0 - (posX / canvas6.width) * (width - canvas6.width)
+				var y = 0 - (posY / canvas6.height) * (height - canvas6.height)
+
+				var img = new Image
+				img.onload = () => {
+					c6.drawImage(img,x,y, width, height)
+				}
+				img.src = 'https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg'
+			}
+			createImage6(0, 0, 0)
+
+			var y = 0, x = 0
+			canvas6.onmousemove = (e) => {
+				x = e.pageX - canvas6.left, y = e.pageY - canvas6.top
+				createImage6(intensity6,x,y)
+			}
+			var intensity6 = 0
+			canvas6.onwheel = (e) => {
+				if (e.deltaY < 0) {
+					intensity6 = (intensity6 + e.deltaY > 0) ? intensity6 + e.deltaY : 0
+				} else {
+					intensity6 += e.deltaY
+				}
+				createImage6(intensity6, x, y)
+			}
+
+			canvas6.onmouseover = () => {
+				document.querySelector('body').style.overflow = 'hidden'
+			}
+			canvas6.onmouseleave = () => {
+				document.querySelector('body').style.overflow = 'visible'
+			}

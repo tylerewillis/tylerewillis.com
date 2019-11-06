@@ -1,0 +1,134 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+	style.
+		.canvas {
+			background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/New_York_City_at_night_HDR.jpg/1280px-New_York_City_at_night_HDR.jpg);
+			background-size: cover;
+			margin-bottom: 30px;
+			border-radius: 10px;
+		}
+
+block example-content
+	.write-up
+		h1 Computer Science Background Effect with HTML5 Canvas
+		h2 Use Case: To bring visual interest to your web page
+		p One of the most popular use-cases for HTML5's Canvas tag is background effects and animations. There are a lot of really neat examples of how front-end developers have manipulated Canvas to create some stunning effects.
+		p Here's a simple implementation for how you could bring life to a background image using Canvas:
+
+		.canvas
+			canvas
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					| // Example code to come
+					
+		script.
+			function distance(x1,y1,x2,y2) {
+				let xDistance = x2 - x1
+				let yDistance = y2 - y1
+				return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
+			}
+
+			function randomIntFromRange(min,max) {
+				return Math.floor(Math.random() * (max - min + 1) + min)
+			}
+
+			var canvas = document.querySelector('canvas')
+			canvas.width = 700
+			canvas.height = 450
+			var c = canvas.getContext('2d')
+
+			var mouse = {
+				x: undefined,
+				y: undefined
+			}
+
+
+			window.addEventListener('mousemove', function(e) {
+				mouse.x = e.pageX - document.querySelector('canvas').offsetLeft
+				mouse.y = e.pageY - document.querySelector('canvas').offsetTop
+			})
+
+
+			function Circle(x,y,r,color) {
+				this.x = x
+				this.y = y
+				this.r = r
+				this.velocity = {
+					x: Math.random() - 0.5,
+					y: Math.random() - 0.5
+				}
+				this.color = color
+
+				this.update = circleArray => {
+
+					this.draw()
+
+					// Other balls
+					for (let i = 0; i < circleArray.length; i++) {
+						if (this === circleArray[i]) continue
+
+						if (distance(this.x,this.y, circleArray[i].x, circleArray[i].y) - r * 2 < 100) {
+							c.beginPath()
+							c.moveTo(this.x, this.y)
+							c.lineTo(circleArray[i].x, circleArray[i].y)
+							c.strokeStyle = 'gray'
+							c.stroke()
+						}
+					}
+
+					// Keep within page frame
+					if (this.x + this.r > canvas.width || this.x - this.r < 0) this.velocity.x = -this.velocity.x
+					if (this.y + this.r > canvas.height || this.y - this.r < 0) this.velocity.y = -this.velocity.y
+					this.x += this.velocity.x
+					this.y += this.velocity.y
+
+					// Mouse Interactivity
+					if (distance(mouse.x, mouse.y, this.x, this.y) < 200) {
+						c.beginPath()
+						c.moveTo(this.x, this.y)
+						c.lineTo(mouse.x, mouse.y)
+						c.strokeStyle = 'gold'
+						c.stroke()
+					}
+				}
+
+				this.draw = function() {
+					c.beginPath()
+					c.arc(this.x, this.y, this.r, 0, Math.PI * 2, false)
+					c.fillStyle = this.color
+					c.fill()
+				}
+			}
+
+
+			var circleArray = []
+			function init() {
+
+				circleArray = []
+				for (i = 0; i < 50; i++) {
+					var r = 3
+					let x = randomIntFromRange(r, canvas.width - r)
+					let y = randomIntFromRange(r, canvas.height - r)
+					const color = '#fff'
+
+					circleArray.push(new Circle(x,y,r,color))
+				}
+			}
+
+			function animate() {
+				requestAnimationFrame(animate)
+				c.clearRect(0,0, innerWidth, innerHeight)
+
+				for (i = 0; i < circleArray.length; i++) {
+					circleArray[i].update(circleArray)
+				}
+			}
+
+			animate()
+			init()

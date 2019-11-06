@@ -139,6 +139,16 @@
 		]
 	},
 	{
+		"header": "Computer Science Background Effect with HTML5 Canvas",
+		"url": "comp-sci-background-canvas",
+		"description": "Using Canvas to make an interesting and interactive background effect.",
+		"category": "Code Examples",
+		"keywords": [
+			"Canvas",
+			"JavaScript"
+		]
+	},
+	{
 		"header": "How I Reduce Contact Form Spam",
 		"url": "reduce-spam",
 		"description": "Website-generated spam is a major problem - one that doesn't go away and is next to impossible to solve. Here's what I did to all but solve the problem entirely.",

@@ -1,0 +1,54 @@
+extends layout.pug
+
+block head
+	include front/head.pug
+	title Products, Projects and Platforms | Tyler Willis
+	meta(name='description', content=`Contained is a list of projects and applications I've had the opportunity to develop or participate in developing.`)
+	meta(property='og:locale', content='en_US')
+	meta(property='og:type', content='website')
+	meta(property='og:url', content='/pages')
+	meta(property='og:title', content=`Products, Projects and Platforms | Tyler Willis`)
+	meta(property='og:description', content=`Contained is a list of projects and applications I've had the opportunity to develop or participate in developing.`)
+	meta(property='og:image', content=`/static/media/social-media.png`)
+
+block content
+	.page.page-pages.page-projects
+		h1 Projects
+		p.sub-header Products, projects and platforms
+
+		//- Search
+			.pages-search-container
+				if init
+					input.pages-search.pages-search-init(type='text', placeholder='Search', value=`${init}`)
+				else
+					input.pages-search(type='text', placeholder='Search')
+				p
+
+		//- Listing of pages	
+		.pages-container
+
+			//-
+			each project in projects
+				.page-single
+					.page-icon.page-icon-personal!= project.icon
+					.page-details
+						h2 #{project.header}
+						p #{project.description}
+
+						//- Keywords
+						if project.keywords
+							.pd-keywords
+								each keyword in project.keywords
+									p ##{keyword}
+
+						a(href=`/project/${project.url}`) View
+							i.fas.fa-chevron-right
+
+			//- No results
+				p.pages-search-no-results
+
+		//- Keywords
+			.pages-keywords
+				each keyword in keywords
+					a(href=`/pages/${keyword}`) ##{keyword}
+		

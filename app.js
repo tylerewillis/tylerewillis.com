@@ -38,10 +38,10 @@ if (cluster.isMaster) {
 	// Router
 	const mainRoutes = require('./routes')
 	const pageRoutes = require('./routes/pages')
-	const productRoutes = require('./routes/products')
+	const projectRoutes = require('./routes/projects')
 	app.use(mainRoutes)
 	app.use('/page', pageRoutes)
-	app.use(productRoutes)
+	app.use('/project', projectRoutes)
 
 	// 404 Error
   app.all('*', function(req, res) {

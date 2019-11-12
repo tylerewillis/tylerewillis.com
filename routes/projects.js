@@ -19,13 +19,26 @@ var compression = require('compression')
 app.use(compression())
 
 //================================================
-// Bracket Balance - checking balance strings
+// Pages
 //================================================
 
-router.get('/from-zero-to-computer-scientist', (req, res) => {
-  // Render page
-  var args = { url: '/from-zero-to-computer-scientist' }
-  res.render('products/zero-to-computer-scientist', args)
+router.get('/:url', (req, res) => {
+  // Get pages from file
+  var json = fs.readFileSync('./includes/projects.json')
+  let projects = JSON.parse(json)
+
+  var exists = false
+  projects.forEach(async function(project) {
+    if (project.url == req.params.url) {
+      exists = true
+      var keywordString = project.keywords.join(', ')
+      var args = { title: project.header, description: project.description, keywords: project.keywords, keywordString, url: `/project/${req.params.url}` }
+      res.render(`projects/${req.params.url}`, args)
+    }
+  })
+  if (exists == false) {
+    res.redirect('/projects')
+  }
 })
 
 module.exports = router

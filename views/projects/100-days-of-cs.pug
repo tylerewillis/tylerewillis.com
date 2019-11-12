@@ -1,0 +1,146 @@
+extends ../projects/projects/layout.pug
+
+block projects-head
+	include ../projects/projects/meta.pug
+
+block example-content
+	.write-up
+		h1 #100DaysofCS
+		h2 Use Case: For coders looking to become programmers and programmers - computer scientists.
+		p 100 Days of Computer Science (aka 
+			a(href='https://twitter.com/100daysofcs', target='_blank') @100daysofcs
+			|  or 
+			a(href='https://twitter.com/search?q=%23100daysofcs&src=typeahead_click', target='_blank') #100daysofcs
+			| ) is a resource platform that I put together while on my own pursuit to become a computer scientist.
+		p Not having a computer science bachelor's degree (B.S. Marketing, 2010) but wanting to become the best programmer and program architect I could be, I scoured the internet looking for free resources (I do have 4 kids after all) that could teach me about the many hundreds and thousands of critical computer science processes, theories and terminology.
+		p For the most part, I didn't have a hard time finding results to my queries. What I 
+			em did
+			|  have trouble finding, at times, were the right resources -
+		ul
+			li Correct information that would lead me to a proper understanding
+			li Information delivered in English (or at least a way that it could be understood by someone who only speaks English)
+			li Clear and succinct content that would help me find the answers I was looking for
+			li Good quality content, not spammy websites or hard-to-consume videos
+		p When I did come across a resource to my liking, I made a note of the resource's location so that I could easily refer to it later on.
+		p This brings me to this platform - it's simply a place for me to share the information that I've accumulated for the benefit of others and in hopes that others will contribute their discovered resources as well.
+
+		//-
+		h3 Front-End
+		p The platform exists on 
+			a(href='https://twitter.com/100daysofcs', target='_blank') Twitter
+			|  and is a stand-alone website - 
+			a(href='https://100daysofcs.com', target='_blank') 100daysofcs.com
+			| . The website is primarily two pages (other than a simple home page) - a links page and a cards page.
+		p The resource links page is a complete listing of all accumulated links and can be ...
+		ul
+			li Searched: By keyword or keyphrase, domain and title
+			li Sorted: By newest, oldest, most popular, and highest-rated
+			li Filtered: By beginner-level content, intermediate, advanced or all content
+		img(src='/static/media/100daysofcs-links.jpg')
+		p The flash cards page allows the user to easily test their knowledge on desktop or mobile by clicking on the card to show the answer, and navigating to the right, left or to a random card.
+		img(src='/static/media/100daysofcs-cards.jpg')
+		p For the user's benefit, the site also has a few formatting options. In addition to the default formatting, users can view the links in full-width form (as opposed to grid).
+		img(src='/static/media/100daysofcs-links-bars.jpg')
+		p Or with even less formatting.
+		img(src='/static/media/100daysofcs-links-plain.jpg')
+		p Additionally, users can view the site in light- or dark-mode 
+			a(href='/page/dark-mode', target='_blank') determined automatically based on computer and browser settings
+			|  or selected and saved by the user when visiting the site.
+		img(src='/static/media/100daysofcs-links-wht.jpg')
+
+		//-
+		h3 Back-End
+		p On the back-end, the web app is built with 
+			strong Node.js
+			|  and -
+		ul
+			li Express.js for routing and middleware
+			li Pug for templating
+			li SCSS for styling
+			li JavaScript for interacting
+			li Other Node modules for performance and security
+		p The application doesn't leverage a database, rather, links and flash cards exist on JSON files that get updated via Node's 
+			strong File System
+			|  module. Additionally, these JSON files get written to when links are clicked on (for tracking popularity) and liked (for tracking rating).
+		p The resource link searching, sorting and filtering all exist on one Express GET route with options being passed as parameters:
+
+		.example
+			pre
+				code.language-javascript
+					|router.get('/links/:sort/:filter/:keyword', (req, res) => { ... }
+
+		p Not only did this make the develop more succinct, but it allows search engines to index each individual option and keyword as an independent URL for SEO purposes.
+		p When returning the results, if filtered by difficulty and a result doesn't match the difficulty, it gets deleted from the links object:
+
+		.example
+			pre
+				code.language-javascript
+					|if (data.links[i].level !== 1) { delete data.links[i] }
+
+		p When sorted, it was easy to determine the order of the oldest vs the newest links. The difficult part came when I tried sorting the results by popularity and rating since each are only listed as properties of their respective link objects.
+		p I found the most efficient way to do this was by looping through the array of link objects and passing the results to a 
+			strong linked list
+			| . I used a previously shared 
+			a(href='/page/linked-lists', target='_blank') linked list implementation
+			| , and added 2 
+			span.code-label push
+			|  methods - one for pushing and sorting new nodes by popularity and the other for pushing and sorting new nodes by rating.
+
+		.example
+			pre
+				code.language-javascript
+					|pushRating(data) {
+					|	let node = new Node(data)
+					|	let temp = this.head
+					|	let prev = null
+					|	let i = 0
+					|	while (temp) {
+					|		if (node.data.rating > temp.data.rating) {
+					|			if (prev) {
+					|				prev.next = node
+					|				node.next = temp
+					|			} else {
+					|				this.head = node
+					|				node.next = temp
+					|			}
+					|			return
+					|		}
+					|		prev = temp
+					|		temp = temp.next
+					|	}
+					|	if (temp !== prev) {
+					|		prev.next = node
+					|	}
+					|}
+					|
+					|pushClicks(data) {
+					|	let node = new Node(data)
+					|	let temp = this.head
+					|	let prev = null
+					|	while (temp) {
+					|		if (node.data.clicks > temp.data.clicks) {
+					|			if (prev) {
+					|				prev.next = node
+					|				node.next = temp
+					|			} else {
+					|				this.head = node
+					|				node.next = temp
+					|			}
+					|			return
+					|		}
+					|		prev = temp
+					|		temp = temp.next
+					|	}
+					|	if (temp !== prev) {
+					|		prev.next = node
+					|	}
+					|}
+
+		p 
+			em Note: These are the same minus the function names and line 6.
+		p In short, each of functions add new nodes to the linked list by checking if their respective values (rating or clicks) are greater than the existing list's head, and then looping or recursing through each of the node's until that conditional statement is true. Once it's true the node is placed in position by setting the previous node's pointer to the new node and set the new node's pointer to the value of the previous node's prior pointer.
+		p There's likely a better way to do this - presently this operation takes O(n^2) time which isn't great - but considering we'd be looping through at-most a few hundred links it's not terrible.
+		p One final note is that this is the first 
+			strong open source
+			|  project I've done on GitHub where I'm actively looking for contributions from fellow programmers - so cheers there! Please consider 
+			a(href='https://github.com/tylerewillis/100daysofcs', target='_blank') contributing yourself or feel free to just check out the source code. Thanks!

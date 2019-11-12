@@ -27,11 +27,11 @@ router.get('/', (req, res) => {
   let featuredPages = pages.slice(0,5)
 
   // Get projects from file
-  json = fs.readFileSync('./includes/products.json')
-  let products = JSON.parse(json)
+  json = fs.readFileSync('./includes/projects.json')
+  let projects = JSON.parse(json)
 
   // Render page
-  var args = { pages: featuredPages, products }
+  var args = { pages: featuredPages, projects }
   res.render('index', args)
 })
 
@@ -75,6 +75,27 @@ router.get('/pages', getPages, (req, res) => {
 router.get('/pages/:keyword', getPages, (req, res) => {
   req.args.init = req.params.keyword
   res.render('pages', req.args)
+})
+
+//===============================================
+//= getProjects Middleware
+//===============================================
+
+var getProjects = (req,res,next) => {
+  // Get pages from file
+  var json = fs.readFileSync('./includes/projects.json')
+  let projects = JSON.parse(json)
+
+  req.args = { projects }
+  next()
+}
+
+//===============================================
+//= Pages
+//===============================================
+
+router.get('/projects', getProjects, (req, res) => {
+  res.render('projects', req.args)
 })
 
 module.exports = router

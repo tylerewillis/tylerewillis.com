@@ -1,0 +1,34 @@
+extends ../../layout.pug
+
+block head
+	link(rel='stylesheet', href='/static/css/prism.css')
+	script(src='/static/js/prism.js')
+	script(src='/static/js/projects.js')
+	block projects-head
+
+block content
+	.page.project
+		.page-example
+			block example-content
+
+			//- Social Media Share Container
+			.social-share-container
+				p Share:
+				//-
+				a.facebook(href=`https://www.facebook.com/sharer/sharer.php?u=https://tylerewillis.com${url}` target='_blank')
+					i.fab.fa-facebook-f
+				//-
+				a.twitter(href=`https://twitter.com/intent/tweet?url=https://tylerewillis.com${url}` target='_blank')
+					i.fab.fa-twitter
+				//-
+				a.linkedin(href=`https://www.linkedin.com/shareArticle?mini=true&url=https://tylerewillis.com${url}` target='_blank')
+					i.fab.fa-linkedin-in
+
+			//- Footer for example pages
+			.example-footer
+				//- Keywords
+				if keywords
+					.ef-keywords
+						each keyword in keywords
+							p ##{keyword}
+				hr

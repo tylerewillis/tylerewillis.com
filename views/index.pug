@@ -23,7 +23,7 @@ block content
 				a(href='#about') About
 				a(href='#skills') Skills
 				a(href='#pages') Pages
-				a(href='#products') Products
+				a(href='#projects') Projects
 				a(href='#contact') Contact
 
 
@@ -154,17 +154,19 @@ block content
 		
 
 		//-----------------------------------------------------
-		//- Products
+		//- Projects
 		//-----------------------------------------------------
 
-		.pages.section#products
-			h2 Products
-			p.sub-header Fun products, experimentations and other MVPs
-			each product in products
+		.pages.section#projects
+			h2 Projects
+			p.sub-header Products, projects and platforms
+			each project in projects
 				.post
-					h3 #{product.header}
-					p #{product.description}
-					a(href=`${product.url}`) View
+					h3 
+						.page-icon!= project.icon
+						| #{project.header}
+					p #{project.description}
+					a(href=`/project/${project.url}`) View
 						i.fas.fa-chevron-right
-			a(href='/products' class='post-all')
+			a(href='/projects' class='post-all')
 				span See All

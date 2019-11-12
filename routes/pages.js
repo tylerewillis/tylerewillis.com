@@ -18,6 +18,10 @@ const defaultLimiter = slowDown({
 var compression = require('compression')
 app.use(compression())
 
+//================================================
+// Pages
+//================================================
+
 router.get('/:url', (req, res) => {
   // Get pages from file
   var json = fs.readFileSync('./includes/pages.json')
@@ -35,21 +39,6 @@ router.get('/:url', (req, res) => {
   if (exists == false) {
     res.redirect('/pages')
   }
-})
-
-//================================================
-// Flashcards
-//================================================
-
-router.get('/flashcards', (req, res) => {
-
-  // Get flashcards from file
-  let json = fs.readFileSync('./includes/flash-cards.json')
-  let cards = JSON.parse(json)
-
-  // Render page
-  var args = { cards, url: '/page/flashcards' }
-  res.render('pages/flashcards', args)
 })
 
 module.exports = router

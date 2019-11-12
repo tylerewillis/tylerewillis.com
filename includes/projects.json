@@ -1,0 +1,13 @@
+[
+	{
+		"header": "#100DaysofCS",
+		"url": "100-days-of-cs",
+		"description": "100 Days of Computer Science is a resource platform for programmers looking to level-up their CS skills with links to free resources and flash cards.",
+		"icon": "<i class='fad fa-th'></i>",
+		"keywords": [
+			"open source",
+			"node.js",
+			"search algorithm"
+		]
+	}
+]

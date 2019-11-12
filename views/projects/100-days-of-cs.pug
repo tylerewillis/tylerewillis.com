@@ -137,10 +137,11 @@ block example-content
 					|}
 
 		p 
-			em Note: These are the same minus the function names and line 6.
+			em Note: These are the same minus the function names and line 7 (6 on the second function).
 		p In short, each of functions add new nodes to the linked list by checking if their respective values (rating or clicks) are greater than the existing list's head, and then looping or recursing through each of the node's until that conditional statement is true. Once it's true the node is placed in position by setting the previous node's pointer to the new node and set the new node's pointer to the value of the previous node's prior pointer.
 		p There's likely a better way to do this - presently this operation takes O(n^2) time which isn't great - but considering we'd be looping through at-most a few hundred links it's not terrible.
 		p One final note is that this is the first 
 			strong open source
 			|  project I've done on GitHub where I'm actively looking for contributions from fellow programmers - so cheers there! Please consider 
-			a(href='https://github.com/tylerewillis/100daysofcs', target='_blank') contributing yourself or feel free to just check out the source code. Thanks!
+			a(href='https://github.com/tylerewillis/100daysofcs', target='_blank') contributing yourself
+			|  or feel free to just check out the source code. Thanks!

@@ -45,15 +45,13 @@
 	height: 100%;
 }
 
-// Flex containers
-@mixin flex-container(
-	$justify: space-between,
-	$align: null,
-	$wrap: wrap) {
-	display: flex;
-	justify-content: $justify;
-	flex-wrap: $wrap;
-	align-items: $align;
+// Transform
+@mixin transform($name) {
+	-webkit-transform: $name;
+	-moz-transform: $name;
+	-ms-transform: $name;
+	-o-transform: $name;
+	transform: $name;
 }
 
 // Animations

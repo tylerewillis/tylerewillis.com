@@ -55,6 +55,18 @@
 		]
 	},
 	{
+		"header": "Start Over: The Simple Way to Accomplish Nesting Level 0",
+		"url": "nesting-level-0",
+		"description": "Avoid out-of-control if-else nesting conditional statements known as 'pyramids of doom' with these easy return statements.",
+		"category": "Code Examples",
+		"keywords": [
+			"JavaScript",
+			"nesting",
+			"conditionals",
+			"pyramid of doom"
+		]
+	},
+	{
 		"header": "Check if Binary Search Tree Structure is Valid",
 		"url": "is-binary-search-tree",
 		"description": "Binary search trees allow for efficient functionality but only when their nodes follow the rules. Here's how to check if a binary search tree is valid.",

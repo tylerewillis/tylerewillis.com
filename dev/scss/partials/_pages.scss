@@ -254,6 +254,11 @@
 			tab-size: 3;
 		}
 	}
+	.example.rotate-90 {
+		width: 320px;
+		margin: 100px auto;
+		@include transform(rotate(-90deg));
+	}
 	strong {
 		font-weight: 900;
 	}

@@ -1,0 +1,117 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Start Over: The Simple Way to Accomplish Nesting Level 0
+		h2 Use Case: Make your code more succinct and easier to read by eliminating nested if-else statements.
+		p Regardless of your programming experience, if you've ever created a program wherein a certain value is compared against multiple independent conditionals, you've probably violated a programming faux pas known as the 'pyramid of doom'.
+		p The pyramid of doom is the result of nesting if-else statements inside of each other. Something like this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|if (name !== false) {
+					|	if (directory.includes(name)) {
+					|		if (newMembers.includes(name)) {
+					|			if (name.charAt(0) !== 'T') {
+					|				...
+					|			}
+					|		}
+					|	}
+					|}
+
+		p This is a small example, but, if we rotated it, can you see how that might look like a pyramid?
+
+		.example.rotate-90
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|if (name !== false) {
+					|	if (directory.includes(name)) {
+					|		if (newMembers.includes(name)) {
+					|			if (name.charAt(0) !== 'T') {
+					|				...
+					|			}
+					|		}
+					|	}
+					|}
+
+		p Here are some more extreme examples - 
+			a(href='https://www.google.com/search?biw=1424&bih=826&tbm=isch&sa=1&ei=SjvUXaS_G4fU5gLElLygBw&q=pyramid+of+doom&oq=pyramid+of+doom&gs_l=img.3...0.0..130967...0.0..0.0.0.......0......gws-wiz-img.sLQX1lNL4kA&ved=0ahUKEwikjNOt-vblAhUHqlkKHUQKD3QQ4dUDCAc&uact=5', target='_blank') google.com
+			| .
+
+		p More importantly (and really what makes the pyramid of doom so bad) is can you see how this might make your code hard to read, both for others and for yourself? 
+			em Which statement are we currently residing in? Where does each statement end?
+		p We're going to create a simple greeting/logging function called 
+			span.code-label greetMember
+			|  that will log hello to people and check whether or not they exist in our member database (or array, for our purposes in this post).
+		p So, let's set up an array of current member's names and create a function to greet our members in a not so non-pyramid-friendly way:
+
+		.example.rotate-90
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var members = ['Tyler', 'Stephen', 'Chad']
+					|
+					|function greetMember(name, callback) {
+					|	if (!name) {
+					|		callback(`Sorry, what's your name?`)
+					|	} else {
+					|		if (!members.includes(name)) {
+					|			callback(`Welcome, ${name}!`)
+					|		} else {
+					|			callback(`Good to see you again, ${name}!`)
+					|		}
+					|	}
+					|}
+
+		p We're checking first that the 
+			strong name
+			|  variable exists. If it doesn't, we're calling our 
+			strong callback
+			|  function with the string argument 'Sorry, what's your name?'. If it does exist, then we're checking whether or not the name exists in our 
+			strong members
+			|  array and then calling the callback accordingly.
+		p Not terrible. We're only nesting one if-else statement inside of another one. Even though our problem is small, we want to create good habits in our code, so let's rewrite the above function with a nesting-free alternative.
+
+		.example.rotate-90
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function greetMember(name, callback) {
+					|	if (!name) {
+					|		return callback(`Sorry, what's your name?`)
+					|	}
+					|	if (!members.includes(name)) {
+					|		return callback(`Welcome, ${name}!`)
+					|	}
+					|	return callback(`Good to see you again, ${name}!`)
+					|}
+
+		p In this better version, we're still calling the same conditional statements, however we're putting them one after the other and using the 
+			strong return
+			|  keyword to return the callback function at each step along the way. Doing this exits the function immediately so that our program won't continue to run the rest of the unncessary function.
+		p For example, if the 
+			strong name
+			|  variable doesn't exist, then we'll return our callback function with the string argument 'Sorry, what's your name?' and our program will exit the function. If it does exist, we'll check the next conditional statement. If members 
+			em does
+			|  include name then, ultimately, we'll reach the last line of our function and return the callback with the string argument 'Good to see you again, name!'
+		p Then, we can call our 
+			span.code-label greetMember
+			|  function as such:
+
+		.example.rotate-90
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|greetNewMember('Phil',console.log)
+					|// Welcome, Phil!
+
+		p Referencing the 'use case' mentioned at the beginning of this post, eliminating nested if-else statements with return statements:
+		ul
+			li Makes our code easier to read
+			li Makes our program more efficient by exiting functions

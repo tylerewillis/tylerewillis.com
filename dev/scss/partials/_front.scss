@@ -245,6 +245,7 @@
 					background-color: $color-primary;
 					width: 40px;
 					box-shadow: 3px 0px 0px $color-primary-light;
+					align-self: baseline;
 					@include transition(.5s);
 				}
 				.s-bar-zero {

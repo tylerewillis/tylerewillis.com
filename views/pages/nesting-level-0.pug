@@ -51,7 +51,7 @@ block example-content
 			|  that will log hello to people and check whether or not they exist in our member database (or array, for our purposes in this post).
 		p So, let's set up an array of current member's names and create a function to greet our members in a not so non-pyramid-friendly way:
 
-		.example.rotate-90
+		.example
 			p.label JavaScript
 			pre
 				code.language-javascript
@@ -78,7 +78,7 @@ block example-content
 			|  array and then calling the callback accordingly.
 		p Not terrible. We're only nesting one if-else statement inside of another one. Even though our problem is small, we want to create good habits in our code, so let's rewrite the above function with a nesting-free alternative.
 
-		.example.rotate-90
+		.example
 			p.label JavaScript
 			pre
 				code.language-javascript
@@ -104,11 +104,11 @@ block example-content
 			span.code-label greetMember
 			|  function as such:
 
-		.example.rotate-90
+		.example
 			p.label JavaScript
 			pre
 				code.language-javascript
-					|greetNewMember('Phil',console.log)
+					|greetMember('Phil',console.log)
 					|// Welcome, Phil!
 
 		p Referencing the 'use case' mentioned at the beginning of this post, eliminating nested if-else statements with return statements:

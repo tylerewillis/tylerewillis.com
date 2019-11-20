@@ -8,7 +8,8 @@
     "eslint": "./node_modules/.bin/eslint",
     "watch-css": "./node_modules/.bin/node-sass -o public/css dev/scss --watch",
     "dev": "nodemon & npm run watch-css",
-    "build": "./node_modules/.bin/node-sass -o public/css dev/scss --output-style compressed"
+    "sitemap": "node sitemap.js",
+    "build": "./node_modules/.bin/node-sass -o public/css dev/scss --output-style compressed & npm run sitemap"
   },
   "author": "",
   "license": "ISC",

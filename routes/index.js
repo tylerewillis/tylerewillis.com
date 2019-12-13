@@ -98,4 +98,12 @@ router.get('/projects', getProjects, (req, res) => {
   res.render('projects', req.args)
 })
 
+//===============================================
+//= Privacy
+//===============================================
+
+router.get('/privacy', (req, res) => {
+  res.render('privacy-policy', req.args)
+})
+
 module.exports = router

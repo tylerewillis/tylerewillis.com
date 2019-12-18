@@ -1,0 +1,164 @@
+extends ../projects/projects/layout.pug
+
+block projects-head
+	include ../projects/projects/meta.pug
+
+block example-content
+	.write-up
+		h1 #100DaysofCS Chrome Browser Extension
+		h2 Use Case: To encourage community participation in growing the catalog of resources.
+		p I wanted to make a quicker, easier way to be able to submit new resource links to 
+			a(href='https://100daysofcs.com', target='_blank') 100DaysofCS.com
+			|  so I built a Chrome browser extension! It's free to download and requires only a valid submission ID (to prevent spam and control the quality of the submissions) to push new URLs directly to 100DaysofCS.com.
+		p If you want to learn more about the #100DaysofCS project, you can view 
+			a(href='/project/100-days-of-cs' target='_blank') this write-up
+			|  I did previously. Below I'm going to give a brief overview as to how I created this browser extension in Chrome.
+
+		//-
+		h3 Front-End
+		p The browser extension itself doesn't require much front-end design. I created a simple form that automatically populates as much data as possible from the active browser tab into a form that can be submitted directly as a POST request to 100DaysofCS.com.
+		img(src='/static/media/submit-links-to-100-chrome-extension-2.png')
+		p Additionally, the extension needed to be registered and approved with Chrome in order to be published to the Chrome Web Store.
+		img(src='/static/media/submit-links-to-100-chrome-extension-1.png')
+
+		//-
+		h3 Back-End
+		p Being able to leverage Chrome's API makes the back-end of the extension fairly brief as well. The most complicated part of browser extensions is having to create scripts that exist in independent environments work together.
+		p A basic browser extension has 3 different environments:
+		ul
+			li The webpage or content existing on the tab
+			li The extension's popup window
+			li The script working in the background leveraging the browser's API functionality
+		p Each different avenue requires its own script, in my case:
+		ul
+			li The content.js file for the active tab
+			li The popup.js file for the extension's window
+			li The background.js file for the background API
+		p Each of these scripts must work together to pass data one to another in order to provide the desired functionality for the extension itself.
+		h4 The content.js file
+		p For this extension, it all started with the 
+			strong content.js
+			|  file. When a user visits a new webpage I wanted the extension to pull data from the web page on the active tab and send it to other parts of the extension. With the content.js file, I was able to manipulate the DOM of the active tab.
+		p Below is the contents of the file where you'll see simple data collection via the DOM.
+
+		.example
+			pre
+				code.language-javascript
+					|// Get current url
+					|var url = window.location.href
+					|
+					|// Get current title
+					|var title = ''
+					|if ($("title")) {
+					|	title = $("title").text()
+					|} else if ($("meta[property='og:title']")) {
+					|	title = $("meta[property='og:title']").attr('content')
+					|} else if ($("meta[name='twitter:title']")) {
+					|	title = $("meta[name='twitter:title']").attr('content')
+					|}
+					|
+					|// Get current meta description
+					|var metaDesc = ''
+					|if ($("meta[name='description']")) {
+					|	metaDesc = $("meta[name='description']").attr('content')
+					|} else if ($("meta[property='og:description']")) {
+					|	metaDesc = $("meta[property='og:description']").attr('content')
+					|} else if ($("meta[name='twitter:description']")) {
+					|	metaDesc = $("meta[name='twitter:description']").attr('content')
+					|}
+					|
+					|// Send page variables to background script
+					|chrome.runtime.sendMessage({
+					|	url,
+					|	title,
+					|	metaDesc
+					|})
+
+		p Once we retrieve the url, title and description from the active tab, we need to send the data from the tab to the background script. We can do this by leveraging the 
+			strong chrome.runtime
+			|  API where we'll send an object as a message to the background.js file.
+		h4 The background.js file
+		p The 
+			strong background.js
+			|  file is even smaller than the content.js file. All we're doing with this file is accepting the object we sent above and then setting up the object's properties as global variables.
+
+		.example
+			pre
+				code.language-javascript
+					|var url
+					|var title
+					|var metaDesc
+					|chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+					|	url = request.url
+					|	title = request.title
+					|	metaDesc = request.metaDesc
+					|})
+					|
+					|// Get ID from extension options
+					|var id
+					|chrome.storage.sync.get({'id': 0}, function(items) {
+					|	id = items.id
+					|})
+
+		p Once again we're leveraging the 
+			strong chrome.runtime
+			|  API but from the receiving end by creating a listener function to receive the object from content.js. We're setting the declared global variables equal to these values in order to access them next in our popup.js file.
+		p In the background.js file we're also accepting the 
+			strong id
+			|  value that is stored in the browser extension's option window (I previously mentioned the extension requiring a submission id). We're also setting this variable as a global variable.
+		h4 The popup.js file
+		p The final piece to the puzzle for our extension is to automatically populate these values in our extension's popup window.
+
+		.example
+			pre
+				code.language-javascript
+					|// Retrieve global variables from background
+					|let bgpage = chrome.extension.getBackgroundPage()
+					|let url = bgpage.url
+					|let title = bgpage.title
+					|let metaDesc = bgpage.metaDesc
+					|let id = bgpage.id
+					|
+					|// Add title and description to form inputs
+					|$('.name').val(title)
+					|$('.description').val(metaDesc)
+					|
+					|// POST to 100daysofcs.com
+					|$('.submit').click(function() {
+					|
+					|	let data = {
+					|		href: url,
+					|		name: $('.name').val(),
+					|		type: $('.type').val(),
+					|		description: $('.description').val(),
+					|		keywords: $('.keywords').val(),
+					|		difficulty: $('.difficulty').val()
+					|	}
+					|
+					|	$.ajax({
+					|		type: "POST",
+					|		url: 'https://100daysofcs.com/api/links/' + id,
+					|		data: data,
+					|		success: function(data) {
+					|			$('.success-message').text(data)
+					|		}
+					|	})
+					|})
+
+		p The first thing we're doing in the 
+			strong popup.js
+			|  script is retrieving the global variables from the background script file. Here we're leveraging the 
+			strong chrome.extension
+			|  API in order to retrieve the variables set prior.
+		p Next, we're automatically populating our popup form (located on our popup's HTML file) with the 
+			strong title
+			|  and 
+			strong description values.
+		p Finally, on form submission we're submitting our data via Ajax as a POST request to 100Daysofcs.com and printing a confirmation message. At 100Daysofcs we're checking for a valid submission ID from the user and then pushing the new resource link directly to the 
+			strong Links
+			|  page.
+		p If you could benefit from enhancing your computer science and programming skills, please consider joining our community. You can contribute either by 
+			a(href='https://chrome.google.com/webstore/detail/submit-links-to-100daysof/ooehllfkkfmlfgnpeagpenhieibdmpdj', target='_blank') downloading and using the Chrome extension
+			|  featured in this post or by
+			a(href='https://github.com/tylerewillis/100daysofcs', target='_blank') submitting a pull request on Github
+			| . I look forward to hearing from you!

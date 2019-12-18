@@ -9,5 +9,16 @@
 			"node.js",
 			"search algorithm"
 		]
+	},
+	{
+		"header": "Chrome Extension for #100DaysofCS",
+		"url": "chrome-extension-100daysofcs",
+		"description": "I wanted to create an easier way to add computer science links to the 100Daysofcs.com website, so I created a Chrome Extension!",
+		"icon": "<i class='fab fa-chrome'></i>",
+		"keywords": [
+			"open source",
+			"browser extension",
+			"chrome"
+		]
 	}
 ]

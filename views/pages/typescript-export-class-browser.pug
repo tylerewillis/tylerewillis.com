@@ -1,0 +1,195 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Exporting a Browser Event Listener Class in TypeScript
+		h2 Use Case: To write code efficiently and comply with the 'single responsibility' coding principle
+		p If you're writing code in TypeScript then I'll assume that you've put a focus on writing code efficiently by leveraging static typing and identifying potential bugs at compile time instead of dealing with them later on in development.
+		p The 
+			strong single responsibility principle
+			|  should then be on your radar as well. It states that
+		.quote
+			p a computer programming principle that states that every module, class, or function should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class, module or function. All its services should be narrowly aligned with that responsibility. (
+				a(href='https://en.wikipedia.org/wiki/Single_responsibility_principle', target='_blank') Wikipedia
+				| ).
+		p You could implement this principle by creating and using classes and functions within the same file, but then our coding efficiency would eventually be lost when trying to scroll through a long file. Its best to create individual files that hold our modules and include them when necessary.
+		p There are many ways to do this (depending on your setup) including 
+			strong export
+			| , 
+			strong import
+			| ,
+			strong include
+			| , 
+			strong require
+			| , and others. However, these might not work if you're writing front-end TypeScript code to be used in the browser.
+		p In this post, I'm going to share with you how to write modular code leveraging TypeScript 
+			a(href='https://www.typescriptlang.org/docs/handbook/namespaces.html', target='_blank') Namespaces
+			|  that will be compiled into a single file and used in the browser.
+
+		h3 Getting Started
+		p You might not need this exact setup, but I'll be using Node.js with the TypeScript NPM module. I'll also be leveraging TypeScript's AMD module.
+		p Here's my tsconfig.json file:
+
+		.example
+			p.label JSON
+			pre
+				code.language-json
+					|{
+					|	"compilerOptions": {
+					|		"noImplicitAny": true,
+					|		"removeComments": true,
+					|		"preserveConstEnums": true,
+					|		"forceConsistentCasingInFileNames": true,
+					|		"sourceMap": true,
+					|		"module": "amd",
+					|		"outFile": "public/js/app.js"
+					|	},
+					|	"include": [
+					|		"dev/ts/**/*.ts",
+					|		"dev/ts/*.ts"
+					|	]
+					|}
+		
+		p Having declared everything in the tsconfig file, I can initiate the compilation by simply running 
+			strong tsc
+			|  in the terminal.
+
+		h3 Creating the class
+		p In this particular instance, we want to create a class called 
+			span.code-label Alert
+			|  that will allow us to close an alert popup and perform an Ajax call to initialize a cookie in Node.js.
+
+		.example
+			p.label TypeScript
+			pre
+				code.language-javascript
+					|export class Alert {
+					|	closeBtn: HTMLElement
+					|	container: HTMLElement
+					|	url: string
+					|	constructor (closeBtn: HTMLElement, container: HTMLElement, url: string) {
+					|		this.closeBtn = closeBtn
+					|		this.container = container
+					|		this.url = url
+					|	}
+					|}
+
+		p To start, we'll declare our class and the 3 include properties:
+		ul
+			li closeBtn - the HTMLElement that, when clicked on, will close our container
+			li container - the alert container (popup) HTMLElement
+			li url - a string containing the URL needed for our Ajax call
+		p Then we'll set their valued with the 
+			strong constructor()
+			|  function.
+		p Next, we need to add an event listener to the 
+			strong closeBtn
+			| , if it exists.
+
+		.example
+			p.label TypeScript
+			pre
+				code.language-javascript
+					|export class Alert {
+					|	...
+					|	constructor (closeBtn: HTMLElement, container: HTMLElement, url: string) {
+					|		...
+					|		// If element exists, add event listener
+					|		if (typeof(this.closeBtn) != 'undefined' && this.closeBtn != null) {
+					|			this.closeBtn.addEventListener("click", (e: Event) => this.setCookie())
+					|		}
+					|	}
+					|	
+					|	setCookie() { ... }
+					|}
+
+		p We'll perform a check that the element exists and then add a 'click' event listener that, when clicked, we'll call our 
+			strong setCookie()
+			|  function.
+		p Here's what that function will do:
+
+		.example
+			p.label TypeScript
+			pre
+				code.language-javascript
+					|	...
+					|	setCookie() {
+					|		let container = this.container
+					|		let url = this.url
+					|		$.ajax({
+					|			url: url,
+					|			success: function(data){
+					|				container.style.display = 'none'
+					|			}
+					|		})
+					|	}
+					|}
+
+		p Here, we're setting 
+			strong container
+			|  and 
+			strong url
+			|  equal to the properties of the class because the 
+			em this
+			|  keyword's lexical environment will be altered when inside of the Ajax call.
+		p Inside the Ajax call we're performing a GET request with the URL and hiding the container if the call is successful.
+		p If you've created a browser eventListener before using vanilla JavaScript then this should be mostly recognizable. The main difference is that we want to 
+			strong export
+			|  the class, not just declare it.
+
+		h3 Adding the class to a namespace
+		p Where do TypeScript's Namespaces come in? We're going to put that entire class inside of a namespace called 
+			strong clickEvents
+			| :
+
+		.example
+			p.label TypeScript
+			pre
+				code.language-javascript
+					|namespace clickEvents {
+					|	export class Alert {
+					|		...
+					|	}
+					|}
+
+		p Namespaces, previously called 
+			em internal modules
+			| , allow us to group functionalities together logically.
+		p Here, we're calling our namespace 
+			strong clickEvents
+			|  because we may decide to add other click-type events other than just alerts.
+
+		h3 Using the namespace in our front-end code
+		p Now we can use this namespace and all included functionality in our front-end scripts.
+
+		.example
+			p.label TypeScript
+			pre
+				code.language-javascript
+					|/// &lt;reference path="namespaces/clickEvents.ts" /&gt;
+					|new clickEvents.Alert(
+					|	&lt;HTMLElement&gt;document.querySelector(`.alert-close`),
+					|	&lt;HTMLElement&gt;document.querySelector(`.alert`),
+					|	'/sessions/alerts'
+					|)
+
+		p We'll include our namespace by using a 
+			a(href='https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html', target='_blank') triple-slash directive
+			|  to declare this file's dependency on the 'clickEvents.ts' file. Then we'll create a new alert.
+		p To do this, we first need to use the name of our namespace and then the class within the namespace. Then we'll include our arguments that the class will use as the 
+			strong closeBtn
+			| , 
+			strong container
+			|  and 
+			strong url
+			| .
+		p Now you just need to run tsc in your terminal to compile the files and test them in the browser.
+
+		.example
+			p.label Linux
+			pre
+				code.language-linux
+					| tsc

@@ -13,6 +13,18 @@
 		]
 	},
 	{
+		"header": "Exporting a Browser Event Listener Class in TypeScript",
+		"url": "typescript-export-class-browser",
+		"description": "Creating a TypeScript class is a great way to write code efficiently. Here's how you can create an eventListener class and implement it in a browser.",
+		"category": "Code Examples",
+		"keywords": [
+			"TypeScript",
+			"Classes",
+			"Namespace",
+			"JavaScript"
+		]
+	},
+	{
 		"header": "Practical Image Magnification using Canvas and JavaScript",
 		"url": "canvas-image-zoom",
 		"description": "I like using Canvas - especially for practical purposes such as making lightweight and user-friendly image magnifications.",

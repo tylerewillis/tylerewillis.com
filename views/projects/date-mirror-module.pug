@@ -1,0 +1,148 @@
+extends ../projects/projects/layout.pug
+
+block projects-head
+	include ../projects/projects/meta.pug
+
+block example-content
+	.write-up
+		h1 PHP-like Date Formatting in JavaScript with Date Ranges and Plain Text
+		h2 Use Case: Making an easy one line date- and date range-formatting function.
+		p Anyone who has programmed in PHP has definitely been disappointed when discovering that JavaScript's native methods for generating and formatting dates is not nearly as simple.
+		p In PHP, a date can be formatted simply be calling:
+
+		.example
+			p.label PHP
+			pre
+				code.language-php
+					|$date = date('F jS, Y') // January 11th, 2020
+
+		p In native JavaScript, here's how we'd go about constructing the above string and setting it to a variable:
+					
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const date = new Date()
+					|
+					|const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+					|const month = months[date.getMonth()]
+					|
+					|const day = date.getDate()
+					|
+					|var th = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 30]
+					|if (th.includes(day)) {
+					|	var suffix = 'th'
+					|} else if (String(day).charAt(day.length - 1) == '1') {
+					|	var suffix = 'st'
+					|} else if (String(day).charAt(day.length - 1) == '2') {
+					|	var suffix = 'nd'
+					|} else {
+					|	var suffix = 'rd'
+					|}
+					|
+					|const year = date.getFullYear()
+					|
+					|const dateString = `${month} ${day}${suffix}, ${year}`
+
+		p 15 lines of JavaScript code necessary to replicate 1 line of PHP.
+		p I did this in my projects for years. Sure, I tried Moment.js but it wasn't as elegant to me and I didn't want to include the 2.5mb plus NPM module in my projects (Date-Mirror is 11kb).
+
+		h3 How It Works
+
+		p Date-Mirror is made up of a bunch of mini-functions that pull date information the JS way but can be accessed by the user the PHP way.
+		p For example, returning the current 4-digit year ... this is what the user would program:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|date('Y') // 2020
+
+		p And this is the function that Date-Mirror would call and return:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|Y = (date) => {
+					|	return date.getFullYear()
+					|}
+
+		p For the day of the week:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|date('l') // Saturday
+
+		p Date-Mirror's call:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|l = (date) => {
+					|	const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+					|	return day[date.getDay()]
+					|}
+
+		p The main Date-Mirror call loops through the inputted string parameter character-by-character and returns the desired function on the date.
+
+		h3 Custom Dates
+		p By default, the function will use today's date. However, if a date string is inputted as a second parameter than that date will be formatted and returned instead.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|date('m-d-Y') // 01-11-2020
+					|
+					|date('m-d-Y', 'May 4 2020') // 05-04-2020
+
+		p Something I've added is the ability to add date ranges. This can be done by adding a second input date (the 3rd and final parameter).
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|date('m-d-Y', 'May 4 2020', 'May 7 2020')
+
+		p This wouldn't return anything different than the previous example - 
+			strong 05-04-2020
+			| . This is because the formatting also needs to be updated to include the range. Something like ...
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|date('F jS [-] jS, Y', 'May 4 2020', 'May 7 2020') // May 4th - 7th, 2020
+
+		p The 2nd occurrence of each character will pull it's information from the 2nd inputted date. And the brackets ...
+
+		h3 Adding Plain Text
+		p Sometimes there's a need to connect date ranges with words or other special characters. To do that, you can put text inside of opening- and closing-brackets '[]'.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|date('F jS [through] jS, Y', 'May 4 2020', 'May 7 2020') // May 4th through 7th, 2020
+
+		p The Date-Mirror JavaScript module is available via NPM:
+
+		.example
+			p.label Terminal
+			pre
+				code.language-xxx
+					|npm i date-mirror
+
+		p Or it can be used in the browser via unpkg:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|&lt;script src="https://unpkg.com/date-mirror"&gt;&lt;/script&gt;
+
+		p Please try it out and let me know how it can be improved. Thanks!

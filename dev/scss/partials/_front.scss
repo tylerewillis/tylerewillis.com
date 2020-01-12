@@ -334,7 +334,15 @@ footer {
 	}
 	ul {
 		list-style: disc;
-		margin:0px 0px 20px 30px;
+		margin: 0px 0px 20px 30px;
+		li {
+			font-size: .8em;
+			line-height: 1.5em;
+		}
+	}
+	ol {
+		list-style: decimal;
+		margin: 0px 0px 20px 30px;
 		li {
 			font-size: .8em;
 			line-height: 1.5em;

@@ -1,5 +1,29 @@
 [
 	{
+		"header": "Express-Modularity NPM Module",
+		"url": "express-modularity-module",
+		"description": "NPM express-modularity is a JavaScript module that works with Express.js to create React-like modular routing files.",
+		"icon": "<i class='fas fa-cubes'></i>",
+		"keywords": [
+			"npm",
+			"routing",
+			"node.js",
+			"express"
+		]
+	},
+	{
+		"header": "Date-Mirror JavaScript Module",
+		"url": "date-mirror-module",
+		"description": "Date-Mirror is a JavaScript module that enables users to format and render dates and times similar to PHP 'date' while also allowing ranges and plain text.",
+		"icon": "<i class='fal fa-calendar-alt'></i>",
+		"keywords": [
+			"npm",
+			"utilities",
+			"node.js",
+			"javascript"
+		]
+	},
+	{
 		"header": "#100DaysofCS",
 		"url": "100-days-of-cs",
 		"description": "100 Days of Computer Science is a resource platform for programmers looking to level-up their CS skills with links to free resources and flash cards.",

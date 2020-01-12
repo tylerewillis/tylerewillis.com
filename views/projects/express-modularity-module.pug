@@ -1,0 +1,81 @@
+extends ../projects/projects/layout.pug
+
+block projects-head
+	include ../projects/projects/meta.pug
+
+block example-content
+	.write-up
+		h1 Creating Modular, React-like Route Files with Express.js
+		h2 Use Case: To easily divide Express routing code into independent module files.
+		p React takes a simple approach to routing - you simply put files into a 'pages' folder and name them according to your desired front-end URL directory. The user can then access the contents of the file via the appropriate URL path.
+		p Having built my fair share of Node.js Express applications with larger-than-desired (and not very modular) routing files, I wanted to create a similar approach to React that I could use with my Express apps.
+		p The 
+			strong express-modularity
+			|  app, 
+			a(href='https://www.npmjs.com/package/express-modularity', target='_blank') available in NPM
+			|  via 
+			strong npm i express-modularity
+			|  lets a programmer predetermine the directory containing the routes files and then create one or multiple Express routes to be placed in those files.
+		p This helps the programmer build their applications in a modular way which is what makes Node.js so effective.
+
+		h3 Quick Start
+		p A user can get up and running with express-modularity by first requiring the module in their project, calling it on the chosen directory containing the route files, and then telling the Express application to use the function's returned routes:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const modularity = require('express-modularity')
+					|modularity.call('routes')
+					|app.use(modularity.router)
+
+		p Full documentation (including functionality for including middleware, global middleware and components) is available at the module's public 
+			a(href='https://www.npmjs.com/package/express-modularity', target='_blank') NPM
+			|  and 
+			a(href='https://github.com/tylerewillis/express-modularity', target='_blank') Github
+			|  pages, but I wanted to give a quick overview of how it works behind the scenes.
+
+		h3 How It Works
+		p Here's the function call and below I'll explain how it works:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|function call(directory) {
+					|
+					|	let path = getPath(directory)
+					|	...
+					|
+					|	require("fs").readdirSync(path, {withFileTypes: true}).forEach(function(file) {
+					|		if (file.isDirectory()) {
+					|			if (!ignoreDirectories.includes(file.name)) call(directory + '/' + file.name)
+					|		} else {
+					|			if (file.name.charAt(0) !== '.') router.use(urlDirectory, require(path + '/' + |file.name))
+					|		}
+					|	})
+					|}
+
+		p A breakdown of the above function:
+		ol
+			li The function is called with a directory parameter chosen by the user.
+			li 
+				strong getPath
+				|  returns the path of the directory requiring the native 
+				strong path
+				|  module in Node.
+			li The native 
+				strong fs
+				|  module is used to read the files and folders within the directory. As it spans the results, it is determined if each result is a directory of a file.
+			li Certain directories are ignored for middleware purposes (again, 
+				a(href='https://github.com/tylerewillis/express-modularity', target='_blank') see full documentation
+				| ), if not, the function is recursed on those inner directories.
+			li If a file, Express's router is directed to use and require the file.
+		p I left certain things out - nested directories and URL directory paths and middleware. You can see the 
+			a(href='https://github.com/tylerewillis/express-modularity/blob/master/index.js', target'_blank') raw code at Github
+			| .
+		p Ultimately, 
+			strong express-modularity
+			|  isn't more than a loader of files within a directory. However, staying true to 
+			em modularity
+			| , I didn't want to have to recreate this loader with each project. So yay for modular programming!

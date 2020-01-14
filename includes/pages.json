@@ -13,6 +13,18 @@
 		]
 	},
 	{
+		"header": "Dynamic Page Metadata with React and Express.js",
+		"url": "react-express-metadata",
+		"description": "Do you have a site built in React that you want to generate organic traffic? If so, you need to search engine optimize your site and it starts with custom, dynamic metadata.",
+		"category": "Code Examples",
+		"keywords": [
+			"React",
+			"Express",
+			"Node",
+			"JavaScript"
+		]
+	},
+	{
 		"header": "Exporting a Browser Event Listener Class in TypeScript",
 		"url": "typescript-export-class-browser",
 		"description": "Creating a TypeScript class is a great way to write code efficiently. Here's how you can create an eventListener class and implement it in a browser.",

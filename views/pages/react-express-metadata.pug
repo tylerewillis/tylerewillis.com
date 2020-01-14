@@ -1,0 +1,350 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Dynamic Page Metadata with React and Express.js
+		h2 Use Case: Loading metadata from a database to be used in a page.
+		p Chances are that you're not both the developer of your website or application AND the creator of content. It's likely that you're developing your app to be used and managed by either a client or a non-programming team member.
+		p If that's true of you, then ideally you'd set up your application to be easily managed by these non-developers with minimal ongoing support required from you in terms of page content and metadata.
+		p I've built a CMS in Node and Express that my clients use to manage their content. You can read more about that and see screenshots in 
+			a(href='/page/nodejs-cms', target='_blank') this other post
+			| . However, today I want to walk through how to pass metadata from Express, fetch it in React and assign it to page metadata in a layout.
+
+		h3 Passing metadata from Express.js
+		p To get the metadata information from our database and sent via our API, we need to set up our MySQL connection, pull the data and send it from the Express.js router.
+
+		h4 Loading database credentials
+		p Our application needs access to our database, so we're going to set up a 
+			strong config.json
+			|  file to hold our credentials:
+
+		.example
+			p.label JSON
+			pre
+				code.language-json
+					|{
+					|	"production": {
+					|		"database": "my_database",
+					|		"dbUser": "root",
+					|		"dbUserPassword": "password"
+					|	}
+					|}
+
+		p and load the contents as global variables via 
+			strong config.js
+			| :
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const config = require('./config.json');
+					|
+					|const defaultConfig = config.production;
+					|global.gConfig = defaultConfig
+
+		p All that's going on here is we're setting the database credentials in JSON then requiring and setting them equal to 
+			strong global.gConfig
+			| . To use these credentials, we'll require the 
+			strong config.js
+			|  file and use the object properties.
+
+		h4 MySQL module
+		p We need to set up our MySQL connection. We'll do that be installing the 
+			a(href='https://www.npmjs.com/package/mysql', target='_blank') MySQL NPM module
+			|  (
+			strong npm i mysql
+			| ) in our project and setting it up and exporting it like so:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const config = require('../config/config.js')
+					|const mysql = require('mysql');
+					|const pool  = mysql.createPool({
+					|	connectionLimit : 10,
+					|	host            : 'localhost',
+					|	user            : global.gConfig.dbUser,
+					|	password        : global.gConfig.dbUserPassword,
+					|	database        : global.gConfig.database,
+					|	multipleStatements: true
+					|})
+					|module.exports = { mysql, pool }
+
+		p You can see that we're requiring our new global configuration object and the newly installed 
+			strong mysql
+			|  component. Then we're setting up a connection via our credentials and exporting the connection object.
+
+		h4 Metadata route middleware
+		p Since each public page needs its own metadata, we'll set up a middleware function in Express to pull each page's metadata depending on its url:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const db = require('../config/db')
+					|
+					|const static = (req, res, next) =&gt; {
+					|
+					|	var url = req.originalUrl
+					|
+					|	const sql = `SELECT * FROM meta WHERE url = '${url}'`
+					|	db.pool.query(sql1, function (error, results) {
+					|		req.args = { meta: results }
+					|		next()
+					|	})
+					|}
+					|
+					|module.exports = static
+
+		p We've put this middleware in an independent file - 
+			strong static.js
+			|  - and exported it as 
+			strong static
+			| .
+		p In our 
+			strong meta
+			|  database table we've assigned a column to hold the page's URL so that we could call it with the 
+			strong originalUrl
+			|  property available in Express's request object. We'll then assign the results of the MySQL query equal to a variable inside of a new property - 
+			strong args
+			|  - that we'll assign to the request object.
+		
+		h4 API Headers
+		p Now that we've pulled and assigned the metadata from the database, we'll need to set up a route to respond to the request. However, before we can do that we need to approve the API call coming from our front-end, React site.
+		p For this, we'll set up another piece of middleware functionality:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const headers = (req, res, next) =&gt; {
+					|	const origin = (req.headers.origin == 'http://localhost:3000') ? 'http://localhost:3000' : 'https://mywebsite.com'
+					|	res.setHeader('Access-Control-Allow-Origin', origin)
+					|	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+					|	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+					|	res.setHeader('Access-Control-Allow-Credentials', true)
+					|	next()
+					|}
+					|
+					|module.exports = headers
+
+		p The 
+			strong headers
+			|  middleware will first determine the origin of the request. Since we want our application to work in both production and development, we'll set origin equal to the result of a conditional statement. If the origin is our localhost (development), then set it equal to that, if not, set it equal to the domain of our website (production).
+		p The reason why we need to do this is because the HTML header 
+			em Access-Control-Allow-Origin
+			|  accepts only 1 url - we can't submit an array or comma-separated values, unfortunately.
+		p We'll then set up the other default settings, call the 
+			strong next()
+			|  function at the end of the middleware and then export the module as 
+			strong headers
+			| .
+
+		h4 Route API
+		p Now we can set up our Express route to receive and respond to the request.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const router = require('express').Router()
+					|const headers = require('./middleware/headers')
+					|const static = require('./middleware/staticPage')
+					|const db = require('../config/db')
+					|
+					|router.get('/home', headers, static, (req, res) =&gt; {
+					|	res.send(req.args)
+					|})
+
+		p We'll first require the necessary modules and middleware functions, then, in this instance, if the requested route is '/home' we'll called the 2 middleware functions and then respond with 
+			strong res.send()
+			|  and include our 
+			strong req.args
+			|  property containing the page's metadata.
+		p The reason we're not using the response 
+			strong res.render()
+			|  is because we only need to respond with the data that will be pulled in from our React application.
+		p Okay, now we've finished with our Express API side of things. Now we need to pull in and render the front-end React side.
+		p Let's go in order of the events ...
+
+		h3 Page Module
+		p Most React application frameworks (i.e. Next.js) start by pulling in the requested page's module. If a user is attempting to visit a site's 'contact' page then React will look for the 
+			strong contact.js
+			|  file located within the necessary directory (i.e. 'pages').
+		p So that's where we start. Since our example is focused on the home page and React will default to looking for the 
+			strong index.js
+			|  file, we need to initiate the loading of our page content there.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|import Layout from '../modules/Layout'
+					|
+					|export default () =&gt; (
+					|	&lt;Layout page='home'&gt;
+					|		&lt;p&gt;This is the home page&lt;/p&gt;
+					|	&lt;/Layout&gt;
+					|)
+
+		p For our example, we're just setting the page content as a paragraph stating 
+			em This is the home page
+			| . But what will lead to the loading of our page's metadata is that we're putting the paragraph inside of the module 
+			strong Layout
+			|  and assigning the prop value of 
+			strong page
+			|  equal to 'home'.
+		p Let's take a look at Layout.js ...
+
+		h3 Fetching metadata in React Layout
+		p To allow for scaleability and modularity, we want to set up a default layout for our front-end pages to pull in things like metadata from the API without needing to set this up for each page individual. For that, we've set up a layout class.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|import React from 'react';
+					|
+					|import Head from './Head'
+					|import Header from './Header'
+					|import Footer from './Footer'
+					|
+					|class Layout extends React.Component {
+					|
+					|	constructor(props) {
+					|		super(props)
+					|		this.state = {
+					|			meta: {}
+					|		}
+					|	}
+					|
+					|	render() {
+					|
+					|		const className = this.props.page.replace(/\//g, '-')
+					|
+					|		return (
+					|			&lt;div className={'page page-' + className}&gt;
+					|				&lt;Head /&gt;
+					|				&lt;Header /&gt;
+					|				&lt;div className='page-content'&gt;
+					|					{children}
+					|				&lt;/div&gt;
+					|				&lt;Footer /&gt;
+					|			&lt;/div&gt;
+					|		)
+					|	}
+					|}
+					|
+					|export default Layout
+
+		p In the return method you can see that we've set up our default pages with a head, header and footer tag. We also put everything inside of a div with a dynamic class name equivalent to the page prop passed to the 
+			strong Layout
+			|  module (formatted for nested routes).
+		p You can also see that we've imported the necessary files at the top and set up a 
+			strong constructor
+			|  function to handle our props and the state of the class.
+		p Now let's get the metadata from the API:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|...
+					|
+					|async componentDidMount(req) {
+					|	const res = await fetch(process.env.api_endpoint + '/' + this.props.page)
+					|	const json = await res.json()
+					|	this.setState({
+					|		meta: json.meta
+					|	})
+					|}
+					|
+					|render() {
+					|	...
+					|	return (
+					|		&lt;div className={'page page-' + className}&gt;
+					|		&lt;Head meta={this.state.meta} /&gt;
+					|
+					|		...
+
+		p We've added 2 things. First, the asynchronous function 
+			strong componentDidMount
+			|  that will be called after our 
+			strong Layout
+			|  class has been rendered to the DOM and second, a props property called 
+			strong meta
+			|  that will send the data from the class to the 
+			strong Head
+			|  module for rendering.
+		p In componentDidMount, we're fetching the data from our API Express application by requesting the '/home' page (
+			strong / + this.props.page
+			| ). Then we're turning the data into JSON and setting the classes 
+			strong meta
+			|  state equal to the JSON object's 
+			strong meta
+			|  property.
+
+		h3 Assigning metadata using Helmet
+		p Now the only thing we have left to do is render the information inside of our 
+			strong Head
+			|  module.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|import React from 'react';
+					|import {Helmet} from "react-helmet";
+					|
+					|export default (props) =&gt; {
+					|	return (
+					|		&lt;Helmet&gt;
+					|			&lt;meta charSet="utf-8" /&gt;
+					|			&lt;title&gt;{props.meta.title}&lt;/title&gt;
+					|			&lt;meta name='description' content={props.meta.description} /&gt;
+					|			&lt;meta property='og:locale' content='en_US' /&gt;
+					|			&lt;meta property='og:type' content='website' /&gt;
+					|			&lt;meta property='og:title' content={props.meta.title} /&gt;
+					|			&lt;meta property='og:description' content={props.meta.description} /&gt;
+					|			&lt;meta property='og:image' content={'/static/media/' + props.meta.image} /&gt;
+					|			&lt;meta property='og:url' content=`https://mywebsite.com${url}` /&gt;
+					|			&lt;meta name='twitter:card' content='summary_large_image' /&gt;
+					|			&lt;meta name='twitter:site' content='@mywebsite' /&gt;
+					|			&lt;meta name='twitter:creator' content='@mywebsite' /&gt;
+					|		&lt;/Helmet&gt;
+					|	)
+					|}
+
+		p Let's address the 
+			strong Helmet
+			|  module. React Helmet is a module available in 
+			a(href='https://www.npmjs.com/package/react-helmet', target='_blank') NPM
+			|  that allows you to make changes to your document's head. Because React applications aren't fully loaded upon initial page render but slightly afterward once a script gets called, the head tag has already been established. Helmet allows us to make changes to the contents of the document's head that will be recognized by both user's and bots (i.e. search engines).
+		p So, we're putting all of our meta and title tags inside of the Helmet module and accessing our metadata via the 
+			strong props.meta
+			|  object. Above is generally what I use for meta tags. They work for search as well as social media sharing.
+		p You could take things a step further and include JSON for search engine schema:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|
+					|&lt;script type='application/ld+json'&gt;
+					|{
+					|	"@context": "http://schema.org",
+					|	"@type": "BlogPosting",
+					|	"author": {props.meta.author},
+					|	"headline": {props.meta.title},
+					|	"about": {props.meta.description},
+					|	"inLanguage": "en-US",
+					|	"keywords": {props.meta.keywords}
+					|}
+					|&lt;/script&gt;
+
+		p Be sure to also put that (and any other meta you'd want to include) inside of the Helmet module tags.

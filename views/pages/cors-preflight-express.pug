@@ -1,0 +1,91 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Fixing CORS Pre-Flight Errors on Your Express.js API
+		h2 Use Case: Making your Express API accessible to receive requests.
+		p Building an API in Express and not able to fetch data?
+		p Trying to submit a form via a POST request and getting 
+			em CORS Pre-Flight
+			|  errors in the console?
+		p That can be frustrating - especially when you see an array of questions resolved by answers in Stack Overflow that don't seem to be working for you.
+		p My issues began when I built 
+			a(href='/page/react-express-metadata' target='_blank') a React frontend fetching data from an Express.js API
+			| . The React application sends both GET and POST http requests to the API and only now do I realize that the POST requests required an additional step.
+
+		h3 Fetching a GET request with Express
+		p To fetch data via a GET request from Express to my React application, all I needed was a route middleware function that set the 
+			strong Access-Control
+			|  headers for the page:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const headers = (req, res, next) => {
+					|	const origin = (req.headers.origin == 'http://localhost:3000') ? 'http://localhost:3000' : 'https://mywebsite.com'
+					|	res.setHeader('Access-Control-Allow-Origin', origin)
+					|	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+					|	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+					|	res.setHeader('Access-Control-Allow-Credentials', true)
+					|	next()
+					|}
+					|
+					|module.exports = headers
+
+		p I would then simply reference the middleware in my route function:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|router.get('/contact', headers, (req, res) => {
+					|	...
+					|	res.send(req.args)
+					|})
+
+		p Done. I could receive data all day with this setup. But the problem came with sending data back to the API with a POST request ...
+
+		h3 Fetching a POST request with Express
+		p What I learned was that certain CORS requests are considered "complex" and require an initial 
+			strong options
+			|  request known as a 
+			strong pre-flight
+			|  request. From my understanding, POST requests didn't fall within this categorization (DELETE requests are more common). However, my Express application 
+			em did
+			|  consider it to be complex and was therefore blocking it.
+		p The simplest way to solve this and send a pre-flight request was via the CORS Node.js package (
+			a(href='https://www.npmjs.com/package/cors', target='_blank') NPM 
+			| ) - 
+			strong npm i cors
+			|  and assigning it as middleware for the POST route:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const cors = require('cors')
+					|
+					|router.post('/contact', cors(), headers, (req, res) => {
+					|	...
+
+		p The 
+			strong headers
+			|  middleware is still required to be sent along with the actual POST request. And this solved my issue.
+		p The CORS module can be customized, but the default configuration worked in my case.
+
+		.example
+			p.label JSON
+			pre
+				code.language-json
+					|{
+					|	"origin": "*",
+					|	"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+					|	"preflightContinue": false,
+					|	"optionsSuccessStatus": 204
+					|}
+
+		p Hopefully this solved your problem. If not, reach out to my on Twitter below!

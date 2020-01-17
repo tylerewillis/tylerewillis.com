@@ -1,5 +1,18 @@
 [
 	{
+		"header": "Fixing CORS Preflight Errors on Your Express.js API",
+		"url": "cors-preflight-express",
+		"description": "Trying to access or allow users to access your Express.js API but getting CORS errors? Fix the errors by adding these few lines of code.",
+		"category": "Code Examples",
+		"keywords": [
+			"CORS",
+			"preflight",
+			"Express",
+			"Node",
+			"API"
+		]
+	},
+	{
 		"header": "Real-Time Social Proof Ticker using WebSockets with Node.js",
 		"url": "nodejs-websockets",
 		"description": "To encourage ticket sales, I built a real-time tickets purchased ticker in Node.js using WebSockets in an incredibly short amount of code.",

@@ -1,16 +1,22 @@
 .contact.section#contact
 	p Tweet me 
 		a(href='https://twitter.com/TylerEWillis' target='_blank') @tylerewillis
-	p Or send me an email: 
+
+	p Or send an email: 
 		a(href='' class='email')
 	.newsletter
-	// Generate email
+
+	//- Generate email
 	script.
 		const address = 'tyler'
 		const domain = 'tylerewillis.com'
 		const emailAddress = `${address}@${domain}`
 		$('.email').attr('href', `mailto:${emailAddress}`)
 		$('.email').text(emailAddress)
+
+	p And support me on 
+		a(href='https://www.patreon.com/tylerwillis', target='_blank') Patreon
+
 footer
 	p &copy;#{new Date().getFullYear()} Tyler Willis
 

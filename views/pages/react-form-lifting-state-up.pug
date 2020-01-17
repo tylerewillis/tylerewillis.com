@@ -1,0 +1,124 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Lifting State Up with React and Submitting a Form
+		h2 Use Case: Maintain your application's state in a parent component so that you can separate your views.
+		p Below is a code example of how I manage state on page's where I have both a contact form and a confirmation message. The main page module maintains the state, the child form component receives and updates the state, and the child confirmation message component receives the 
+			em first name
+			|  state property via a prop on the submission of the form.
+
+		h3 The page maintaining the state
+		p The form's page module holds and maintains the state and passes its own 
+			strong handleChange
+			|  and 
+			strong handleSubmit
+			|  functions to the child form component:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|import ConfirmationMessage from '../components/ConfirmationMessage'
+					|import ContactForm from '../components/ContactForm'
+					|
+					|class Page extends React.PureComponent {
+					|
+					|	constructor(props) {
+					|		super(props)
+					|		this.state = {
+					|			submitted: false, first: '', last: '', email: '', phone: '', message: '', ip: '', url: ''
+					|		}
+					|	this.handleChange = this.handleChange.bind(this)
+					|	this.handleSubmit = this.handleSubmit.bind(this)
+					|}
+					|
+					|	handleChange = (e) =&gt; {
+					|		const target = e.target
+					|		const value = target.type === 'checkbox' ? target.checked : target.value
+					|		const name = target.name
+					|		if (name !== 'ip') {
+					|			this.setState({
+					|				[name]: value
+					|			})
+					|		}
+					|	}
+					|
+					|	handleSubmit = (e) =&gt; {
+					|		// POST request to API
+					|		this.setState({submitted: true})
+					|		e.preventDefault()
+					|	}
+					|
+					|	render() {
+					|		const values = {
+					|			first: this.state.first,
+					|			last: this.state.last,
+					|			email: this.state.email
+					|		}
+					|
+					|		if (this.state.submitted) {
+					|			return &lt;ConfirmationMessage first={this.state.first} /&gt;
+					|		}
+					|		return &lt;ContactForm onInputChange={this.handleChange} onFormSubmit={this.handleSubmit} {...values}/&gt;
+					|	}
+					|}
+					
+		h3 The form
+		p The form itself both receives and updates the state of the page module by leveraging the function 
+			strong handleChange
+			|  passed to it via the props.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|class Form extends React.PureComponent {
+					|
+					|	constructor(props) {
+					|		super(props)
+					|		this.handleChange = this.handleChange.bind(this)
+					|		this.handleSubmit = this.handleSubmit.bind(this)
+					|	}
+					|
+					|	handleChange(e) {
+					|		this.props.onInputChange(e)
+					|	}
+					|
+					|	handleSubmit(e) {
+					|		this.props.onFormSubmit(e)
+					|		e.preventDefault()
+					|	}
+					|
+					|	render() {
+					|		return (
+					|			&lt;form onSubmit={this.handleSubmit}&gt;
+					|				&lt;div className='form-section'&gt;
+					|					&lt;label&gt;Name&lt;/label&gt;
+					|						&lt;input type='text' name='first' placeholder='First' required value={this.props.first} onChange={this.handleChange} /&gt;
+					|						&lt;input type='text' name='last' placeholder='Last' required value={this.props.last} onChange={this.handleChange} /&gt;
+					|				&lt;/div&gt;
+					|				&lt;label&gt; Email
+					|					&lt;input type='email' name='email' required value={this.props.email} onChange={this.handleChange} /&gt;
+					|				&lt;/label&gt;
+					|				&lt;input type='submit' value='Submit' /&gt;
+					|			&lt;/form&gt;
+					|		)
+					|	}
+					|}
+					|
+					|export default Form
+
+		h3 The confirmation message
+		p The confirmation message component receives the first name submitted by the form as a prop.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|export default (props) =&gt; (
+					|	&lt;p className='form-confirmation'&gt;Thanks for your message, {props.first}. We'll get back to you shortly.&lt;/p&gt;
+					|)

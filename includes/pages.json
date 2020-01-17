@@ -26,6 +26,17 @@
 		]
 	},
 	{
+		"header": "Lifting State Up with React and Submitting a Form",
+		"url": "react-form-lifting-state-up",
+		"description": "By lifting-state-up and maintaining your application's state in a parent module you can ensure modularity and the separation of views.",
+		"category": "Code Examples",
+		"keywords": [
+			"React",
+			"state",
+			"Node"
+		]
+	},
+	{
 		"header": "Dynamic Page Metadata with React and Express.js",
 		"url": "react-express-metadata",
 		"description": "Do you have a site built in React that you want to generate organic traffic? If so, you need to search engine optimize your site and it starts with custom, dynamic metadata.",

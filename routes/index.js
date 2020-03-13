@@ -107,4 +107,34 @@ router.get('/privacy', (req, res) => {
   res.render('privacy-policy', req.args)
 })
 
+// Enable CORS Pre-Flight
+const cors = require('cors')
+router.options('*', cors())
+
+// Global middleware
+router.get('*', (req, res, next) => {
+  const origin = (req.headers.origin == 'http://localhost:3000') ? 'http://localhost:3000' : 'WEBSITE'
+  res.setHeader('Access-Control-Allow-Origin', origin)
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next()
+})
+
+//===============================================
+//= Test JS Script validation
+//===============================================
+
+router.get('/user/:id/:site', (req, res) => {
+  if (req.params.id === '12345' && req.params.site === 'localhost') {
+    res.send({
+      success: true
+    })
+  } else {
+    res.send({
+      success: false
+    })
+  }
+})
+
 module.exports = router

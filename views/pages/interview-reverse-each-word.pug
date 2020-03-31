@@ -1,0 +1,64 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Reverse Each Word in the Sentence in JavaScript and PHP
+		h2 Use Case: Showing competence in your programming interview
+		p A question that you may be asked during a programming interview is "reverse a string" or "reverse a portion of a string". The reason why you might be asked this is because the interviewer wants to see your ability to manipulate strings.
+		p In this post, I'm going to show you how to best answer this question in both JavaScript and PHP.
+		p If you'd rather see this post in video format, watch the video below and be sure to subscribe to my YouTube playlist 
+			a(href='https://www.youtube.com/playlist?list=PLSnaUTnN_9O0BnsLJK6QZ3OfwlYgxcSNv' target='_blank') Tyler Answers Interview Questions
+			| .
+		iframe(src="https://www.youtube.com/embed/V8OkUMhZwfQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+
+		h3 JavaScript Solution
+		p The best way to solve this dilemma in JavaScript is to create a reusable function that can be used to reverse strings given a specific separator.
+		p In the answer below, we've created a function called 
+			span.code-label rvsBy
+			|  that takes a string and a separator value. We'll use this function to first reverse our entire sentence by character, and then undo the reversed order of words by calling the function on the reversed sentence.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const sentence = 'This is a sentence!'
+					|
+					|const rvsBy = (string, separator) =&gt; {
+					|	return string.split(separator).reverse().join(separator)
+					|}
+					|
+					|const newSentence = rvsBy(sentence, '') // !ecnetnes a si sihT
+					|const answer =  rvsBy(newSentence, ' ') // sihT si a !ecnetnes
+		
+		p We've now answered the interview question by keeping the order of the sentence while reversing the individual words.
+
+		h3 PHP Solution
+		p In the PHP solution, we'll create the same basic function. There are some differences, however, due to how PHP allows us to manipulate strings and arrays.
+		p Also, we'll have to perform a conditional statement to use 
+			strong str_split
+			|  instead of 
+			strong explode
+			|  when attempting to create a new array of individual characters.
+		p Other than that, you'll see the function is overall the same.
+
+		.example
+			p.label PHP
+			pre
+				code.language-php
+					|$sentence = 'This is a sentence!';
+					|
+					|function rvsBy($string, $separator) {
+					|	if ($separator === '') {
+					|		$array = str_split($string);
+					|	} else {
+					|		$array = explode($separator, $string);
+					|	}
+					|	$reversed = array_reverse($array);
+					|	return join($separator, $reversed);
+					|}
+					|
+					|$reversedSentence = rvsBy($sentence, ''); // !ecnetnes a si sihT
+					|$answer = rvsBy($reversedSentence, ' '); // sihT si a !ecnetnes

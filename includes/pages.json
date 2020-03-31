@@ -495,5 +495,17 @@
 			"array",
 			"hashing"
 		]
+	},
+	{
+		"header": "Reverse Each Word in the Sentence in JavaScript and PHP | Programming Interview Question",
+		"url": "interview-reverse-each-word",
+		"description": "How to answer the common interview question 'Given a string, reverse each word in the sentence' in JavaScript.",
+		"category": "Interview Questions",
+		"keywords": [
+			"JavaScript",
+			"PHP",
+			"string",
+			"interview"
+		]
 	}
 ]

@@ -30,6 +30,8 @@ block content
 			//-
 			each page in pages
 				.page-single
+
+					//-
 					if page.category == 'Code Examples'
 						.page-icon.page-icon-code
 							i.fas.fa-laptop-code
@@ -39,6 +41,11 @@ block content
 					else if page.category == 'Personal'
 						.page-icon.page-icon-personal
 							i.fas.fa-hiking
+					else if page.category == 'Interview Questions'
+						.page-icon.page-icon-interview
+							i.fas.fa-user-tie
+
+					//-
 					.page-details
 						h2 #{page.header}
 						p #{page.description}

@@ -519,5 +519,17 @@
 			"function combinator",
 			"multiply"
 		]
+	},
+	{
+		"header": "Empty an Array and All References in JavaScript and PHP | Programming Interview Question",
+		"url": "interview-empty-an-array",
+		"description": "Here's how you can successfully answer the interview question about how to empty an array and all references to it in PHP and JavaScript.",
+		"category": "Interview Questions",
+		"keywords": [
+			"JavaScript",
+			"PHP",
+			"array",
+			"reference"
+		]
 	}
 ]

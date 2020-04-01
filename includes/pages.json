@@ -499,13 +499,25 @@
 	{
 		"header": "Reverse Each Word in the Sentence in JavaScript and PHP | Programming Interview Question",
 		"url": "interview-reverse-each-word",
-		"description": "How to answer the common interview question 'Given a string, reverse each word in the sentence' in JavaScript.",
+		"description": "How to answer the common interview question 'Given a string, reverse each word in the sentence' in JavaScript and PHP.",
 		"category": "Interview Questions",
 		"keywords": [
 			"JavaScript",
 			"PHP",
 			"string",
 			"interview"
+		]
+	},
+	{
+		"header": "Solve a Given Function Containing Multiple, Separate Parameters in JavaScript and PHP | Programming Interview Question",
+		"url": "interview-function-multiple-separate-parameters",
+		"description": "How to answer an interview question regarding multiplication function combinators in JavaScript and PHP.",
+		"category": "Interview Questions",
+		"keywords": [
+			"JavaScript",
+			"PHP",
+			"function combinator",
+			"multiply"
 		]
 	}
 ]

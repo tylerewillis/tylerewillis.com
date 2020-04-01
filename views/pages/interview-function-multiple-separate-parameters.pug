@@ -1,0 +1,79 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Implementing a Multiplication Function Combinator in JavaScript and PHP
+		h2 Use Case: Showing competence in your programming interview
+		p A problem that may be presented to you in a programming interview may be something like ... presented this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|console.log(mul(2)(3)(4)); // 24
+
+		p ... how would you create a function that would enable this calculation to work properly?
+		p If you're unfamiliar with 
+			strong combinators
+			|  or 
+			strong curried functions
+			| , this may look strange to you. Normally, you see functions called with multiple parameters like this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|console.log(mul(2,3,4));
+
+		p As strange as it may look, it can be solved by returning anonymous, nested functions giving us access to the each and all of the passed parameters.
+		p In this post, I'm going to show you how to create a curried function that will allow our provided multiplication function to work properly.
+		p If you'd rather see this post in video format, watch the video below and be sure to subscribe to my YouTube playlist 
+			a(href='https://www.youtube.com/playlist?list=PLSnaUTnN_9O0BnsLJK6QZ3OfwlYgxcSNv' target='_blank') Tyler Answers Interview Questions
+			| .
+		iframe(src="https://www.youtube.com/embed/6JwN10_LPb8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+
+		h3 JavaScript Solution
+		p The JavaScript solution to function combinators can be very concise.
+		p In the answer below, we've created a function called 
+			span.code-label mul
+			|  that receives 3 individual integer parameters and returns the product of their multiplication.
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const mul = x =&gt; {
+					|	return y =&gt; {
+					|		return z =&gt; {
+					|			return x * y * z
+					|		}
+					|	}
+					|}
+					|
+					|const mul1 = x =&gt; y =&gt; z =&gt; x * y * z
+					|
+					|mul(2)(3)(4) // 24
+					|mul(4)(3)(4) // 48
+
+		h3 PHP Solution
+		p As of v7, the PHP solution to this is very concise as well. The only difference is that arguments are not automatically passed in PHP. they need to be passed via the 
+			strong use
+			|  keyword.
+
+		.example
+			p.label PHP
+			pre
+				code.language-php
+					|function mul($x) {
+					|	return function($y) use ($x) {
+					|		return function($z) use ($x, $y) {
+					|			return $x * $y * $z;
+					|		};
+					|	};
+					|};
+					|
+					|echo mul(2)(3)(4); // 24
+					|echo mul(4)(3)(4); // 48

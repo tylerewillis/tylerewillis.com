@@ -531,5 +531,16 @@
 			"array",
 			"reference"
 		]
+	},
+	{
+		"header": "Maintain Returned Values Using Closures in JavaScript and PHP | Programming Interview Question",
+		"url": "interview-maintain-returned-values-using-closures",
+		"description": "Here's how you can maintain and use a previously returned function value using closures in PHP and JavaScript.",
+		"category": "Interview Questions",
+		"keywords": [
+			"JavaScript",
+			"PHP",
+			"closures"
+		]
 	}
 ]

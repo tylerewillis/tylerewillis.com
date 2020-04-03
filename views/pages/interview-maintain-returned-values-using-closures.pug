@@ -1,0 +1,96 @@
+extends ../pages/pages/layout.pug
+
+block pages-head
+	include ../pages/pages/meta.pug
+
+block example-content
+	.write-up
+		h1 Maintain Returned Values Using Closures in JavaScript and PHP
+		h2 Use Case: Showing competence in your programming interview
+		p In your programming interview, you may be given an example like this:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|var addFive = createBase(5)
+					|addFive(8) // returns 13
+					|addFive(16) // returns 21
+
+		p And asked to solve it or make sense of it.
+		p The question is how can we access the base value of 
+			strong 5
+			|  in the subsequent (and future) 
+			strong addFive()
+			|  function calls?
+		p The answer is 
+			a(href='https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36' target='_blank') closures
+			| .
+		p A 
+			strong closure
+			|  is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function.
+		p Below I'll show you how you can create closures both in JavaScript and PHP to answer the interview question above.
+		p If you'd rather see this post in video format, watch the video below and be sure to subscribe to my YouTube playlist 
+			a(href='https://www.youtube.com/playlist?list=PLSnaUTnN_9O0BnsLJK6QZ3OfwlYgxcSNv' target='_blank') Tyler Answers Interview Questions
+			| .
+		iframe(src="https://www.youtube.com/embed/VVf-xjQDW64" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+		//------------------------------------------------------
+		h3 JavaScript Solution
+		p In JavaScript, a closure is just a function that returns a function. Here's how we can make the interview question work:
+
+		.example
+			p.label JavaScript
+			pre
+				code.language-javascript
+					|const createBase = base =&gt; {
+					|	return (n) =&gt; {
+					|		return n + base
+					|	}
+					|}
+					|
+					|const addFive = createBase(5)
+					|addFive(8) // returns 13
+					|addFive(16) // returns 21
+		
+		p Because of the closure, we are able to access the 
+			strong base
+			|  parameter inside of the returned function after the fact.
+
+		//------------------------------------------------------
+		h3 PHP Solution
+		p Our PHP solution is nearly identical adding only one necessary keyword: 
+			strong use
+			| . Use lets us pass parameters to use in closures.
+
+		.example
+			p.label PHP
+			pre
+				code.language-php
+					|function createBase($base) {
+					|	return function($n) use ($base) {
+					|		return $n + $base;
+					|	};
+					|};
+					|
+					|$addFive = createBase(5);
+					|$addFive(8) // returns 13
+					|$addFive(16) // returns 21
+
+		p By passing the 
+			strong $base
+			|  parameter via 
+			strong use
+			|  we can add it to 
+			strong $n
+			|  and return the sum.
+
+
+
+
+
+
+
+
+
+
+

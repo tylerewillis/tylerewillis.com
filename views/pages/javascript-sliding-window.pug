@@ -27,6 +27,12 @@ block example-content
 		p We have been tasked with returning the maximum value found in the window at each slide of the pane in O(n) - or linear time. To do so, we're going to start with the 
 			a(href='/page/javascript-stack' title='Constant-time JavaScript stack') constant-time JavaScript stack 
 			| that we previously created.
+					
+		//-------------------------
+		//- Ad
+		//-------------------------
+		include ../layout/ad
+
 		p But we need to make a few updates. We need to give our stack the functionality of a queue so that we can dequeue values from the front of the stack when the window pane slides forward. We don't want to lose the constant-time efficiency of the stack however, so we'll need to add a 'start' variable to keep track of the index of our stack's starting variable. This will also alter the index that we use for pushing new values onto our stack so we'll need to change that as well.
 		p Here are the updated declarations and push functions.
 

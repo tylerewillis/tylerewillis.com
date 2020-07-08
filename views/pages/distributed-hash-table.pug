@@ -17,6 +17,12 @@ block example-content
 			|  and 
 			strong overlay networks
 			| .
+					
+		//-------------------------
+		//- Ad
+		//-------------------------
+		include ../layout/ad
+
 		p Consistent hashing is useful for creating scalability in storage architecture. Basically, you could add new computers (or take them away) from your distributed hash table without needing to rebuild the entire storage system. You'll see in my example below that I use consistent hashing to create an algorithm to hash incoming data and map it to a particular computer based on the hash value.
 		p Overlay networks provide communication between computers. So, consistent hashing will determine which computer the data will be stored in and the overlay network will assign a backup of the file to the computer's nearest neighbor. Or, when a computer is down, the network will send the data to the next nearest computer and the backup to its nearest neighbor and so on. Protecting data and improving uptime are also benefits of this system.
 		p Here's a visual:

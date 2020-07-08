@@ -13,6 +13,12 @@ block example-content
 		p When comparing 2 individual elements, we can determine the proper sorting order of the 2 by asking just 1 question - 
 			strong is the first element greater than the second?
 			|  If yes, then they should swap order. If not, then they should stay as is. Either way, once we've determined the proper order between the 2, we can group them together. Then we'll move on to the next set of numbers and repeat the question.
+					
+		//-------------------------
+		//- Ad
+		//-------------------------
+		include ../layout/ad
+
 		p Once we've answered this question for each pair of individual elements, we can start to group, or 
 			strong merge
 			|  our data back together by starting back at the beginning - now the grouping of our first 2 elements. We'll compare the first 2 elements to the second 2 elements and ask the same question as previously to put them in order. Then we'll continue and repeat this process until we've rebuilt our now-sorted data set.

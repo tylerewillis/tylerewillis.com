@@ -1,8 +1,8 @@
 [
 	{
-		"header": "Gazeble Website Accessibility Plugin",
-		"url": "gazeble",
-		"description": "Gazeble is a website accessibility plugin that helps website owners make their sites ADA compliant.",
+		"header": "Bit Mountain Website Accessibility Plugin",
+		"url": "bit-mountain-accessibility",
+		"description": "Bit Mountain is a website accessibility plugin that helps website owners make their sites ADA compliant.",
 		"icon": "<i class='far fa-universal-access'></i>",
 		"keywords": [
 			"react",

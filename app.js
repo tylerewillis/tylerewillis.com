@@ -11,9 +11,17 @@ if (cluster.isMaster) {
   });
 } else {
 	const express = require('express')
-	const helmet = require('helmet')
 	const app = express()
-	app.use(helmet())
+	
+	const helmet = require('helmet')
+	app.use(helmet({
+		contentSecurityPolicy: {
+	    directives: {
+	      "frame-ancestors": ["'self'", "https://shuffleinspire.com", "http://localhost:4000"]
+	    }
+	  }
+	}))
+	
 	const compression = require('compression')
 	app.use(compression())
 	const port = 3002

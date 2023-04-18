@@ -15,11 +15,7 @@ if (cluster.isMaster) {
 	
 	const helmet = require('helmet')
 	app.use(helmet({
-		contentSecurityPolicy: {
-	    directives: {
-	      "frame-ancestors": ["'self'", "https://shuffleinspire.com", "http://localhost:4000"]
-	    }
-	  }
+		contentSecurityPolicy: false
 	}))
 	
 	const compression = require('compression')
